@@ -57,6 +57,7 @@ const SearchProduct = () => {
 			<Divider orientation='vertical' sx={{ height: '25px', bgcolor: '#d6d6d6' }} />
 
 			<TextField
+				aria-label='search for items'
 				placeholder='Search for items...'
 				variant='outlined'
 				size='small'
