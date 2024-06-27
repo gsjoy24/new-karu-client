@@ -11,22 +11,22 @@ const data = [
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	},
 	{
-		title: 'Up to 50% Off',
+		title: 'Flash Sale 2024 50% Off',
 		subtitle: 'Exclusive deals on top brands',
 		banner: 'https://i.ibb.co/1227QnW/slider-2.png'
 	},
 	{
-		title: 'New Arrivals',
+		title: 'New Styles Every Week 2024',
 		subtitle: 'Fresh styles added every week',
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	},
 	{
-		title: 'Best Sellers',
+		title: 'Our Best Sellers 2024 50% Off',
 		subtitle: 'Shop our most popular items',
 		banner: 'https://i.ibb.co/1227QnW/slider-2.png'
 	},
 	{
-		title: 'Limited Time Offer',
+		title: 'Very Last Chance 2024 70% Off',
 		subtitle: "Get your favorites before they're gone",
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	}
@@ -63,15 +63,10 @@ const HeroSection = () => {
 					color: '#253D4E'
 				}
 			}}
+			duration={700}
+			interval={5000}
 			sx={{
-				mt: 3,
-				'&:hover': {
-					'& $button': {
-						backgroundColor: 'red',
-						filter: 'brightness(120%)',
-						opacity: '0.4'
-					}
-				}
+				mt: 3
 			}}
 		>
 			{data.map((item, index) => (
@@ -93,77 +88,99 @@ const HeroSection = () => {
 						sx={{
 							position: 'absolute',
 							top: '0',
-							left: '0',
+							left: {
+								xs: '0',
+								sm: '30px'
+							},
 							height: '100%',
 							maxWidth: '600px',
-							width: '100%'
+							width: '100%',
+							padding: 1.5,
+							display: 'flex',
+							justifyContent: 'start',
+							alignItems: 'center'
 						}}
 					>
-						<p className={`${quicksand.className} text-gray-700 text-[40px] font-[700]`}>{item.title}</p>
-						<Typography
-							variant='h5'
-							sx={{
-								color: '#253D4E'
-							}}
-						>
-							{item.subtitle}
-						</Typography>
-						{/* subscribe */}
-						<Stack
-							direction='row'
-							justifyContent='center'
-							alignItems='center'
-							sx={{
-								backgroundColor: 'white',
-								padding: {
-									xs: '2px 10px',
-									md: '5px 20px'
-								},
-								borderRadius: '50px',
-								color: '#253D4E',
-								position: 'relative',
-								maxWidth: {
-									xs: '260px',
-									md: '400px'
-								},
-								width: '100%'
-							}}
-						>
-							<FaRegPaperPlane />
-							<TextField
-								aria-label='Subscribe to our newsletter'
-								placeholder='Your email address'
-								variant='outlined'
-								size='small'
+						<div className='w-full'>
+							<h1 className={`${quicksand.className} text-gray-700 text-[30px] md:text-[48px] font-[700]`}>
+								{item.title}
+							</h1>
+							<Typography
+								variant='h5'
 								sx={{
-									'& .MuiOutlinedInput-root': {
-										'& fieldset': {
-											border: 'none'
-										}
-									},
-									width: '100%'
-								}}
-							/>
-							<Button
-								variant='contained'
-								color='primary'
-								sx={{
-									position: 'absolute',
-									right: '-50px',
-									borderRadius: '50px',
-									padding: {
-										xs: '12px 10px',
-										md: '13px 20px'
-									},
+									color: '#253D4E',
 									fontSize: {
-										xs: '12px',
-										md: '16px'
+										xs: '16px',
+										md: '22px'
 									}
 								}}
 							>
-								Subscribe
-							</Button>
-						</Stack>
+								{item.subtitle}
+							</Typography>
+							{/* subscribe */}
+							<Stack
+								direction='row'
+								justifyContent='center'
+								alignItems='center'
+								mt={4}
+								sx={{
+									backgroundColor: 'white',
+									padding: {
+										xs: '2px 10px',
+										md: '5px 20px'
+									},
+									borderRadius: '50px',
+									color: '#253D4E',
+									position: 'relative',
+									maxWidth: {
+										xs: '260px',
+										md: '400px'
+									},
+									width: '100%'
+								}}
+							>
+								<FaRegPaperPlane />
+								<TextField
+									aria-label='Subscribe to our newsletter'
+									placeholder='Your email address'
+									variant='outlined'
+									name='email'
+									size='small'
+									sx={{
+										'& .MuiOutlinedInput-root': {
+											'& fieldset': {
+												border: 'none'
+											}
+										},
+										width: '100%',
+										fontSize: {
+											xs: '12px',
+											md: '14px'
+										}
+									}}
+								/>
+								<Button
+									variant='contained'
+									color='primary'
+									sx={{
+										position: 'absolute',
+										right: '-50px',
+										borderRadius: '50px',
+										padding: {
+											xs: '12px 10px',
+											md: '13px 20px'
+										},
+										fontSize: {
+											xs: '12px',
+											md: '14px'
+										},
+										textTransform: 'capitalize'
+									}}
+								>
+									Subscribe
+								</Button>
+							</Stack>
+						</div>
 					</Box>
 				</Box>
 			))}
