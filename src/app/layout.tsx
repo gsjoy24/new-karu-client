@@ -1,4 +1,6 @@
+import Header from '@/Components/Shared/Header/Header';
 import Providers from '@/lib/Providers/Providers';
+import { Container, Divider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
@@ -15,7 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<Providers>
 			<html lang='en'>
 				<body className={roboto.className}>
-					<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+					<AppRouterCacheProvider>
+						<Container>
+							<Header />
+							{children}
+						</Container>
+					</AppRouterCacheProvider>
 				</body>
 			</html>
 		</Providers>
