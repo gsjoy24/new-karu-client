@@ -14,6 +14,11 @@ export const theme = createTheme({
 			defaultProps: {
 				variant: 'contained'
 			}
+		},
+		MuiContainer: {
+			defaultProps: {
+				maxWidth: 'lg'
+			}
 		}
 	}
 });
