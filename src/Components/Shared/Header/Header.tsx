@@ -13,7 +13,7 @@ const Header = () => {
 	const cart = 2;
 	return (
 		<>
-			<Stack justifyContent='space-between' alignItems='center' direction='row' py={2}>
+			<Stack justifyContent='space-between' alignItems='center' direction='row' py={2} gap={1}>
 				<Link href='/'>
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>
@@ -24,7 +24,7 @@ const Header = () => {
 				{/* buttons */}
 				<Stack direction='row' gap={2} alignItems='center'>
 					{/* wishlist button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.3} aria-label='Wishlist'>
+					<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
 						<div className='relative'>
 							<Chip label={wishlist} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
 							<IoIosHeartEmpty size={30} />
@@ -32,7 +32,7 @@ const Header = () => {
 						<span className='text-gray-600'>Wishlist</span>
 					</Stack>
 					{/* cart button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.3} aria-label='Cart'>
+					<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.5} aria-label='Cart'>
 						<div className='relative'>
 							<Chip label={cart} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
 							<IoCartOutline size={30} />
@@ -42,7 +42,7 @@ const Header = () => {
 					{/* user button */}
 					<Stack direction='row' alignItems='center' component={Link} href='/user' gap={1.3} aria-label='User account'>
 						<FaRegUser size={22} />
-						<span className='text-gray-600'>User</span>
+						<span className='text-gray-600'>Account</span>
 					</Stack>
 				</Stack>
 			</Stack>

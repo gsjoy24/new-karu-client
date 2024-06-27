@@ -9,6 +9,7 @@ import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import * as React from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import { IoGridOutline } from 'react-icons/io5';
 
 type TCategory = {
@@ -84,15 +85,6 @@ const BrowseCategory = () => {
 		setOpen(false);
 	};
 
-	function handleListKeyDown(event: React.KeyboardEvent) {
-		if (event.key === 'Tab') {
-			event.preventDefault();
-			setOpen(false);
-		} else if (event.key === 'Escape') {
-			setOpen(false);
-		}
-	}
-
 	// return focus to the button when we transitioned from !open -> open
 	const prevOpen = React.useRef(open);
 	React.useEffect(() => {
@@ -112,12 +104,16 @@ const BrowseCategory = () => {
 					aria-controls={open ? 'composition-menu' : undefined}
 					aria-expanded={open ? 'true' : undefined}
 					aria-haspopup='true'
-					onMouseEnter={handleToggle}
+					onClick={handleToggle}
 					sx={{
-						textTransform: 'capitalize'
+						textTransform: 'capitalize',
+						display: 'flex',
+						alignItems: 'center',
+						gap: '0.5rem'
 					}}
 				>
-					<IoGridOutline size={18} className='mr-2' /> <span>Browse Categories</span>
+					<IoGridOutline size={18} /> <span>Browse Categories</span>{' '}
+					<IoIosArrowDown className={`${open && 'rotate-180'} duration-150`} />
 				</Button>
 				<Popper
 					open={open}
@@ -126,7 +122,6 @@ const BrowseCategory = () => {
 					placement='bottom-start'
 					transition
 					disablePortal
-					onMouseLeave={handleToggle}
 				>
 					{({ TransitionProps, placement }) => (
 						<Grow
@@ -135,16 +130,18 @@ const BrowseCategory = () => {
 								transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom'
 							}}
 						>
-							<Paper className='w-[500px] p-3'>
+							<Paper className='w-[500px] p-3 mt-5 '>
 								<Stack flexWrap='wrap' direction='row'>
 									{categories.slice(0, 10).map((category: TCategory, index: number) => (
-										<MenuItem key={index} onClick={handleClose}>
-											{/* like a button with image and name */}
-											<div className='flex items-center gap-2 p-2 border border-[#29A56C] rounded-md w-[200px]'>
-												<Image src={category.image} alt={category.name} className='w-8 h-8' width={50} height={50} />
-												<span className='font-[500]'>{category.name}</span>
-											</div>
-										</MenuItem>
+										<ClickAwayListener onClickAway={handleClose} key={index}>
+											<MenuItem onClick={handleClose}>
+												{/* like a button with image and name */}
+												<div className='flex items-center gap-2 p-2 border border-[#29A56C] rounded-md w-[200px]'>
+													<Image src={category.image} alt={category.name} className='w-8 h-8' width={50} height={50} />
+													<span className='font-[500]'>{category.name}</span>
+												</div>
+											</MenuItem>
+										</ClickAwayListener>
 									))}
 								</Stack>
 							</Paper>
