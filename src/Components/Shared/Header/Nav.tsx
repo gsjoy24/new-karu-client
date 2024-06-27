@@ -20,7 +20,8 @@ const Nav = () => {
 				position: 'sticky',
 				top: 0,
 				zIndex: 100,
-				backgroundColor: 'white'
+				backgroundColor: 'white',
+				display: { xs: 'none', md: 'flex' }
 			}}
 		>
 			<BrowseCategory />

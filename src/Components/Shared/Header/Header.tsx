@@ -13,7 +13,19 @@ const Header = () => {
 	const cart = 2;
 	return (
 		<>
-			<Stack justifyContent='space-between' alignItems='center' direction='row' py={2} gap={1}>
+			<Stack
+				justifyContent='space-between'
+				alignItems='center'
+				direction='row'
+				py={2}
+				gap={1}
+				sx={{
+					display: {
+						xs: 'none',
+						md: 'flex'
+					}
+				}}
+			>
 				<Link href='/'>
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>

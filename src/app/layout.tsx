@@ -1,11 +1,10 @@
 import Header from '@/Components/Shared/Header/Header';
 import Providers from '@/lib/Providers/Providers';
-import { Container, Divider } from '@mui/material';
+import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { roboto } from './fonts';
 import './globals.css';
-const roboto = Roboto({ weight: ['300', '400', '500', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Karukon',
