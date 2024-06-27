@@ -1,29 +1,74 @@
 'use client';
-import { Box, FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Divider, IconButton, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const SearchProduct = () => {
-	const [age, setAge] = useState('');
+	const [category, setCategory] = useState<string>('');
 
 	const handleChange = (event: SelectChangeEvent) => {
-		setAge(event.target.value);
+		setCategory(event.target.value);
 	};
 
+	const categories = [
+		'Electronics',
+		'Clothing',
+		'Shoes',
+		'Bags',
+		'Watches',
+		'Jewelry',
+		'Books',
+		'Toys',
+		'Furniture',
+		'Home Appliances'
+	];
 	return (
-		<Box>
-			<FormControl sx={{ m: 1, minWidth: 120 }}>
-				<Select value={age} onChange={handleChange} displayEmpty inputProps={{ 'aria-label': 'Without label' }}>
-					<MenuItem value=''>
-						<em>None</em>
+		<Stack
+			direction='row'
+			alignItems='center'
+			spacing={1}
+			sx={{
+				border: '1px solid #29A56C',
+				borderRadius: '5px'
+			}}
+		>
+			<Select
+				inputProps={{ 'aria-label': ' select Category to search products' }}
+				value={category}
+				onChange={handleChange}
+				displayEmpty
+				size='small'
+				sx={{
+					'& .MuiOutlinedInput-notchedOutline': {
+						border: 'none'
+					}
+				}}
+			>
+				<MenuItem value=''>All Categories</MenuItem>
+				{categories.map((category, index) => (
+					<MenuItem key={index} value={category}>
+						{category}
 					</MenuItem>
-					<MenuItem value={10}>Ten</MenuItem>
-					<MenuItem value={20}>Twenty</MenuItem>
-					<MenuItem value={30}>Thirty</MenuItem>
-				</Select>
-				<FormHelperText>Without label</FormHelperText>
-			</FormControl>
-			<input type='text' placeholder='Search Product' />
-		</Box>
+				))}
+			</Select>
+			<Divider orientation='vertical' sx={{ height: '20px' }} />
+
+			<TextField
+				placeholder='Search for items...'
+				variant='outlined'
+				size='small'
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						'& fieldset': {
+							border: 'none'
+						}
+					}
+				}}
+			/>
+			<IconButton aria-label='search'>
+				<HiMagnifyingGlass />
+			</IconButton>
+		</Stack>
 	);
 };
 
