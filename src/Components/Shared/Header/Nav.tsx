@@ -11,7 +11,18 @@ const Nav = () => {
 		{ title: 'Services', link: '/services' }
 	];
 	return (
-		<Stack direction='row' justifyContent='space-between' alignItems='center' py={1}>
+		<Stack
+			direction='row'
+			justifyContent='space-between'
+			alignItems='center'
+			py={1}
+			sx={{
+				position: 'sticky',
+				top: 0,
+				zIndex: 100,
+				backgroundColor: 'white'
+			}}
+		>
 			<BrowseCategory />
 
 			<Stack direction='row' gap={2}>
