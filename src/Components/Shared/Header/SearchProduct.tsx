@@ -29,7 +29,10 @@ const SearchProduct = () => {
 			spacing={1}
 			sx={{
 				border: '1px solid #29A56C',
-				borderRadius: '5px'
+				borderRadius: '5px',
+				maxWidth: '600px',
+				width: '100%',
+				padding: '5px 0'
 			}}
 		>
 			<Select
@@ -51,7 +54,7 @@ const SearchProduct = () => {
 					</MenuItem>
 				))}
 			</Select>
-			<Divider orientation='vertical' sx={{ height: '20px' }} />
+			<Divider orientation='vertical' sx={{ height: '25px', bgcolor: '#d6d6d6' }} />
 
 			<TextField
 				placeholder='Search for items...'
@@ -62,7 +65,8 @@ const SearchProduct = () => {
 						'& fieldset': {
 							border: 'none'
 						}
-					}
+					},
+					width: '100%'
 				}}
 			/>
 			<IconButton aria-label='search'>

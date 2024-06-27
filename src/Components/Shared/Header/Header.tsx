@@ -1,25 +1,46 @@
 import logo from '@/assets/Karukon-logo.png';
-import { Box, Button, Chip, Stack } from '@mui/material';
+import { Chip, Stack } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaRegUser } from 'react-icons/fa';
 import { IoIosHeartEmpty } from 'react-icons/io';
+import { IoCartOutline } from 'react-icons/io5';
 import SearchProduct from './SearchProduct';
+
 const Header = () => {
 	const wishlist = 5;
+	const cart = 2;
 	return (
-		<Stack justifyContent={'space-between'} alignItems={'center'} direction='row' py={1}>
+		<Stack justifyContent='space-between' alignItems='center' direction='row' py={2}>
 			<Link href='/'>
 				<Image src={logo} alt='logo' width={80} height={80} />
 			</Link>
+
+			{/* search bar */}
 			<SearchProduct />
-			<Stack>
-				{/* wish list button */}
-				<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.3}>
+
+			{/* buttons */}
+			<Stack direction='row' gap={2} alignItems='center'>
+				{/* wishlist button */}
+				<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.3} aria-label='Wishlist'>
 					<div className='relative'>
 						<Chip label={wishlist} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
 						<IoIosHeartEmpty size={30} />
 					</div>
 					<span className='text-gray-600'>Wishlist</span>
+				</Stack>
+				{/* cart button */}
+				<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.3} aria-label='Cart'>
+					<div className='relative'>
+						<Chip label={cart} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
+						<IoCartOutline size={30} />
+					</div>
+					<span className='text-gray-600'>Cart</span>
+				</Stack>
+				{/* user button */}
+				<Stack direction='row' alignItems='center' component={Link} href='/user' gap={1.3} aria-label='User account'>
+					<FaRegUser size={22} />
+					<span className='text-gray-600'>User</span>
 				</Stack>
 			</Stack>
 		</Stack>
