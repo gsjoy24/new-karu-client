@@ -93,7 +93,7 @@ const HeroSection = () => {
 								sm: '30px'
 							},
 							height: '100%',
-							maxWidth: '600px',
+							maxWidth: '650px',
 							width: '100%',
 							padding: 1.5,
 							display: 'flex',
@@ -102,13 +102,13 @@ const HeroSection = () => {
 						}}
 					>
 						<div className='w-full'>
-							<h1 className={`${quicksand.className} text-gray-700 text-[30px] md:text-[48px] font-[700]`}>
+							<h1 className={`${quicksand.className} text-gray-700 text-[30px] md:text-[52px] font-[700]`}>
 								{item.title}
 							</h1>
 							<Typography
 								variant='h5'
 								sx={{
-									color: '#253D4E',
+									color: 'secondary.main',
 									fontSize: {
 										xs: '16px',
 										md: '22px'
