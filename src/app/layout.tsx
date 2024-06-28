@@ -1,4 +1,5 @@
 import Header from '@/components/Shared/Header/Header';
+import MobileNav from '@/components/Shared/Header/MobileNav';
 import Providers from '@/lib/Providers/Providers';
 import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<AppRouterCacheProvider>
 						<Container>
 							<Header />
+							<MobileNav />
 							{children}
 						</Container>
 					</AppRouterCacheProvider>

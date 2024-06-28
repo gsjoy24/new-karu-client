@@ -52,7 +52,14 @@ const Header = () => {
 						<span className='text-gray-600'>Cart</span>
 					</Stack>
 					{/* user button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/user' gap={1.3} aria-label='User account'>
+					<Stack
+						direction='row'
+						alignItems='center'
+						component={Link}
+						href='/profile'
+						gap={1.3}
+						aria-label='User profile'
+					>
 						<FaRegUser size={22} />
 						<span className='text-gray-600'>Account</span>
 					</Stack>
