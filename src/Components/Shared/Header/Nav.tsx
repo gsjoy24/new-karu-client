@@ -53,7 +53,7 @@ const Nav = () => {
 						color: 'secondary.main'
 					}}
 				>
-					<Typography variant='h6' color='primary.main'>
+					<Typography variant='h6' color='primary.dark'>
 						01777777777
 					</Typography>
 					<span>24/7 Support Center</span>

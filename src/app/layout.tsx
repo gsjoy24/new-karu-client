@@ -1,4 +1,4 @@
-import Header from '@/Components/Shared/Header/Header';
+import Header from '@/components/Shared/Header/Header';
 import Providers from '@/lib/Providers/Providers';
 import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
