@@ -1,4 +1,6 @@
 'use client';
+import { useGetCategoriesQuery } from '@/redux/api/categoryApis';
+import TCategory from '@/types/category.type';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -12,64 +14,9 @@ import * as React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoGridOutline } from 'react-icons/io5';
 
-type TCategory = {
-	_id: string;
-	name: string;
-	description: string;
-	image: string;
-};
-
 const BrowseCategory = () => {
-	const categories: TCategory[] = [
-		{
-			_id: '662d2a66c1f73d9085769cd5',
-			name: 'Flower and verse',
-			description: 'sdfsdf',
-			image: 'https://i.ibb.co/0DGSkbD/Flower-and-verse.jpg'
-		},
-		{
-			_id: '662d2be6ee1d4270c1d0bf72',
-			name: 'Flavored Coffee',
-			description: 'sdfs',
-			image: 'https://i.ibb.co/zSZLt1x/Flavored-Coffee.jpg'
-		},
-		{
-			_id: '662d2cd7ee1d4270c1d0bf76',
-			name: 'Popular',
-			description: 'dsfsdgf',
-			image: 'https://i.ibb.co/p0xm8np/Popular.jpg'
-		},
-		{
-			_id: '662d2a66c1f73d9085769cd5',
-			name: 'Flower and verse',
-			description: 'sdfsdf',
-			image: 'https://i.ibb.co/0DGSkbD/Flower-and-verse.jpg'
-		},
-		{
-			_id: '662d2be6ee1d4270c1d0bf72',
-			name: 'Flavored Coffee',
-			description: 'sdfs',
-			image: 'https://i.ibb.co/zSZLt1x/Flavored-Coffee.jpg'
-		},
-		{
-			_id: '662d2cd7ee1d4270c1d0bf76',
-			name: 'Popular',
-			description: 'dsfsdgf',
-			image: 'https://i.ibb.co/p0xm8np/Popular.jpg'
-		},
-		{
-			_id: '662d2be6ee1d4270c1d0bf72',
-			name: 'Flavored Coffee',
-			description: 'sdfs',
-			image: 'https://i.ibb.co/zSZLt1x/Flavored-Coffee.jpg'
-		},
-		{
-			_id: '662d2cd7ee1d4270c1d0bf76',
-			name: 'Popular',
-			description: 'dsfsdgf',
-			image: 'https://i.ibb.co/p0xm8np/Popular.jpg'
-		}
-	];
+	const { data: categoryData, isFetching } = useGetCategoriesQuery({});
+
 	const [open, setOpen] = React.useState(false);
 	const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -105,6 +52,7 @@ const BrowseCategory = () => {
 					aria-expanded={open ? 'true' : undefined}
 					aria-haspopup='true'
 					onClick={handleToggle}
+					disabled={isFetching || !categoryData?.data.length}
 					sx={{
 						textTransform: 'capitalize',
 						display: 'flex',
@@ -132,7 +80,7 @@ const BrowseCategory = () => {
 						>
 							<Paper className='w-[500px] p-3 mt-5 '>
 								<Stack flexWrap='wrap' direction='row'>
-									{categories.slice(0, 10).map((category: TCategory, index: number) => (
+									{categoryData?.data.slice(0, 10).map((category: TCategory, index: number) => (
 										<ClickAwayListener onClickAway={handleClose} key={index}>
 											<MenuItem onClick={handleClose}>
 												{/* like a button with image and name */}

@@ -34,9 +34,13 @@ const SearchProduct = () => {
 			spacing={1}
 			sx={{
 				border: '1px solid #29A56C',
+				margin: '0 auto',
 				borderRadius: '5px',
 				maxWidth: '600px',
-				width: '100%',
+				width: {
+					xs: '95%',
+					md: '100%'
+				},
 				padding: '5px 0'
 			}}
 		>
@@ -50,6 +54,11 @@ const SearchProduct = () => {
 				sx={{
 					'& .MuiOutlinedInput-notchedOutline': {
 						border: 'none'
+					},
+
+					display: {
+						xs: 'none',
+						md: 'block'
 					}
 				}}
 			>
@@ -71,9 +80,19 @@ const SearchProduct = () => {
 					)
 				)}
 			</Select>
-			<Divider orientation='vertical' sx={{ height: '25px', bgcolor: '#d6d6d6' }} />
+			<Divider
+				orientation='vertical'
+				sx={{
+					height: '25px',
+					bgcolor: '#d6d6d6',
+					display: {
+						xs: 'none',
+						md: 'block'
+					}
+				}}
+			/>
 
-			<KForm onSubmit={handleSubmit} styleClasses='w-full flex '>
+			<KForm onSubmit={handleSubmit} styleClasses='w-full flex'>
 				<KInput
 					name='search'
 					placeholder='Search for items...'

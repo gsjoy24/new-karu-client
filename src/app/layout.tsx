@@ -1,5 +1,5 @@
 import Header from '@/components/Shared/Header/Header';
-import MobileNav from '@/components/Shared/Header/MobileNav';
+import MobileNav from '@/components/Shared/Header/MobileNav/MobileNav';
 import Providers from '@/lib/Providers/Providers';
 import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';

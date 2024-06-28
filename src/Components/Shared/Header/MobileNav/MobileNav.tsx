@@ -1,56 +1,79 @@
 'use client';
 import logo from '@/assets/Karukon-logo.png';
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Chip, IconButton, Stack } from '@mui/material';
+import { Chip, Divider, IconButton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { FaRegUser } from 'react-icons/fa';
 import { IoIosHeartEmpty } from 'react-icons/io';
-import { IoCartOutline } from 'react-icons/io5';
+import { IoCartOutline, IoClose } from 'react-icons/io5';
+import SearchProduct from '../SearchProduct';
 
 const MobileNav = () => {
 	const [open, setOpen] = React.useState(false);
 	const wishlist = 5;
 	const cart = 2;
+	const mobileNavLinks = [
+		{ name: 'Home', href: '/' },
+		{ name: 'Products', href: '/products' },
+		{ name: 'Wishlist', href: '/wishlist' },
+		{ name: 'Cart', href: '/cart' },
+		{
+			name: 'About Us',
+			href: '/about-us'
+		},
+		{
+			name: 'Term of Service',
+			href: '/term-of-service'
+		},
+		{
+			name: 'Privacy Policy',
+			href: '/privacy-policy'
+		},
+		{
+			name: 'Contact Us',
+			href: '/contact-us'
+		}
+	];
 
 	const toggleDrawer = (newOpen: boolean) => () => {
 		setOpen(newOpen);
 	};
 
 	const DrawerList = (
-		<Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
-			<List>
-				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItemButton>
-					</ListItem>
+		<Box sx={{ width: 350 }} role='presentation'>
+			<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
+				<Image src={logo} alt='logo' width={80} height={80} />
+				<IconButton
+					size='small'
+					onClick={toggleDrawer(false)}
+					aria-label='close drawer'
+					sx={{
+						bgcolor: '#99ffab',
+						color: 'secondary.main'
+					}}
+				>
+					<IoClose size={22} />
+				</IconButton>
+			</Box>
+			<Divider
+				sx={{
+					mb: 2
+				}}
+			/>
+
+			{/* search bar */}
+			<SearchProduct />
+			<Stack direction='column' gap={2} p={2}>
+				{mobileNavLinks.map((link, index) => (
+					<Link key={index} href={link.href}>
+						{link.name}
+					</Link>
 				))}
-			</List>
-			<Divider />
-			<List>
-				{['All mail', 'Trash', 'Spam'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItemButton>
-					</ListItem>
-				))}
-			</List>
+			</Stack>
 		</Box>
 	);
 
