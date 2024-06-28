@@ -8,9 +8,10 @@ type TFormProps = {
 	children: React.ReactNode;
 	onSubmit: SubmitHandler<FieldValues>;
 	resetForm?: boolean;
+	styleClasses?: string;
 } & TFormConfig;
 
-const KForm = ({ children, onSubmit, resolver, resetForm, defaultValues }: TFormProps) => {
+const KForm = ({ children, onSubmit, resolver, resetForm, defaultValues, styleClasses }: TFormProps) => {
 	const formConfig: TFormConfig = {};
 
 	if (resolver) {
@@ -29,7 +30,9 @@ const KForm = ({ children, onSubmit, resolver, resetForm, defaultValues }: TForm
 	};
 	return (
 		<FormProvider {...methods}>
-			<form onSubmit={handleSubmit(submit)}>{children}</form>
+			<form onSubmit={handleSubmit(submit)} className={styleClasses}>
+				{children}
+			</form>
 		</FormProvider>
 	);
 };
