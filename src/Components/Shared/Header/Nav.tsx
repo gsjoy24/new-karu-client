@@ -32,7 +32,7 @@ const Nav = () => {
 						<Typography
 							sx={{
 								fontWeight: '500',
-								transition: 'color 0.3s',
+								transition: 'color 0.2s',
 								color: 'secondary.main',
 								'&:hover': {
 									color: 'primary.main'

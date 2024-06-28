@@ -2,8 +2,11 @@
 import { quicksand } from '@/app/fonts';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
+import { FieldValues } from 'react-hook-form';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import Carousel from 'react-material-ui-carousel';
+import KForm from '../Form/KForm';
+import KInput from '../Form/KInput';
 const data = [
 	{
 		title: 'Summer Collection 2024',
@@ -32,6 +35,9 @@ const data = [
 	}
 ];
 const HeroSection = () => {
+	const onSubmit = (data: FieldValues) => {
+		console.log(data);
+	};
 	return (
 		<Carousel
 			indicatorIconButtonProps={{
@@ -106,7 +112,7 @@ const HeroSection = () => {
 								{item.title}
 							</h1>
 							<Typography
-								variant='h5'
+								variant='h2'
 								sx={{
 									color: 'secondary.main',
 									fontSize: {
@@ -117,69 +123,64 @@ const HeroSection = () => {
 							>
 								{item.subtitle}
 							</Typography>
-							{/* subscribe */}
-							<Stack
-								direction='row'
-								justifyContent='center'
-								alignItems='center'
-								mt={4}
-								sx={{
-									backgroundColor: 'white',
-									padding: {
-										xs: '2px 10px',
-										md: '5px 20px'
-									},
-									borderRadius: '50px',
-									color: '#253D4E',
-									position: 'relative',
-									maxWidth: {
-										xs: '260px',
-										md: '400px'
-									},
-									width: '100%'
-								}}
-							>
-								<FaRegPaperPlane />
-								<TextField
-									aria-label='Subscribe to our newsletter'
-									placeholder='Your email address'
-									variant='outlined'
-									name='email'
-									size='small'
+
+							{/* subscribe field */}
+							<KForm onSubmit={onSubmit}>
+								<Stack
+									direction='row'
+									justifyContent='center'
+									alignItems='center'
+									mt={4}
 									sx={{
-										'& .MuiOutlinedInput-root': {
-											'& fieldset': {
-												border: 'none'
-											}
-										},
-										width: '100%',
-										fontSize: {
-											xs: '12px',
-											md: '14px'
-										}
-									}}
-								/>
-								<Button
-									variant='contained'
-									color='primary'
-									sx={{
-										position: 'absolute',
-										right: '-50px',
-										borderRadius: '50px',
+										backgroundColor: 'white',
 										padding: {
-											xs: '12px 10px',
-											md: '13px 20px'
+											xs: '2px 10px',
+											md: '5px 20px'
 										},
-										fontSize: {
-											xs: '12px',
-											md: '14px'
+										borderRadius: '50px',
+										color: '#253D4E',
+										position: 'relative',
+										maxWidth: {
+											xs: '260px',
+											md: '400px'
 										},
-										textTransform: 'capitalize'
+										width: '100%'
 									}}
 								>
-									Subscribe
-								</Button>
-							</Stack>
+									<FaRegPaperPlane color='secondary.main' />
+									<KInput
+										name='email'
+										placeholder='Your email address'
+										sx={{
+											'& .MuiOutlinedInput-root': {
+												'& fieldset': {
+													border: 'none'
+												}
+											},
+											width: '100%'
+										}}
+									/>
+									<Button
+										type='submit'
+										sx={{
+											position: 'absolute',
+											right: '-50px',
+											borderRadius: '50px',
+											padding: {
+												xs: '12px 10px',
+												md: '13px 20px'
+											},
+											fontSize: {
+												xs: '11px',
+												md: '14px'
+											},
+											textTransform: 'capitalize'
+										}}
+									>
+										Subscribe
+									</Button>
+								</Stack>
+							</KForm>
 						</div>
 					</Box>
 				</Box>
