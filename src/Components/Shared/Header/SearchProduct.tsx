@@ -1,35 +1,32 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { Divider, IconButton, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
+import { useGetCategoriesQuery } from '@/redux/api/categoryApis';
+import TCategory from '@/types/category.type';
+import { Divider, IconButton, MenuItem, Select, SelectChangeEvent, Stack } from '@mui/material';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const SearchProduct = () => {
-	const [category, setCategory] = useState<string>('');
+	const [categoryId, setCategoryId] = useState<string>('');
+
+	const { data: categoryData, isFetching } = useGetCategoriesQuery({});
 
 	const handleChange = (event: SelectChangeEvent) => {
-		setCategory(event.target.value);
+		setCategoryId(event.target.value);
 	};
 
 	const handleSubmit = (data: FieldValues) => {
 		// handle search
-		console.log({ category, search: data.search });
+		console.log({ categoryId, search: data.search });
 	};
 
-	const categories = [
-		'Electronics',
-		'Clothing',
-		'Shoes',
-		'Bags',
-		'Watches',
-		'Jewelry',
-		'Books',
-		'Toys',
-		'Furniture',
-		'Home Appliances'
-	];
+	const categories =
+		categoryData?.data?.map((category: TCategory) => ({
+			id: category._id,
+			name: category.name
+		})) || [];
 	return (
 		<Stack
 			direction='row'
@@ -45,10 +42,11 @@ const SearchProduct = () => {
 		>
 			<Select
 				inputProps={{ 'aria-label': ' select Category to search products' }}
-				value={category}
+				value={categoryId}
 				onChange={handleChange}
 				displayEmpty
 				size='small'
+				disabled={isFetching || !categoryData?.data?.length}
 				sx={{
 					'& .MuiOutlinedInput-notchedOutline': {
 						border: 'none'
@@ -56,11 +54,22 @@ const SearchProduct = () => {
 				}}
 			>
 				<MenuItem value=''>All Categories</MenuItem>
-				{categories.map((category, index) => (
-					<MenuItem key={index} value={category}>
-						{category}
-					</MenuItem>
-				))}
+				{categories.map(
+					(
+						{
+							id,
+							name
+						}: {
+							id: string;
+							name: string;
+						},
+						index: number
+					) => (
+						<MenuItem key={index} value={id}>
+							{name}
+						</MenuItem>
+					)
+				)}
 			</Select>
 			<Divider orientation='vertical' sx={{ height: '25px', bgcolor: '#d6d6d6' }} />
 
