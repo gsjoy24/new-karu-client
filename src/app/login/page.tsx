@@ -1,17 +1,40 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { useLoginMutation } from '@/redux/api/authApi';
+import { setUser } from '@/redux/features/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
+import verifyToken from '@/utils/verifyToken';
+import { LoadingButton } from '@mui/lab';
+import { Box, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { toast } from 'sonner';
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
-	const [login, { isLoading }] = useL;
-	const handleSubmit = (data: FieldValues) => {
-		console.log(data);
+	const [login, { isLoading }] = useLoginMutation();
+	const dispatch = useAppDispatch();
+	const navigate = useRouter();
+	const handleSubmit = async (data: FieldValues) => {
+		try {
+			const response = await login(data).unwrap();
+
+			if (response?.success) {
+				toast.success('Logged in successfully!');
+				const userInfo = verifyToken(response?.data?.accessToken);
+				// save user info and token in redux store
+				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
+				navigate.push('/');
+			}
+
+			console.log(response);
+		} catch (error: any) {
+			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
+		}
 	};
 	return (
 		<Stack
@@ -38,7 +61,7 @@ const LoginPage = () => {
 			<KForm onSubmit={handleSubmit} styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'>
 				<KInput label='Email Address' placeholder='*example@gmail.com' name='email' type='email' />
 				<div className='relative'>
-					<KInput label='Password' name='password' type={!showPassword ? 'text' : 'password'} />
+					<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
 					<Box
 						onClick={() => setShowPassword(!showPassword)}
 						sx={{
@@ -51,9 +74,9 @@ const LoginPage = () => {
 						{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
 					</Box>
 				</div>
-				<Button type='submit' variant='contained' color='primary'>
+				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Logging in' variant='contained'>
 					Login
-				</Button>
+				</LoadingButton>
 			</KForm>
 			<Stack direction='row' gap={1}>
 				<Typography variant='body2'>Don&#39;t have an account?</Typography>
