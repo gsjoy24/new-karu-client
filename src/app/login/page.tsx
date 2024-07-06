@@ -9,6 +9,7 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [login, { isLoading }] = useL;
 	const handleSubmit = (data: FieldValues) => {
 		console.log(data);
 	};

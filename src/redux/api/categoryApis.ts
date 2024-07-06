@@ -1,3 +1,4 @@
+import { reduxTagTypes } from '@/constants/reduxTagTypes';
 import baseApi from './baseApi';
 
 const categoryApis = baseApi.injectEndpoints({
@@ -7,7 +8,7 @@ const categoryApis = baseApi.injectEndpoints({
 				url: '/categories',
 				method: 'GET'
 			}),
-			providesTags: ['categories']
+			providesTags: [reduxTagTypes.categories]
 		})
 	})
 });
