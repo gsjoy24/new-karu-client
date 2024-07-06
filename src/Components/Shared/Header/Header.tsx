@@ -43,6 +43,7 @@ const Header = () => {
 						</div>
 						<span className='text-gray-600'>Wishlist</span>
 					</Stack>
+
 					{/* cart button */}
 					<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.5} aria-label='Cart'>
 						<div className='relative'>
@@ -51,17 +52,11 @@ const Header = () => {
 						</div>
 						<span className='text-gray-600'>Cart</span>
 					</Stack>
+
 					{/* user button */}
-					<Stack
-						direction='row'
-						alignItems='center'
-						component={Link}
-						href='/profile'
-						gap={1.3}
-						aria-label='User profile'
-					>
+					<Stack direction='row' alignItems='center' component={Link} href='/login' gap={1.3} aria-label='User profile'>
 						<FaRegUser size={22} />
-						<span className='text-gray-600'>Account</span>
+						<span className='text-gray-600'>Sign In</span>
 					</Stack>
 				</Stack>
 			</Stack>
