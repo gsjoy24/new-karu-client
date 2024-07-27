@@ -30,11 +30,10 @@ const Header = () => {
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>
 
-				{/* search bar */}
-				<SearchProduct />
-
 				{/* buttons */}
 				<Stack direction='row' gap={2} alignItems='center'>
+					{/* search bar */}
+					<SearchProduct />
 					{/* wishlist button */}
 					<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
 						<div className='relative'>

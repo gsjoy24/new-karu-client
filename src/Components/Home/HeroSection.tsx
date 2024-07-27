@@ -10,23 +10,23 @@ const data = [
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	},
 	{
-		title: 'Flash Sale 2024 50% Off',
-		subtitle: 'Exclusive deals on top brands',
+		title: 'Flash Sale Bonanza 2024 - 50% Off',
+		subtitle: 'Don’t miss out on exclusive deals and discounts on top brands, available for a limited time only',
 		banner: 'https://i.ibb.co/1227QnW/slider-2.png'
 	},
 	{
-		title: 'New Styles Every Week 2024',
-		subtitle: 'Fresh styles added every week',
+		title: 'Fresh Styles Every Week 2024',
+		subtitle: 'Discover new and exciting styles added every week, keeping your wardrobe always up-to-date',
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	},
 	{
-		title: 'Our Best Sellers 2024 50% Off',
-		subtitle: 'Shop our most popular items',
+		title: 'Our Best Sellers 2024 - 50% Off',
+		subtitle: 'Shop our most popular and top-rated items at amazing prices, only for a short period',
 		banner: 'https://i.ibb.co/1227QnW/slider-2.png'
 	},
 	{
-		title: 'Very Last Chance 2024 70% Off',
-		subtitle: "Get your favorites before they're gone",
+		title: 'Very Last Chance Sale 2024 - 70% Off',
+		subtitle: 'Grab your favorite items at unbeatable prices before they’re gone forever, hurry while stocks last',
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	}
 ];
@@ -67,6 +67,7 @@ const HeroSection = () => {
 			sx={{
 				mt: 3
 			}}
+			swipe={true}
 		>
 			{data.map((item) => (
 				<Box
@@ -104,7 +105,9 @@ const HeroSection = () => {
 						}}
 					>
 						<div className='w-full md:max-w-[500px] lg:max-w-[600px]'>
-							<h1 className={`${quicksand.className} text-gray-700 text-[30px] md:text-[52px] font-[700]`}>
+							<h1
+								className={`${quicksand.className} text-gray-700 text-[30px] md:text-[52px] font-[700] leading-tight mb-5`}
+							>
 								{item.title}
 							</h1>
 							<Typography
