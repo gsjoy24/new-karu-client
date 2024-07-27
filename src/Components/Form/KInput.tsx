@@ -27,15 +27,15 @@ const KInput = ({ label, type = 'text', ariaLabel, name, placeholder, sx, multil
 					</label>
 					<TextField
 						{...field}
-						aria-label={ariaLabel || placeholder}
+						aria-label={ariaLabel ?? placeholder}
 						inputProps={{ autoComplete: name }}
 						sx={{ ...sx, width: '100%', borderRadius: '5px', mt: '5px' }}
-						placeholder={placeholder || label}
-						minRows={rows || 6}
+						placeholder={placeholder ?? label}
+						minRows={rows ?? 6}
 						variant='outlined'
 						multiline={multiline}
 						type={type}
-						value={field.value || ''}
+						value={field.value ?? ''}
 						size='small'
 						fullWidth
 						error={!!error?.message}

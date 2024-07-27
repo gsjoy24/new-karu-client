@@ -18,7 +18,7 @@ const Header = () => {
 				alignItems='center'
 				direction='row'
 				py={2}
-				gap={1}
+				gap={2}
 				sx={{
 					display: {
 						xs: 'none',

@@ -4,6 +4,7 @@ import KInput from '@/components/Form/KInput';
 import { useLoginMutation } from '@/redux/api/authApi';
 import { setUser } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
+import { TGenericErrorResponse } from '@/types';
 import verifyToken from '@/utils/verifyToken';
 import { LoadingButton } from '@mui/lab';
 import { Box, Stack, Typography } from '@mui/material';
@@ -30,8 +31,6 @@ const LoginPage = () => {
 				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
 				navigate.push('/');
 			}
-
-			console.log(response);
 		} catch (error: any) {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
 		}

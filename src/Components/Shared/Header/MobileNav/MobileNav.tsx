@@ -49,7 +49,7 @@ const MobileNav = () => {
 	};
 
 	const DrawerList = (
-		<Box sx={{ width: 350 }} role='presentation' px={2}>
+		<Box sx={{ width: 350 }} px={2}>
 			<Box
 				sx={{
 					display: 'flex',
@@ -83,8 +83,8 @@ const MobileNav = () => {
 
 			{/* links */}
 			<Stack direction='column' gap={2} p={2} mt={2}>
-				{mobileNavLinks.map((link, index) => (
-					<Link key={index} href={link.href}>
+				{mobileNavLinks.map((link) => (
+					<Link key={link?.href} href={link?.href}>
 						<Stack
 							direction='row'
 							justifyContent='space-between'

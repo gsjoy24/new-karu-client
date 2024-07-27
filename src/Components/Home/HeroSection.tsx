@@ -1,12 +1,8 @@
 'use client';
 import { quicksand } from '@/app/fonts';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { FieldValues } from 'react-hook-form';
-import { FaRegPaperPlane } from 'react-icons/fa';
 import Carousel from 'react-material-ui-carousel';
-import KForm from '../Form/KForm';
-import KInput from '../Form/KInput';
 const data = [
 	{
 		title: 'Summer Collection 2024',
@@ -35,9 +31,6 @@ const data = [
 	}
 ];
 const HeroSection = () => {
-	const onSubmit = (data: FieldValues) => {
-		console.log(data);
-	};
 	return (
 		<Carousel
 			indicatorIconButtonProps={{
@@ -75,20 +68,23 @@ const HeroSection = () => {
 				mt: 3
 			}}
 		>
-			{data.map((item, index) => (
+			{data.map((item) => (
 				<Box
-					key={index}
+					key={item?.title}
 					sx={{
 						position: 'relative',
-						height: '400px'
+						height: {
+							xs: '250px',
+							md: '400px'
+						}
 					}}
 				>
 					<Image
-						src={item.banner}
-						alt={item.title}
+						src={item?.banner}
+						alt={item?.title}
 						width={1200}
-						height={800}
-						className='w-full h-full object-cover rounded-2xl '
+						height={700}
+						className='w-full h-full object-cover  rounded-2xl '
 					/>
 					<Box
 						sx={{
@@ -107,7 +103,7 @@ const HeroSection = () => {
 							alignItems: 'center'
 						}}
 					>
-						<div className='w-full'>
+						<div className='w-full md:max-w-[500px] lg:max-w-[600px]'>
 							<h1 className={`${quicksand.className} text-gray-700 text-[30px] md:text-[52px] font-[700]`}>
 								{item.title}
 							</h1>
@@ -123,64 +119,6 @@ const HeroSection = () => {
 							>
 								{item.subtitle}
 							</Typography>
-
-							{/* subscribe field */}
-							<KForm onSubmit={onSubmit}>
-								<Stack
-									direction='row'
-									justifyContent='center'
-									alignItems='center'
-									mt={4}
-									sx={{
-										backgroundColor: 'white',
-										padding: {
-											xs: '2px 10px',
-											md: '5px 20px'
-										},
-										borderRadius: '50px',
-										color: '#253D4E',
-										position: 'relative',
-										maxWidth: {
-											xs: '260px',
-											md: '400px'
-										},
-										width: '100%'
-									}}
-								>
-									<FaRegPaperPlane color='secondary.main' />
-									<KInput
-										name='email'
-										placeholder='Your email address'
-										sx={{
-											'& .MuiOutlinedInput-root': {
-												'& fieldset': {
-													border: 'none'
-												}
-											},
-											width: '100%'
-										}}
-									/>
-									<Button
-										type='submit'
-										sx={{
-											position: 'absolute',
-											right: '-50px',
-											borderRadius: '50px',
-											padding: {
-												xs: '12px 10px',
-												md: '13px 20px'
-											},
-											fontSize: {
-												xs: '11px',
-												md: '14px'
-											},
-											textTransform: 'capitalize'
-										}}
-									>
-										Subscribe
-									</Button>
-								</Stack>
-							</KForm>
 						</div>
 					</Box>
 				</Box>

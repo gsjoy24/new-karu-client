@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
@@ -25,7 +24,7 @@ const BrowseCategory = () => {
 	};
 
 	const handleClose = (event: Event | React.SyntheticEvent) => {
-		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+		if (anchorRef?.current && anchorRef?.current?.contains(event?.target as HTMLElement)) {
 			return;
 		}
 
@@ -80,13 +79,13 @@ const BrowseCategory = () => {
 						>
 							<Paper className='w-[500px] p-3 mt-5 '>
 								<Stack flexWrap='wrap' direction='row'>
-									{categoryData?.data.slice(0, 10).map((category: TCategory, index: number) => (
-										<ClickAwayListener onClickAway={handleClose} key={index}>
+									{categoryData?.data.slice(0, 10).map((category: TCategory) => (
+										<ClickAwayListener onClickAway={handleClose} key={category?._id}>
 											<MenuItem onClick={handleClose}>
 												{/* like a button with image and name */}
 												<div className='flex items-center gap-2 p-2 border border-[#29A56C] rounded-md w-[200px]'>
-													<Image src={category.image} alt={category.name} className='w-8 h-8' width={50} height={50} />
-													<span className='font-[500]'>{category.name}</span>
+													<Image src={category.image} alt={category?.name} className='w-8 h-8' width={50} height={50} />
+													<span className='font-[500]'>{category?.name}</span>
 												</div>
 											</MenuItem>
 										</ClickAwayListener>
