@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Carousel from 'react-material-ui-carousel';
 const data = [
 	{
-		title: 'Summer Collection 2024',
-		subtitle: 'Explore the latest trends in summer fashion',
+		title: 'Summer Collection Extravaganza 2024',
+		subtitle: 'Dive into the latest trends and styles in summer fashion, perfect for your sunny adventures',
 		banner: 'https://i.ibb.co/s22BRjx/slider-1.png'
 	},
 	{

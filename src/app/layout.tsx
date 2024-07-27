@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	description: 'Karukon is a ecommerce website selling products.'
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
 	return (
 		<Providers>
 			<html lang='en'>

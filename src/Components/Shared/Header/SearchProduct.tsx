@@ -63,22 +63,11 @@ const SearchProduct = () => {
 				}}
 			>
 				<MenuItem value=''>All Categories</MenuItem>
-				{categories.map(
-					(
-						{
-							id,
-							name
-						}: {
-							id: string;
-							name: string;
-						},
-						index: number
-					) => (
-						<MenuItem key={index} value={id}>
-							{name}
-						</MenuItem>
-					)
-				)}
+				{categories.map(({ id, name }: { id: string; name: string }) => (
+					<MenuItem key={id} value={id}>
+						{name}
+					</MenuItem>
+				))}
 			</Select>
 			<Divider
 				orientation='vertical'

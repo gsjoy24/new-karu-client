@@ -1,5 +1,5 @@
 import XIcon from '@mui/icons-material/X';
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FaFacebookF, FaYoutube } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa6';

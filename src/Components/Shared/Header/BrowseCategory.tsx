@@ -62,14 +62,7 @@ const BrowseCategory = () => {
 					<IoGridOutline size={18} /> <span>Browse Categories</span>{' '}
 					<IoIosArrowDown className={`${open && 'rotate-180'} duration-150`} />
 				</Button>
-				<Popper
-					open={open}
-					anchorEl={anchorRef.current}
-					role={undefined}
-					placement='bottom-start'
-					transition
-					disablePortal
-				>
+				<Popper open={open} anchorEl={anchorRef.current} placement='bottom-start' transition disablePortal>
 					{({ TransitionProps, placement }) => (
 						<Grow
 							{...TransitionProps}
@@ -77,13 +70,20 @@ const BrowseCategory = () => {
 								transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom'
 							}}
 						>
-							<Paper className='w-[500px] p-3 mt-5 '>
+							<Paper className='w-[550px] p-3 mt-5 '>
 								<Stack flexWrap='wrap' direction='row'>
 									{categoryData?.data.slice(0, 10).map((category: TCategory) => (
 										<ClickAwayListener onClickAway={handleClose} key={category?._id}>
-											<MenuItem onClick={handleClose}>
+											<MenuItem
+												onClick={handleClose}
+												sx={{
+													'&:hover': {
+														backgroundColor: 'transparent'
+													}
+												}}
+											>
 												{/* like a button with image and name */}
-												<div className='flex items-center gap-2 p-2 border border-[#29A56C] rounded-md w-[200px]'>
+												<div className='flex items-center gap-2 p-2 border border-[#29A56C] rounded-md w-[225px] hover:scale-105 duration-150'>
 													<Image src={category.image} alt={category?.name} className='w-8 h-8' width={50} height={50} />
 													<span className='font-[500]'>{category?.name}</span>
 												</div>

@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { TfiHeadphoneAlt } from 'react-icons/tfi';
 import BrowseCategory from './BrowseCategory';
@@ -27,8 +27,8 @@ const Nav = () => {
 			<BrowseCategory />
 
 			<Stack direction='row' gap={2}>
-				{navLinks.map((link, index) => (
-					<Link key={index} href={link.link}>
+				{navLinks.map((link) => (
+					<Link key={link?.link + '1'} href={link?.link}>
 						<Typography
 							sx={{
 								fontWeight: '500',

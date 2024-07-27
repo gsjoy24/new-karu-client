@@ -21,7 +21,7 @@ const KInput = ({ label, type = 'text', ariaLabel, name, placeholder, sx, multil
 			control={control}
 			name={name}
 			render={({ field, fieldState: { error } }) => (
-				<div>
+				<div className='w-full'>
 					<label htmlFor={name} className='text-sm font-medium text-gray-700'>
 						{label}
 					</label>
@@ -29,7 +29,7 @@ const KInput = ({ label, type = 'text', ariaLabel, name, placeholder, sx, multil
 						{...field}
 						aria-label={ariaLabel ?? placeholder}
 						inputProps={{ autoComplete: name }}
-						sx={{ ...sx, width: '100%', borderRadius: '5px', mt: '5px' }}
+						sx={{ ...sx, width: '100%', borderRadius: '5px' }}
 						placeholder={placeholder ?? label}
 						minRows={rows ?? 6}
 						variant='outlined'
