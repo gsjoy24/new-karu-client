@@ -1,41 +1,21 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { useLoginMutation } from '@/redux/api/authApi';
-import { setUser } from '@/redux/features/authSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import verifyToken from '@/utils/verifyToken';
-import { LoginSchema } from '@/validationShemas/auth.validation';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { toast } from 'sonner';
 
-const LoginPage = () => {
+const RegisterPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
-	const [login, { isLoading }] = useLoginMutation();
-	const dispatch = useAppDispatch();
-	const navigate = useRouter();
-	const handleSubmit = async (data: FieldValues) => {
-		try {
-			const response = await login(data).unwrap();
+	const isLoading = false;
 
-			if (response?.success) {
-				toast.success('Logged in successfully!');
-				const userInfo = verifyToken(response?.data?.accessToken);
-				// save user info and token in redux store
-				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
-				navigate.push('/');
-			}
-		} catch (error: any) {
-			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
-		}
+	const handleSubmit = async (data: FieldValues) => {
+		console.log(data);
 	};
+
 	return (
 		<Stack
 			direction='column'
@@ -58,32 +38,28 @@ const LoginPage = () => {
 				Login
 			</Typography>
 
-			<KForm
-				onSubmit={handleSubmit}
-				resolver={zodResolver(LoginSchema)}
-				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
-			>
+			<KForm onSubmit={handleSubmit} styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'>
 				<KInput label='Email Address' placeholder='*example@gmail.com' name='email' type='email' />
 				<div className='relative'>
 					<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
-					<IconButton
+					<Box
 						onClick={() => setShowPassword(!showPassword)}
 						sx={{
 							position: 'absolute',
-							top: '25px',
+							bottom: '10px',
 							right: '10px',
 							cursor: 'pointer'
 						}}
 					>
 						{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
-					</IconButton>
+					</Box>
 				</div>
 				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Logging in' variant='contained'>
 					Login
 				</LoadingButton>
 			</KForm>
 			<Stack direction='row' gap={1}>
-				<Typography variant='body2'>Don&#39;t have an account?</Typography>
+				<Typography variant='body2'>Already have an account?</Typography>
 				<Typography
 					variant='body2'
 					sx={{
@@ -93,11 +69,11 @@ const LoginPage = () => {
 						}
 					}}
 				>
-					<Link href='/register'>Register Now</Link>
+					<Link href='/login'>Login Now</Link>
 				</Typography>
 			</Stack>
 		</Stack>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;
