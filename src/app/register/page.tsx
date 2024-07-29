@@ -1,19 +1,33 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
+import { useRegisterMutation } from '@/redux/api/authApi';
+import { RegisterSchema } from '@/validationSchemas/auth.validation';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
-import { Box, Stack, Typography } from '@mui/material';
+import { IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { toast } from 'sonner';
 
 const RegisterPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
-	const isLoading = false;
+	const [register, { isLoading }] = useRegisterMutation();
 
 	const handleSubmit = async (data: FieldValues) => {
-		console.log(data);
+		try {
+			const response = await register(data).unwrap();
+			if (response?.success) {
+				toast.success(response.message ?? 'Registered successfully!', {
+					duration: Infinity,
+					closeButton: true
+				});
+			}
+		} catch (error: any) {
+			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
+		}
 	};
 
 	return (
@@ -35,27 +49,33 @@ const RegisterPage = () => {
 					fontWeight: 'bold'
 				}}
 			>
-				Login
+				Register Now
 			</Typography>
 
-			<KForm onSubmit={handleSubmit} styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'>
+			<KForm
+				onSubmit={handleSubmit}
+				// resolver={zodResolver(RegisterSchema)}
+				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
+			>
+				<KInput label='First Name' name='name.firstName' />
+				<KInput label='Last Name' name='name.lastName' />
 				<KInput label='Email Address' placeholder='*example@gmail.com' name='email' type='email' />
 				<div className='relative'>
 					<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
-					<Box
+					<IconButton
 						onClick={() => setShowPassword(!showPassword)}
 						sx={{
 							position: 'absolute',
-							bottom: '10px',
+							top: '25px',
 							right: '10px',
 							cursor: 'pointer'
 						}}
 					>
 						{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
-					</Box>
+					</IconButton>
 				</div>
-				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Logging in' variant='contained'>
-					Login
+				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Loading' variant='contained'>
+					Register
 				</LoadingButton>
 			</KForm>
 			<Stack direction='row' gap={1}>

@@ -42,7 +42,10 @@ const KInput = ({ label, type = 'text', ariaLabel, name, placeholder, sx, multil
 						helperText={
 							error?.message && (
 								<span className='flex items-center gap-1 relative right-3'>
-									<CiWarning size={16} /> {error?.message}
+									<span className='inline-block'>
+										<CiWarning size={16} />
+									</span>{' '}
+									{error?.message}
 								</span>
 							)
 						}

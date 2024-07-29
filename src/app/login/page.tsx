@@ -5,7 +5,7 @@ import { useLoginMutation } from '@/redux/api/authApi';
 import { setUser } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import verifyToken from '@/utils/verifyToken';
-import { LoginSchema } from '@/validationShemas/auth.validation';
+import { LoginSchema } from '@/validationSchemas/auth.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
@@ -21,6 +21,7 @@ const LoginPage = () => {
 	const [login, { isLoading }] = useLoginMutation();
 	const dispatch = useAppDispatch();
 	const navigate = useRouter();
+
 	const handleSubmit = async (data: FieldValues) => {
 		try {
 			const response = await login(data).unwrap();
