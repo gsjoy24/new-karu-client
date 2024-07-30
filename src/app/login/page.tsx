@@ -8,7 +8,7 @@ import verifyToken from '@/utils/verifyToken';
 import { LoginSchema } from '@/validationSchemas/auth.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

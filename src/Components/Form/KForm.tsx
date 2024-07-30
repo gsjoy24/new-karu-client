@@ -7,11 +7,10 @@ type TFormConfig = {
 type TFormProps = {
 	children: React.ReactNode;
 	onSubmit: SubmitHandler<FieldValues>;
-	resetForm?: boolean;
 	styleClasses?: string;
 } & TFormConfig;
 
-const KForm = ({ children, onSubmit, resolver, resetForm, defaultValues, styleClasses }: TFormProps) => {
+const KForm = ({ children, onSubmit, resolver, defaultValues, styleClasses }: TFormProps) => {
 	const formConfig: TFormConfig = {};
 
 	if (resolver) {
@@ -25,8 +24,8 @@ const KForm = ({ children, onSubmit, resolver, resetForm, defaultValues, styleCl
 	const methods = useForm(formConfig);
 	const { handleSubmit, reset } = methods;
 	const submit: SubmitHandler<FieldValues> = (data) => {
+		reset();
 		onSubmit(data);
-		resetForm === true && reset();
 	};
 	return (
 		<FormProvider {...methods}>

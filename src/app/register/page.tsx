@@ -54,7 +54,7 @@ const RegisterPage = () => {
 
 			<KForm
 				onSubmit={handleSubmit}
-				// resolver={zodResolver(RegisterSchema)}
+				resolver={zodResolver(RegisterSchema)}
 				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
 			>
 				<KInput label='First Name' name='name.firstName' />
