@@ -9,8 +9,15 @@ const productApis = baseApi.injectEndpoints({
 				method: 'GET'
 			}),
 			providesTags: [reduxTagTypes.categories]
+		}),
+		getProductBySlug: build.query({
+			query: (slug: string) => ({
+				url: `/products/slug/${slug}`,
+				method: 'GET'
+			}),
+			providesTags: [reduxTagTypes.product]
 		})
 	})
 });
 
-export const { useGetNewArrivalsQuery } = productApis;
+export const { useGetNewArrivalsQuery, useGetProductBySlugQuery } = productApis;

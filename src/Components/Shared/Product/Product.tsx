@@ -1,6 +1,7 @@
 import { TProduct } from '@/types/product';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
 const Product = ({ product }: { product: TProduct }) => {
@@ -12,9 +13,11 @@ const Product = ({ product }: { product: TProduct }) => {
 					sm: '17rem'
 				}
 			}}
-			className='hover:shadow-xl duration-200 rounded-lg overflow-hidden'
+			className='border hover:border-[#ffba00] duration-200 rounded-lg overflow-hidden'
+			component={Link}
+			href={`/product/${product?.slug}`}
 		>
-			<Box className='w-full h-[16rem]'>
+			<Box className='w-full h-[9rem] md:h-[16rem]'>
 				<Image
 					src={
 						'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
@@ -26,7 +29,7 @@ const Product = ({ product }: { product: TProduct }) => {
 				/>
 			</Box>
 			<Box p={2}>
-				<Typography mb={2} className='line-clamp-2'>
+				<Typography mb={2} className='line-clamp-2 text-center text-[0.8rem] md:text-[1rem]'>
 					{product?.name}
 				</Typography>
 				<Box
@@ -34,7 +37,11 @@ const Product = ({ product }: { product: TProduct }) => {
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-						gap: '1rem'
+						gap: '1rem',
+						fontSize: {
+							xs: '0.8rem',
+							sm: '1rem'
+						}
 					}}
 				>
 					<Typography
