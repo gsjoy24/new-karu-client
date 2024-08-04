@@ -13,3 +13,50 @@
 .custom-border-color {
 	border-color: var(--primary-color);
 }
+
+.image-gallery-thumbnail {
+	width: 4rem !important;
+}
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:hover {
+	border: 2px solid var(--primary-color) !important;
+}
+
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+	height: 3.5rem !important;
+	width: 2rem !important;
+}
+.custom-font {
+	font-family: 'Roboto', sans-serif !important;
+}
+h1 {
+	@apply text-4xl;
+}
+h2 {
+	@apply text-3xl;
+}
+h3 {
+	@apply text-2xl;
+}
+h4 {
+	@apply text-xl;
+}
+h5 {
+	@apply text-lg;
+}
+h6 {
+	@apply text-base;
+}
+
+ul {
+	@apply list-inside list-disc;
+}
+
+li {
+	@apply mb-1;
+}
+
+ol {
+	@apply list-inside list-decimal;
+}

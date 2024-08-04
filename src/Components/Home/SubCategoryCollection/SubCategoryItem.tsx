@@ -31,7 +31,7 @@ const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
 				{productImages.map((productImage, index) => {
 					return (
 						<Grid item xs={6} key={index} p='2px'>
-							<Image src={productImage} alt='product' width={200} height={200} className='w-full h-full object-cover' />
+							<Image src={productImage} alt='product' width={150} height={150} className='w-full h-full object-cover' />
 						</Grid>
 					);
 				})}
