@@ -1,13 +1,14 @@
 'use client';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
-// import { useGetProductBySlugQuery } from '@/redux/api/productApi';
-import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { useGetProductBySlugQuery } from '@/redux/api/productApi';
+import { Box, Button, Chip, Grid, IconButton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { LiaCartPlusSolid } from 'react-icons/lia';
-import { TbCurrencyTaka, TbShoppingCartDiscount } from 'react-icons/tb';
+import { TbCurrencyTaka } from 'react-icons/tb';
 
 const productImages = [
 	{
@@ -22,22 +23,7 @@ const productImages = [
 const ProductDetails = () => {
 	const [quantity, setQuantity] = useState<number>(1);
 	const { slug } = useParams();
-	// const { data } = useGetProductBySlugQuery(slug as string);
-	const data = {
-		data: {
-			name: 'Ash Color Design 6 cup 1 jug 1 plate Surai Set',
-			description: `<h2>Amazing Features</h2>
-                <ul>
-                  <li>Feature 1: Super fast performance</li>
-                  <li>Feature 2: Sleek and modern design</li>
-                  <li>Feature 3: Long-lasting battery life</li>
-                </ul>
-                <p>This <strong>Awesome Gadget</strong> is designed to enhance your productivity and make your life easier. With its cutting-edge technology and user-friendly interface, you'll wonder how you ever lived without it.</p>`,
-			last_price: 39.99,
-			old_price: 49.99,
-			stock: 100
-		}
-	};
+	const { data } = useGetProductBySlugQuery(slug as string);
 	return (
 		<Grid
 			container
@@ -105,7 +91,7 @@ const ProductDetails = () => {
 							{data?.data?.last_price}
 						</Typography>
 					</Box>
-					<Box className='custom-font'>{parse(data?.data?.description)}</Box>
+					<Box className='custom-font'>{parse(data?.data?.description ?? 'Loading...')}</Box>
 					<Typography>
 						Stock: <strong>{data?.data?.stock}</strong>
 					</Typography>
@@ -126,6 +112,36 @@ const ProductDetails = () => {
 							</IconButton>
 						</Box>
 						<Button startIcon={<LiaCartPlusSolid />}>Add to Cart</Button>
+					</Stack>
+					<Box mt={2}>
+						<Box>
+							<strong>Categories: </strong>
+							<Typography component={Link} href={`/category/${data?.data?.category?.slug}`}>
+								{data?.data?.category?.name},
+							</Typography>{' '}
+							<Typography
+								component={Link}
+								href={`/category/${data?.data?.category?.slug}/${data?.data?.sub_category?.slug}`}
+							>
+								{data?.data?.sub_category?.name}
+							</Typography>
+						</Box>
+					</Box>
+					<Stack direction='row' gap={1} mt={1}>
+						{data?.data?.tags?.map((tag: string) => (
+							<Chip
+								key={tag}
+								label={tag}
+								component={Link}
+								href={`/products?search=${tag}`}
+								sx={{
+									cursor: 'pointer',
+									':hover': {
+										backgroundColor: '#ffba00'
+									}
+								}}
+							/>
+						))}
 					</Stack>
 				</Box>
 			</Grid>
