@@ -1,14 +1,16 @@
+'use client';
 import logo from '@/assets/Karukon-logo.png';
-import { Chip, Divider, Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegUser } from 'react-icons/fa';
-import { IoIosHeartEmpty } from 'react-icons/io';
-import { IoCartOutline } from 'react-icons/io5';
 import BrowseCategory from './BrowseCategory';
 import SearchProduct from './SearchProduct';
 
 const Header = () => {
+	const CartButton = dynamic(() => import('./HeaderButtons'), {
+		ssr: false
+	});
 	const cart = 2;
 	return (
 		<>
@@ -28,36 +30,13 @@ const Header = () => {
 				<Link href='/'>
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>
-
 				<BrowseCategory />
-
-				{/* buttons */}
 				<Stack direction='row' gap={2} alignItems='center'>
 					{/* search bar */}
 					<SearchProduct />
-					{/* wishlist button */}
-					{/* <Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
-						<div className='relative'>
-							<Chip label={wishlist} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
-							<IoIosHeartEmpty size={30} />
-						</div>
-						<span className='text-gray-600'>Wishlist</span>
-					</Stack> */}
 
 					{/* cart button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.5} aria-label='Cart'>
-						<div className='relative'>
-							<Chip label={cart} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
-							<IoCartOutline size={30} />
-						</div>
-						<span className='text-gray-600'>Cart</span>
-					</Stack>
-
-					{/* user button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/login' gap={1.3} aria-label='User profile'>
-						<FaRegUser size={22} />
-						<span className='text-gray-600'>Sign In</span>
-					</Stack>
+					<CartButton count={0} />
 				</Stack>
 			</Stack>
 			<Divider />

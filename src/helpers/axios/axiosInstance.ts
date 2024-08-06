@@ -1,4 +1,5 @@
 import { authKey } from '@/constants/authKey';
+import { useAppSelector } from '@/redux/hooks';
 import { TGenericErrorResponse, TResponseSuccess } from '@/types';
 import { getFromLocalStorage } from '@/utils/local-storage';
 import axios from 'axios';
@@ -12,7 +13,7 @@ axiosInstance.defaults.timeout = 60000;
 axiosInstance.interceptors.request.use(
 	function (config) {
 		// Do something before request is sent
-		const accessToken = getFromLocalStorage(authKey);
+		const accessToken = useAppSelector((state) => state.auth.token);
 		if (accessToken) {
 			config.headers.Authorization = accessToken;
 		}

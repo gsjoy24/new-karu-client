@@ -15,7 +15,6 @@ import SubCategoryModal from './Category/SubCategoryModal';
 
 const BrowseCategory = () => {
 	const { data: categoryData, isFetching } = useGetCategoriesQuery({});
-
 	const [categoryModalOpen, setCategoryModalOpen] = React.useState(false);
 	const categoryModalRef = React.useRef<HTMLButtonElement>(null);
 
