@@ -33,7 +33,13 @@ const BrowseCategory = () => {
 	}, [categoryModalOpen]);
 
 	return (
-		<Stack direction='row' spacing={2}>
+		<Stack
+			direction='row'
+			spacing={2}
+			sx={{
+				zIndex: 1000
+			}}
+		>
 			<div>
 				<Button
 					ref={categoryModalRef}

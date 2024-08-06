@@ -17,7 +17,7 @@ const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
 			sx={{
 				width: {
 					xs: '9rem',
-					sm: '17rem'
+					sm: '16rem'
 				},
 				':hover': {
 					boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)'
@@ -31,7 +31,7 @@ const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
 				{productImages.map((productImage, index) => {
 					return (
 						<Grid item xs={6} key={index} p='2px'>
-							<Image src={productImage} alt='product' width={150} height={150} className='w-full h-full object-cover' />
+							<Image src={productImage} alt='product' width={120} height={120} className='w-full h-full object-cover' />
 						</Grid>
 					);
 				})}

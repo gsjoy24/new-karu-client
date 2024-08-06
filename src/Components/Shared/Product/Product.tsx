@@ -29,8 +29,18 @@ const Product = ({ product }: { product: TProduct }) => {
 				/>
 			</Box>
 			<Box p={2}>
-				<Typography mb={2} className='line-clamp-2 text-center text-[0.8rem] md:text-[1rem]'>
-					{product?.name}
+				<Typography
+					mb={2}
+					className='line-clamp-2 text-center'
+					sx={{
+						fontSize: {
+							xs: '0.8rem',
+							sm: '1rem'
+						}
+					}}
+				>
+					{/* {product?.name} */}
+					Ash Color Design 6 cup 1 jug 1 plate Surai Set
 				</Typography>
 				<Box
 					sx={{

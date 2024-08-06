@@ -5,11 +5,10 @@ import Link from 'next/link';
 import { FaRegUser } from 'react-icons/fa';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { IoCartOutline } from 'react-icons/io5';
-import Nav from './Nav';
+import BrowseCategory from './BrowseCategory';
 import SearchProduct from './SearchProduct';
 
 const Header = () => {
-	const wishlist = 5;
 	const cart = 2;
 	return (
 		<>
@@ -30,18 +29,20 @@ const Header = () => {
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>
 
+				<BrowseCategory />
+
 				{/* buttons */}
 				<Stack direction='row' gap={2} alignItems='center'>
 					{/* search bar */}
 					<SearchProduct />
 					{/* wishlist button */}
-					<Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
+					{/* <Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
 						<div className='relative'>
 							<Chip label={wishlist} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
 							<IoIosHeartEmpty size={30} />
 						</div>
 						<span className='text-gray-600'>Wishlist</span>
-					</Stack>
+					</Stack> */}
 
 					{/* cart button */}
 					<Stack direction='row' alignItems='center' component={Link} href='/cart' gap={1.5} aria-label='Cart'>
@@ -59,8 +60,6 @@ const Header = () => {
 					</Stack>
 				</Stack>
 			</Stack>
-			<Divider />
-			<Nav />
 			<Divider />
 		</>
 	);

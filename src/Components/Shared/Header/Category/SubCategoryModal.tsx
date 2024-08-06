@@ -13,7 +13,6 @@ import * as React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const SubCategoryModal = ({ category }: { category: TCategory }) => {
-	console.log(category?.subcategories);
 	const [subCategoryModalOpen, setSubCategoryModalOpen] = React.useState(false);
 	const subCategoryModalRef = React.useRef<HTMLButtonElement>(null);
 
