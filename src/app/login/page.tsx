@@ -4,6 +4,7 @@ import KInput from '@/components/Form/KInput';
 import { useLoginMutation } from '@/redux/api/authApi';
 import { setUser } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
+import { setTOLocalStorage } from '@/utils/local-storage';
 import verifyToken from '@/utils/verifyToken';
 import { LoginSchema } from '@/validationSchemas/auth.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,8 +30,10 @@ const LoginPage = () => {
 			if (response?.success) {
 				toast.success('Logged in successfully!');
 				const userInfo = verifyToken(response?.data?.accessToken);
+				console.log(response);
 				// save user info and token in redux store
 				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
+				setTOLocalStorage('accessToken', response?.data?.accessToken);
 				navigate.push('/');
 			}
 		} catch (error: any) {
