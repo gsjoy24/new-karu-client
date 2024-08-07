@@ -11,7 +11,7 @@ const CartButton = ({ count = 0 }: { count: number }) => {
 	const user = useAppSelector((state) => state.auth.user);
 	const [userData, setUserData] = useState<any>({});
 	const { data } = useGetMeQuery({});
-	console.log(data);
+	console.log({ data });
 	return (
 		<>
 			{/* wishlist button */}

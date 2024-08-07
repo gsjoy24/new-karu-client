@@ -1,7 +1,5 @@
-import { authKey } from '@/constants/authKey';
-import { useAppSelector } from '@/redux/hooks';
+import { RootState, store } from '@/redux/store';
 import { TGenericErrorResponse, TResponseSuccess } from '@/types';
-import { getFromLocalStorage } from '@/utils/local-storage';
 import axios from 'axios';
 
 const axiosInstance = axios.create();
@@ -9,18 +7,22 @@ axiosInstance.defaults.headers.post['Content-Type'] = 'application/json';
 axiosInstance.defaults.headers['Accept'] = 'application/json';
 axiosInstance.defaults.timeout = 60000;
 
-// Add a request interceptor
 axiosInstance.interceptors.request.use(
-	function (config) {
-		// Do something before request is sent
-		const accessToken = useAppSelector((state) => state.auth.token);
-		if (accessToken) {
-			config.headers.Authorization = accessToken;
+	(config) => {
+		try {
+			// Get the current state
+			const state: RootState = store.getState();
+			const accessToken = state.auth.token;
+
+			if (accessToken) {
+				config.headers.Authorization = accessToken;
+			}
+		} catch (error) {
+			console.error('Error accessing Redux state:', error);
 		}
 		return config;
 	},
-	function (error) {
-		// Do something with request error
+	(error) => {
 		return Promise.reject(error);
 	}
 );
@@ -40,7 +42,7 @@ axiosInstance.interceptors.response.use(
 	},
 	function (error) {
 		const responseObj: TGenericErrorResponse = {
-			success: error?.response?.data?.success,
+			success: false,
 			statusCode: error?.response?.status || 500,
 			message: error?.response?.data?.message || 'Something went wrong!',
 			errorMassages: error?.response?.data?.message || 'Something went wrong!'
