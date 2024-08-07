@@ -1,5 +1,8 @@
 'use client';
 import logo from '@/assets/Karukon-logo.png';
+import { useGetMeQuery } from '@/redux/api/userApi';
+import { setUser } from '@/redux/features/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { Divider, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -11,7 +14,6 @@ const Header = () => {
 	const CartButton = dynamic(() => import('./HeaderButtons'), {
 		ssr: false
 	});
-	const cart = 2;
 	return (
 		<>
 			<Stack
@@ -36,7 +38,7 @@ const Header = () => {
 					<SearchProduct />
 
 					{/* cart button */}
-					<CartButton count={0} />
+					<CartButton />
 				</Stack>
 			</Stack>
 			<Divider />

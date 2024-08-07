@@ -7,26 +7,26 @@ axiosInstance.defaults.headers.post['Content-Type'] = 'application/json';
 axiosInstance.defaults.headers['Accept'] = 'application/json';
 axiosInstance.defaults.timeout = 60000;
 
-// axiosInstance.interceptors.request.use(
-// 	(config) => {
-// 		try {
-// 			// const state: RootState = store.getState();
-// 			// const accessToken = state.auth.token;
+axiosInstance.interceptors.request.use(
+	(config) => {
+		try {
+			// const state: RootState = store.getState();
+			// const accessToken = state.auth.token;
 
-// 			let accessToken;
+			const accessToken = localStorage.getItem('accessToken');
 
-// 			if (accessToken) {
-// 				config.headers.Authorization = accessToken;
-// 			}
-// 		} catch (error) {
-// 			console.error('Error accessing Redux state:', error);
-// 		}
-// 		return config;
-// 	},
-// 	(error) => {
-// 		return Promise.reject(error);
-// 	}
-// );
+			if (accessToken) {
+				config.headers.Authorization = accessToken;
+			}
+		} catch (error) {
+			console.error('Error accessing Redux state:', error);
+		}
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
 
 // Add a response interceptor
 axiosInstance.interceptors.response.use(

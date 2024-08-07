@@ -33,6 +33,7 @@ const axiosBaseQuery =
 			});
 			return { data: result };
 		} catch (axiosError) {
+			console.log(axiosError);
 			const err = axiosError as AxiosError;
 			return {
 				error: {
