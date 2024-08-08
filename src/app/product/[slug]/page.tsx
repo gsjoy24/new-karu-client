@@ -1,12 +1,13 @@
 'use client';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
 import { useGetProductBySlugQuery } from '@/redux/api/productApi';
-import { Box, Button, Chip, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { useAppSelector } from '@/redux/hooks';
+import { Box, Breadcrumbs, Button, Chip, Grid, IconButton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
+import { CiLogin, CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { LiaCartPlusSolid } from 'react-icons/lia';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
@@ -21,9 +22,22 @@ const productImages = [
 	}
 ];
 const ProductDetails = () => {
+	const user = useAppSelector((state) => state.auth.user);
 	const [quantity, setQuantity] = useState<number>(1);
 	const { slug } = useParams();
 	const { data } = useGetProductBySlugQuery(slug as string);
+	const breadcrumbs = [
+		<Link href='/' key='1'>
+			Home
+		</Link>,
+		<Link key='2' href={`/category/${data?.data?.category?.slug}`}>
+			{data?.data?.category?.name}
+		</Link>,
+		<Link key='3' href={`/category/${data?.data?.category?.slug}/${data?.data?.sub_category?.slug}`}>
+			{data?.data?.sub_category?.name}
+		</Link>
+	];
+
 	return (
 		<Grid
 			container
@@ -41,11 +55,14 @@ const ProductDetails = () => {
 						margin: '0 auto'
 					}}
 				>
+					<Breadcrumbs separator='›' aria-label='breadcrumb'>
+						{breadcrumbs}
+					</Breadcrumbs>
 					<KImageGallery productImages={productImages} />
 				</Box>
 			</Grid>
 			<Grid item xs={12} md={6}>
-				<Box>
+				<Box mt={2.5}>
 					<Typography
 						sx={{
 							fontSize: { xs: '1.5rem', sm: '2rem' }
@@ -95,24 +112,38 @@ const ProductDetails = () => {
 					<Typography>
 						Stock: <strong>{data?.data?.stock}</strong>
 					</Typography>
-					<Stack direction='row' spacing={2} mt={2}>
-						<Box
+					{/* here */}
+					{user ? (
+						<Stack direction='row' spacing={2} mt={2}>
+							<Box
+								sx={{
+									display: 'flex',
+									gap: '0.3rem',
+									alignItems: 'center'
+								}}
+							>
+								<IconButton disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>
+									<CiSquareMinus />
+								</IconButton>
+								<span>{quantity}</span>
+								<IconButton disabled={quantity === data?.data?.stock} onClick={() => setQuantity(quantity + 1)}>
+									<CiSquarePlus />
+								</IconButton>
+							</Box>
+							<Button startIcon={<LiaCartPlusSolid />}>Add to Cart</Button>
+						</Stack>
+					) : (
+						<Button
+							component={Link}
+							href='/login'
+							endIcon={<CiLogin />}
 							sx={{
-								display: 'flex',
-								gap: '0.3rem',
-								alignItems: 'center'
+								mt: 2
 							}}
 						>
-							<IconButton disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>
-								<CiSquareMinus />
-							</IconButton>
-							<span>{quantity}</span>
-							<IconButton disabled={quantity === data?.data?.stock} onClick={() => setQuantity(quantity + 1)}>
-								<CiSquarePlus />
-							</IconButton>
-						</Box>
-						<Button startIcon={<LiaCartPlusSolid />}>Add to Cart</Button>
-					</Stack>
+							Sign in to add to cart
+						</Button>
+					)}
 					<Box mt={2}>
 						<Box>
 							<strong>Categories: </strong>
