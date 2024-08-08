@@ -2,7 +2,6 @@
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
 import { useLoginMutation } from '@/redux/api/authApi';
-import { useGetMeQuery } from '@/redux/api/userApi';
 import { setUser } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { setTOLocalStorage } from '@/utils/local-storage';
@@ -32,10 +31,9 @@ const LoginPage = () => {
 				toast.success('Logged in successfully!');
 				const userInfo = verifyToken(response?.data?.accessToken);
 				// save user info and token in redux store
-				dispatch(setUser({ user: response?.data?.user, token: response?.data?.accessToken }));
+				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
 				setTOLocalStorage('accessToken', response?.data?.accessToken);
 				navigate.push('/');
-				navigate.refresh();
 			}
 		} catch (error: any) {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');

@@ -1,13 +1,7 @@
 'use client';
 import { useGetCategoriesQuery } from '@/redux/api/categoryApis';
 import { TCategory } from '@/types/category.type';
-import { ClickAwayListener } from '@mui/material';
-import Button from '@mui/material/Button';
-import Grow from '@mui/material/Grow';
-import MenuItem from '@mui/material/MenuItem';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import Stack from '@mui/material/Stack';
+import { Button, ClickAwayListener, Grow, MenuItem, Paper, Popper, Stack } from '@mui/material';
 import * as React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoGridOutline } from 'react-icons/io5';

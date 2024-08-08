@@ -1,22 +1,15 @@
 'use client';
 import { useGetMeQuery } from '@/redux/api/userApi';
-import { setUser } from '@/redux/features/authSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { removeFromLocalStorage } from '@/utils/local-storage';
-import { Button, Chip, Stack } from '@mui/material';
+import { useAppSelector } from '@/redux/hooks';
+import { Chip, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FaRegUser } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
+import ProfileMenu from './ProfileMenu';
 
 const CartButton = () => {
-	const dispatch = useAppDispatch();
 	const { data } = useGetMeQuery({});
 	const user = useAppSelector((state) => state.auth.user);
-
-	const handleLogout = () => {
-		dispatch(setUser({ user: null, token: null }));
-		removeFromLocalStorage('accessToken');
-	};
 
 	return (
 		<>
@@ -39,20 +32,30 @@ const CartButton = () => {
 						/>
 						<IoCartOutline size={30} />
 					</div>
-					<span className='text-gray-600'>Cart</span>
 				</Stack>
 			)}
 			{/* user button */}
 			{user ? (
-				<Button onClick={handleLogout}>
-					<FaRegUser size={22} />
-					<span className='text-gray-600'>Log out</span>
-				</Button>
+				<ProfileMenu />
 			) : (
-				<Stack direction='row' alignItems='center' component={Link} href='/login' gap={1.3} aria-label='User profile'>
-					<FaRegUser size={22} />
-					<span className='text-gray-600'>Sign In</span>
-				</Stack>
+				<Typography
+					component={Link}
+					href='/login'
+					sx={{
+						cursor: 'pointer',
+						textTransform: 'capitalize',
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: '0.1rem',
+						':hover span': {
+							width: '100%'
+						}
+					}}
+				>
+					Sign In
+					<span className='h-[1px] w-0 duration-100 inline-block bg-slate-400  '></span>
+				</Typography>
 			)}
 		</>
 	);
