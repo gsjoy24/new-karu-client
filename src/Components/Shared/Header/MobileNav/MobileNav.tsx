@@ -21,7 +21,6 @@ const MobileNav = () => {
 		ssr: false
 	});
 	const [open, setOpen] = React.useState(false);
-	const cart = 2;
 	const mobileNavLinks = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Products', href: '/products' },

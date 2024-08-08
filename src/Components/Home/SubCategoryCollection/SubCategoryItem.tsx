@@ -28,9 +28,9 @@ const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
 			href={`/category/${item?.category_slug}/${item?.slug}`}
 		>
 			<Grid container>
-				{productImages.map((productImage, index) => {
+				{productImages.map((productImage) => {
 					return (
-						<Grid item xs={6} key={index} p='2px'>
+						<Grid item xs={6} key={productImage} p='2px'>
 							<Image src={productImage} alt='product' width={120} height={120} className='w-full h-full object-cover' />
 						</Grid>
 					);

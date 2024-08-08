@@ -1,4 +1,3 @@
-import { RootState, store } from '@/redux/store';
 import { TGenericErrorResponse, TResponseSuccess } from '@/types';
 import axios from 'axios';
 
@@ -10,11 +9,7 @@ axiosInstance.defaults.timeout = 60000;
 axiosInstance.interceptors.request.use(
 	(config) => {
 		try {
-			// const state: RootState = store.getState();
-			// const accessToken = state.auth.token;
-
 			const accessToken = localStorage.getItem('accessToken');
-
 			if (accessToken) {
 				config.headers.Authorization = accessToken;
 			}
