@@ -1,29 +1,31 @@
 'use client';
 import logo from '@/assets/Karukon-logo.png';
-import { Chip, IconButton, Stack } from '@mui/material';
+import { Button, IconButton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { CiLocationOn } from 'react-icons/ci';
-import { FaRegUser } from 'react-icons/fa';
 import { GiFlexibleLamp } from 'react-icons/gi';
-import { IoCartOutline, IoClose } from 'react-icons/io5';
+import { IoClose } from 'react-icons/io5';
 import { LuPhoneCall } from 'react-icons/lu';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import SocialSection from '../../SocialSection';
 import SearchProduct from '../SearchProduct';
 
 const MobileNav = () => {
+	const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
+		ssr: false
+	});
 	const [open, setOpen] = React.useState(false);
 	const cart = 2;
 	const mobileNavLinks = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Products', href: '/products' },
-		{ name: 'Wishlist', href: '/wishlist' },
-		{ name: 'Cart', href: '/cart' },
+		// { name: 'Wishlist', href: '/wishlist' },
 		{
 			name: 'About Us',
 			href: '/about-us'
@@ -84,23 +86,25 @@ const MobileNav = () => {
 			{/* links */}
 			<Stack direction='column' gap={2} p={2} mt={2}>
 				{mobileNavLinks.map((link) => (
-					<Link key={link?.href} href={link?.href}>
-						<Stack
-							direction='row'
-							justifyContent='space-between'
-							align-items='center'
-							sx={{
-								'&:hover': {
-									color: 'primary.main'
-								},
-								transition: 'all 0.3s',
-								borderBottom: '1px solid #f0f0f0'
-							}}
-						>
-							<span>{link.name}</span>
-							<MdOutlineArrowOutward />
-						</Stack>
-					</Link>
+					<Button
+						key={link?.href}
+						LinkComponent={Link}
+						href={link?.href}
+						onClick={toggleDrawer(false)}
+						variant='text'
+						endIcon={<MdOutlineArrowOutward />}
+						sx={{
+							justifyContent: 'space-between',
+							transition: 'all 0.3s',
+							borderBottom: '1px solid #f0f0f0',
+							color: 'secondary.main',
+							'&:hover': {
+								color: 'primary.main'
+							}
+						}}
+					>
+						<span>{link.name}</span>
+					</Button>
 				))}
 			</Stack>
 
@@ -168,17 +172,7 @@ const MobileNav = () => {
 				</Link>
 
 				{/* buttons */}
-				<Stack direction='row' gap={2} alignItems='center'>
-					{/* cart button */}
-					<Box component={Link} href='/cart' aria-label='User profile' sx={{ position: 'relative' }}>
-						<Chip label={cart} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
-						<IoCartOutline size={30} />
-					</Box>
-					{/* user button */}
-					<Box component={Link} href='/profile' aria-label='User profile'>
-						<FaRegUser size={22} />
-					</Box>
-				</Stack>
+				<HeaderButtons />
 			</Stack>
 			<Drawer open={open} onClose={toggleDrawer(false)}>
 				{DrawerList}

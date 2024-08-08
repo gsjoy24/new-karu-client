@@ -7,12 +7,11 @@ import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const SearchProduct = () => {
 	const handleSubmit = (data: FieldValues) => {
-		// handle search
 		console.log({ search: data.search });
 	};
 
 	return (
-		<KForm onSubmit={handleSubmit} styleClasses='w-[400px] flex border rounded-md py-[5px]'>
+		<KForm onSubmit={handleSubmit} styleClasses='w-[300px] md:w-[400px] flex border rounded-md py-[5px]'>
 			<KInput
 				name='search'
 				placeholder='Search for items...'

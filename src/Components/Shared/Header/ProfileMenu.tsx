@@ -53,7 +53,7 @@ const ProfileMenu = () => {
 						gap: '0.5rem'
 					}}
 				>
-					<Avatar />
+					<Avatar sizes='60' />
 				</IconButton>
 				<Popper open={menuOpen} anchorEl={modalRef.current} placement='bottom-start' transition disablePortal>
 					{({ TransitionProps, placement }) => (
