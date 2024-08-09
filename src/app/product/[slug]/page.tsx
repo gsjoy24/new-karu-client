@@ -1,14 +1,14 @@
 'use client';
+import Loading from '@/app/loading';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
 import { useGetProductBySlugQuery } from '@/redux/api/productApi';
 import { useAppSelector } from '@/redux/hooks';
-import { Box, Breadcrumbs, Button, Chip, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Button, Chip, Grid, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
-import { CiLogin, CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
-import { LiaCartPlusSolid } from 'react-icons/lia';
+import { CiLogin } from 'react-icons/ci';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
 const productImages = [
@@ -22,10 +22,12 @@ const productImages = [
 	}
 ];
 const ProductDetails = () => {
+	const AddToCart = dynamic(() => import('../components/AddToCart'), {
+		ssr: false
+	});
 	const user = useAppSelector((state) => state.auth.user);
-	const [quantity, setQuantity] = useState<number>(1);
 	const { slug } = useParams();
-	const { data } = useGetProductBySlugQuery(slug as string);
+	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
 	const breadcrumbs = [
 		<Link href='/' key='1'>
 			Home
@@ -38,7 +40,9 @@ const ProductDetails = () => {
 		</Link>
 	];
 
-	return (
+	return isFetching ? (
+		<Loading />
+	) : (
 		<Grid
 			container
 			py={2}
@@ -114,24 +118,7 @@ const ProductDetails = () => {
 					</Typography>
 					{/* here */}
 					{user ? (
-						<Stack direction='row' spacing={2} mt={2}>
-							<Box
-								sx={{
-									display: 'flex',
-									gap: '0.3rem',
-									alignItems: 'center'
-								}}
-							>
-								<IconButton disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>
-									<CiSquareMinus />
-								</IconButton>
-								<span>{quantity}</span>
-								<IconButton disabled={quantity === data?.data?.stock} onClick={() => setQuantity(quantity + 1)}>
-									<CiSquarePlus />
-								</IconButton>
-							</Box>
-							<Button startIcon={<LiaCartPlusSolid />}>Add to Cart</Button>
-						</Stack>
+						<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
 					) : (
 						<Button
 							component={Link}
