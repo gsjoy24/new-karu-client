@@ -23,8 +23,9 @@ const AddToCart = ({ product, stock }: { product: string; stock: number }) => {
 		try {
 			const res = await addToCart(data).unwrap();
 			toast.success(res?.message);
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			// console.log(error);
+			toast.error(error?.data?.message ?? 'Something went wrong');
 		}
 	};
 
@@ -32,8 +33,9 @@ const AddToCart = ({ product, stock }: { product: string; stock: number }) => {
 		try {
 			const res = await removeFromCart(product).unwrap();
 			toast.success(res?.message);
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			// console.log(error);
+			toast.error(error?.data?.message ?? 'Something went wrong');
 		}
 	};
 

@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
 				config.headers.Authorization = accessToken;
 			}
 		} catch (error) {
-			console.error('Error accessing Redux state:', error);
+			// console.error('Error accessing Redux state:', error);
 		}
 		return config;
 	},
