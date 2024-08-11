@@ -34,6 +34,8 @@ const LoginPage = () => {
 				dispatch(setUser({ user: userInfo, token: response?.data?.accessToken }));
 				setTOLocalStorage('accessToken', response?.data?.accessToken);
 				navigate.push('/');
+			} else {
+				toast.error(response?.message);
 			}
 		} catch (error: any) {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
@@ -54,8 +56,7 @@ const LoginPage = () => {
 				variant='h1'
 				sx={{
 					textAlign: 'center',
-					fontSize: '2.5rem',
-					fontWeight: 'bold'
+					fontSize: '2.5rem'
 				}}
 			>
 				Login

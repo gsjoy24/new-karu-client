@@ -45,8 +45,7 @@ const RegisterPage = () => {
 				variant='h1'
 				sx={{
 					textAlign: 'center',
-					fontSize: '2.5rem',
-					fontWeight: 'bold'
+					fontSize: '2.5rem'
 				}}
 			>
 				Register Now

@@ -30,11 +30,13 @@ export interface TUserProfile {
 	isEmailConfirmed: boolean;
 	password: string;
 	cart?: TCart[];
+
 	courier_address?: string;
 	city?: string;
 	district?: string;
 	postal_code?: string;
 	mobile_number?: string;
+
 	orders?: string[];
 	status?: 'active' | 'blocked';
 	isDeleted: boolean;

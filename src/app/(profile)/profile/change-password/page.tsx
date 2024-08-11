@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
 import { IconButton, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
+import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
 
@@ -17,10 +18,14 @@ const ChangePassword = () => {
 	const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
 	const [changePassword, { isLoading }] = useChangePasswordMutation();
-	const handleSubmit = async (data: any) => {
+	const handleSubmit = async (data: FieldValues) => {
 		try {
 			const res = await changePassword(data).unwrap();
-			toast.success(res?.message);
+			if (res?.success) {
+				toast.success(res?.message);
+			} else {
+				toast.error(res?.message);
+			}
 		} catch (error: any) {
 			toast.error(error.data?.message ?? error.error.message ?? 'An error occurred! Please try again later.');
 		}

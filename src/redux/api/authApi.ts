@@ -1,3 +1,4 @@
+import { reduxTagTypes } from '@/constants/reduxTagTypes';
 import baseApi from './baseApi';
 
 const authApi = baseApi.injectEndpoints({
@@ -28,8 +29,22 @@ const authApi = baseApi.injectEndpoints({
 				method: 'PATCH',
 				data
 			})
+		}),
+		updateProfile: build.mutation({
+			query: (data) => ({
+				url: `/users/${data.id}`,
+				method: 'PUT',
+				data: data?.data
+			}),
+			invalidatesTags: [reduxTagTypes.user]
 		})
 	})
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutQuery, useChangePasswordMutation } = authApi;
+export const {
+	useLoginMutation,
+	useRegisterMutation,
+	useLogoutQuery,
+	useChangePasswordMutation,
+	useUpdateProfileMutation
+} = authApi;
