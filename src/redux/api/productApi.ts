@@ -10,6 +10,13 @@ const productApis = baseApi.injectEndpoints({
 			}),
 			providesTags: [reduxTagTypes.categories]
 		}),
+		getProductsByCategory: build.query({
+			query: (query: Record<string, unknown>) => ({
+				url: '/products',
+				method: 'GET'
+			}),
+			providesTags: [reduxTagTypes.products]
+		}),
 		getProductBySlug: build.query({
 			query: (slug: string) => ({
 				url: `/products/slug/${slug}`,

@@ -70,7 +70,7 @@ const SubCategoryModal = ({ category }: { category: TCategory }) => {
 				) : (
 					<Button
 						component={Link}
-						href={`/category/${category?._id}`}
+						href={`/category/${category?.slug}`}
 						sx={{
 							display: 'flex',
 							alignItems: 'center',
@@ -112,7 +112,7 @@ const SubCategoryModal = ({ category }: { category: TCategory }) => {
 									<Stack flexWrap='wrap' direction='row' gap={2}>
 										<Box
 											component={Link}
-											href={`/category/${category?._id}`}
+											href={`/category/${category?.slug}`}
 											className='flex items-center justify-center gap-2 py-2 px-4 border border-gray-400 rounded-md hover:border-gray-600 duration-150'
 										>
 											See All
@@ -120,7 +120,7 @@ const SubCategoryModal = ({ category }: { category: TCategory }) => {
 										{category?.subcategories?.map((subCategory: TSubCategory) => (
 											<Box
 												component={Link}
-												href={`/subcategory/${subCategory?._id}`}
+												href={`/category/${category?.slug}/${subCategory?.slug}`}
 												className='flex items-center justify-center gap-2 py-2 px-4 border border-gray-400 rounded-md hover:border-gray-600 duration-150'
 												key={subCategory?._id}
 											>

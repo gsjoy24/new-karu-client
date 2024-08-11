@@ -1,6 +1,7 @@
 export type TCategory = {
 	_id?: string;
 	name: string;
+	slug: string;
 	description: string;
 	image: string;
 	subcategories: TSubCategory[];
@@ -8,6 +9,7 @@ export type TCategory = {
 
 export type TSubCategory = {
 	_id?: string;
+	slug: string;
 	name: string;
 	description: string;
 	category: string;
