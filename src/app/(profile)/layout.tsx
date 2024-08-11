@@ -1,4 +1,3 @@
-'use client';
 import { Stack } from '@mui/material';
 import ProfileNav from './components/ProfileNav';
 
@@ -12,7 +11,7 @@ const layout = ({ children }: { readonly children: React.ReactNode }) => {
 			spacing={2}
 		>
 			<ProfileNav />
-			{children}
+			<div className='py-[1rem] w-full'> {children}</div>
 		</Stack>
 	);
 };

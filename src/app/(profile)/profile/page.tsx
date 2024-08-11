@@ -1,13 +1,12 @@
 'use client';
-import dynamic from 'next/dynamic';
+import NewArrivals from '@/components/Home/NewArrivals/NewArrivals';
 const Profile = () => {
-	const PrivateRoute = dynamic(() => import('@/components/Shared/PrivateRoute'), {
-		ssr: false
-	});
 	return (
-		<PrivateRoute>
-			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum, veritatis. Aut, deleniti!
-		</PrivateRoute>
+		<>
+			<NewArrivals />
+			<NewArrivals />
+			<NewArrivals />
+		</>
 	);
 };
 

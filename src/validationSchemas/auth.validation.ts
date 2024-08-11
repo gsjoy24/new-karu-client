@@ -62,3 +62,46 @@ export const RegisterSchema = z.object({
 			}
 		)
 });
+
+export const ChangePasswordSchema = z
+	.object({
+		oldPassword: z
+			.string({
+				required_error: 'Current Password is required!'
+			})
+			.min(8, {
+				message: 'Password must be at least 8 characters long!'
+			}),
+		newPassword: z
+			.string({
+				required_error: 'Password is required!'
+			})
+			.refine(
+				(data) => {
+					const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+					return passwordRegex.test(data);
+				},
+				{
+					message:
+						'The password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.'
+				}
+			),
+		confirmPassword: z
+			.string({
+				required_error: 'Password is required!'
+			})
+			.refine(
+				(data) => {
+					const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+					return passwordRegex.test(data);
+				},
+				{
+					message:
+						'The password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.'
+				}
+			)
+	})
+	.refine((data) => data.newPassword === data.confirmPassword, {
+		message: 'Passwords do not match!',
+		path: ['confirmPassword']
+	});

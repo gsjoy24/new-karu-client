@@ -8,23 +8,62 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BiSolidDashboard } from 'react-icons/bi';
 import { FaBoxOpen } from 'react-icons/fa';
-import { FaGlobe } from 'react-icons/fa6';
+import { FaGlobe, FaKey } from 'react-icons/fa6';
 import { IoIosLogOut, IoMdHeart } from 'react-icons/io';
+import { MdDelete } from 'react-icons/md';
+const profileNavLinks = [
+	{
+		icon: <BiSolidDashboard />,
+		text: 'Dashboard',
+		href: '/profile'
+	},
+	{
+		icon: <FaBoxOpen />,
+		text: 'Orders',
+		href: '/profile/orders'
+	},
+	{
+		icon: <FaGlobe />,
+		text: 'Address',
+		href: '/profile/address'
+	},
+	{
+		icon: <IoMdHeart />,
+		text: 'Wishlist',
+		href: '/wishlist'
+	},
+	{
+		icon: <FaKey />,
+		text: 'Change Password',
+		href: '/profile/change-password'
+	}
+];
+
 const ProfileNav = () => {
+	const { data } = useGetMeQuery({});
+	const profile = data?.data ?? {};
+
 	const dispatch = useAppDispatch();
 	const handleLogout = () => {
 		dispatch(setUser({ user: null, token: null }));
 		removeFromLocalStorage('accessToken');
 	};
-	const { data } = useGetMeQuery({});
-	const profile = data?.data ?? {};
+	const handleDeleteAccount = () => {
+		dispatch(setUser({ user: null, token: null }));
+		removeFromLocalStorage('accessToken');
+	};
+
 	return (
 		<Box
 			py={2}
 			className='relative'
 			sx={{
 				maxWidth: '22rem',
-				width: '100%'
+				width: '100%',
+				position: { md: 'sticky' },
+				top: '0.5rem',
+				zIndex: 10,
+				height: 'fit-content'
 			}}
 		>
 			{/* cover */}
@@ -39,8 +78,8 @@ const ProfileNav = () => {
 			<Image
 				src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
 				alt={profile?.full_name ?? 'profile picture'}
-				width={150}
-				height={150}
+				width={120}
+				height={120}
 				className='rounded-full mx-auto border-4 border-white z-10 mt-[5rem] '
 			/>
 			<Typography
@@ -60,25 +99,49 @@ const ProfileNav = () => {
 				{profile?.email}
 			</Typography>
 			<Divider />
+
 			<Stack
 				p={2}
 				sx={{
 					fontSize: '1.1rem',
 					color: '#333',
-					gap: '1rem'
+					gap: '0.5rem'
 				}}
 			>
-				<Stack component={Link} href='/profile/dashboard' direction='row' alignItems='center' spacing={1}>
-					<BiSolidDashboard /> <span>Dashboard</span>
-				</Stack>
-				<Stack component={Link} href='/profile/orders' direction='row' alignItems='center' spacing={1}>
-					<FaBoxOpen /> <span>Orders</span>
-				</Stack>
-				<Stack component={Link} href='/profile/address' direction='row' alignItems='center' spacing={1}>
-					<FaGlobe /> <span>Address</span>
-				</Stack>
-				<Stack component={Link} href='/profile/wishlist' direction='row' alignItems='center' spacing={1}>
-					<IoMdHeart /> <span>Wishlist</span>
+				{profileNavLinks.map((link, index) => (
+					<Link key={index} href={link.href}>
+						<Stack
+							component={Button}
+							fullWidth
+							variant='text'
+							direction='row'
+							alignItems='center'
+							sx={{
+								color: 'inherit',
+								justifyContent: 'flex-start',
+								'&:hover': {
+									bgcolor: 'primary.main'
+								}
+							}}
+							startIcon={link.icon}
+						>
+							{link.text}
+						</Stack>
+					</Link>
+				))}
+				<Stack
+					component={Button}
+					variant='text'
+					direction='row'
+					alignItems='center'
+					sx={{
+						color: 'inherit',
+						justifyContent: 'flex-start'
+					}}
+					startIcon={<MdDelete />}
+					onClick={handleDeleteAccount}
+				>
+					Delete Account
 				</Stack>
 				<Stack
 					component={Button}
