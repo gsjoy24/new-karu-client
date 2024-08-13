@@ -1,6 +1,6 @@
 'use client';
 import logo from '@/assets/Karukon-logo.png';
-import { Button, IconButton, Stack } from '@mui/material';
+import { Button, IconButton, Skeleton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import dynamic from 'next/dynamic';
@@ -15,16 +15,16 @@ import { LuPhoneCall } from 'react-icons/lu';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import SocialSection from '../../SocialSection';
 import SearchProduct from '../SearchProduct';
+const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
+	ssr: false
+});
 
 const MobileNav = () => {
-	const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
-		ssr: false
-	});
 	const [open, setOpen] = React.useState(false);
 	const mobileNavLinks = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Products', href: '/products' },
-		// { name: 'Wishlist', href: '/wishlist' },
+		{ name: 'Wishlist', href: '/wishlist' },
 		{
 			name: 'About Us',
 			href: '/about-us'
@@ -171,7 +171,9 @@ const MobileNav = () => {
 				</Link>
 
 				{/* buttons */}
-				<HeaderButtons />
+				<React.Suspense fallback={<Skeleton variant='rectangular' width={210} height={40} />}>
+					<HeaderButtons />
+				</React.Suspense>
 			</Stack>
 			<Drawer open={open} onClose={toggleDrawer(false)}>
 				{DrawerList}

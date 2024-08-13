@@ -1,16 +1,17 @@
 'use client';
 import logo from '@/assets/Karukon-logo.png';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Skeleton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import BrowseCategory from './BrowseCategory';
 import SearchProduct from './SearchProduct';
+const HeaderButtons = dynamic(() => import('./HeaderButtons'), {
+	ssr: false
+});
 
 const Header = () => {
-	const HeaderButtons = dynamic(() => import('./HeaderButtons'), {
-		ssr: false
-	});
 	return (
 		<>
 			<Stack
@@ -29,10 +30,12 @@ const Header = () => {
 				<Link href='/'>
 					<Image src={logo} alt='logo' width={80} height={80} />
 				</Link>
-				<BrowseCategory />
 				<Stack direction='row' gap={2} alignItems='center'>
+					<BrowseCategory />
 					<SearchProduct />
-					<HeaderButtons />
+					<Suspense fallback={<Skeleton variant='rectangular' width={150} height={40} />}>
+						<HeaderButtons />
+					</Suspense>
 				</Stack>
 			</Stack>
 			<Divider />

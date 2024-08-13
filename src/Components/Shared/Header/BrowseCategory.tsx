@@ -46,7 +46,8 @@ const BrowseCategory = () => {
 						textTransform: 'capitalize',
 						display: 'flex',
 						alignItems: 'center',
-						gap: '0.5rem'
+						gap: '0.5rem',
+						p: 1.4
 					}}
 				>
 					<IoGridOutline size={18} /> <span>Browse Categories</span>{' '}
