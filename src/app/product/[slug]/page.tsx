@@ -28,6 +28,7 @@ const ProductDetails = () => {
 	const user = useAppSelector((state) => state.auth.user);
 	const { slug } = useParams();
 	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
+	console.log(data);
 	const breadcrumbs = [
 		<Link href='/' key='1'>
 			Home

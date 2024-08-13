@@ -2,16 +2,13 @@
 import Loading from '@/app/loading';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import KSelect from '@/components/Form/KSelect';
 import EmptyCard from '@/components/Shared/Header/EmptyCard';
 import Product from '@/components/Shared/Product/Product';
 import { useGetProductsQuery } from '@/redux/api/productApi';
-import { TQueryParams } from '@/types';
 import { TProduct } from '@/types/product';
-import { Box, IconButton, MenuItem, Pagination, Select, Stack } from '@mui/material';
+import { IconButton, MenuItem, Pagination, Select, Stack } from '@mui/material';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const sortOptions = [
@@ -26,10 +23,11 @@ const sortOptions = [
 ];
 
 const ProductsByCategory = () => {
+	const { slug } = useParams();
 	const [sortParam, setSortParam] = useState('createdAt');
+	const [sortOrder, setSortOrder] = useState('asc');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [page, setPage] = useState<number>(1);
-	const { slug } = useParams();
 
 	const { data, isFetching } = useGetProductsQuery([
 		{
@@ -55,26 +53,34 @@ const ProductsByCategory = () => {
 		{
 			name: 'page',
 			value: page
+		},
+		{
+			name: 'sortOrder',
+			value: sortOrder
 		}
 	]);
-
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 
-	return isFetching ? (
-		<Loading />
-	) : (
+	return (
 		<div>
 			<Stack
 				direction='row'
 				sx={{
 					py: 2,
-					gap: 3,
+					gap: {
+						xs: 1,
+						sm: 2
+					},
 					flexWrap: 'wrap'
+				}}
+				justifyContent={{
+					xs: 'center',
+					md: 'start'
 				}}
 			>
 				<Select
 					sx={{
-						maxWidth: '200px',
+						maxWidth: '120px',
 						width: '100%'
 					}}
 					value={sortParam}
@@ -83,11 +89,32 @@ const ProductsByCategory = () => {
 					variant='outlined'
 					size='small'
 				>
+					<MenuItem disabled>
+						<em>Sort By</em>
+					</MenuItem>
 					{sortOptions.map((option) => (
 						<MenuItem key={option.value} value={option.value}>
 							{option.label}
 						</MenuItem>
 					))}
+				</Select>
+				<Select
+					sx={{
+						maxWidth: '150px',
+						width: '100%'
+					}}
+					value={sortOrder}
+					onChange={(e) => setSortOrder(e.target.value)}
+					placeholder='Sort by'
+					variant='outlined'
+					size='small'
+				>
+					<MenuItem disabled>
+						<em>Sort Order</em>
+					</MenuItem>
+
+					<MenuItem value='asc'>Ascending</MenuItem>
+					<MenuItem value='desc'>Descending</MenuItem>
 				</Select>
 
 				{/* search form */}
@@ -112,35 +139,24 @@ const ProductsByCategory = () => {
 					</IconButton>
 				</KForm>
 			</Stack>
-
-			{data?.data?.length > 0 ? (
-				<Stack direction='row' justifyContent='center' alignItems='center' gap={3} flexWrap='wrap'>
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-					{data?.data?.map((product: TProduct) => (
-						<Product product={product} key={product?._id} />
-					))}
-				</Stack>
+			{!isFetching ? (
+				<>
+					{data?.data?.length > 0 ? (
+						<Stack direction='row' justifyContent='center' alignItems='center' gap={3} flexWrap='wrap'>
+							{data?.data?.map((product: TProduct) => (
+								<Product product={product} key={product?._id} />
+							))}
+						</Stack>
+					) : (
+						<EmptyCard />
+					)}
+				</>
 			) : (
-				<EmptyCard />
+				<Loading />
 			)}
-
-			{20 > 1 && (
+			{totalPage > 1 && (
 				<Stack my={5} alignItems='center'>
-					<Pagination count={20} shape='rounded' />
+					<Pagination count={totalPage} shape='rounded' onChange={(e, value) => setPage(value)} />
 				</Stack>
 			)}
 		</div>

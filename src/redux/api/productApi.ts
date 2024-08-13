@@ -28,7 +28,7 @@ const productApis = baseApi.injectEndpoints({
 		}),
 		getProductBySlug: build.query({
 			query: (slug) => ({
-				url: `/products/${slug}`,
+				url: `/products/slug/${slug}`,
 				method: 'GET'
 			}),
 
