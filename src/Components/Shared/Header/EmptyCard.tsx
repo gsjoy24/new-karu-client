@@ -4,7 +4,7 @@ import Image from 'next/image';
 const EmptyCard = () => {
 	return (
 		<Stack justifyContent='center' alignItems='center' gap={2} py={2}>
-			<Image src={emptySvg} height={300} width={300} alt='No Data found' />
+			<Image src={emptySvg} height={250} width={250} alt='No Data found' />
 			<Typography
 				sx={{
 					fontSize: {

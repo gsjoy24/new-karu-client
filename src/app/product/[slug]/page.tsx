@@ -3,14 +3,18 @@ import Loading from '@/app/loading';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
 import { useGetProductBySlugQuery } from '@/redux/api/productApi';
 import { useAppSelector } from '@/redux/hooks';
-import { Box, Breadcrumbs, Button, Chip, Grid, Stack, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Button, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { CiLogin } from 'react-icons/ci';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
+const AddToCart = dynamic(() => import('../components/AddToCart'), {
+	ssr: false
+});
 const productImages = [
 	{
 		original: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy3.jpg',
@@ -21,14 +25,11 @@ const productImages = [
 		thumbnail: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg'
 	}
 ];
+
 const ProductDetails = () => {
-	const AddToCart = dynamic(() => import('../components/AddToCart'), {
-		ssr: false
-	});
 	const user = useAppSelector((state) => state.auth.user);
 	const { slug } = useParams();
 	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
-	console.log(data);
 	const breadcrumbs = [
 		<Link href='/' key='1'>
 			Home
@@ -119,7 +120,9 @@ const ProductDetails = () => {
 					</Typography>
 					{/* here */}
 					{user ? (
-						<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
+						<Suspense fallback={<Skeleton variant='rectangular' width={210} height={40} />}>
+							<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
+						</Suspense>
 					) : (
 						<Button
 							component={Link}
