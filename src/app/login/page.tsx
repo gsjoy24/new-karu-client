@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
+import ForgotPasswordModal from './components/ForgotPasswordModal';
 
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -61,7 +62,6 @@ const LoginPage = () => {
 			>
 				Login
 			</Typography>
-
 			<KForm
 				onSubmit={handleSubmit}
 				resolver={zodResolver(LoginSchema)}
@@ -100,6 +100,7 @@ const LoginPage = () => {
 					<Link href='/register'>Register Now</Link>
 				</Typography>
 			</Stack>
+			<ForgotPasswordModal />
 		</Stack>
 	);
 };
