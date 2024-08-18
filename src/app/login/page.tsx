@@ -93,7 +93,7 @@ const LoginPage = () => {
 					sx={{
 						transition: 'color 0.2s',
 						'&:hover': {
-							color: 'blue'
+							color: 'primary.main'
 						}
 					}}
 				>

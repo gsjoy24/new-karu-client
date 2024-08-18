@@ -60,12 +60,13 @@ const SubCategoryModal = ({ category }: { category: TCategory }) => {
 							'&:hover': {
 								backgroundColor: '#f9f9f9'
 							},
-							boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)'
+							boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
+							color: 'secondary.main'
 						}}
 					>
 						<Image src={category?.image} alt={category?.name} className='w-8 h-8' width={50} height={50} />
 						<span className='font-[500]'>{category?.name}</span>
-						<IoIosArrowDown className={`${subCategoryModalOpen && 'rotate-180'} duration-150`} />
+						<IoIosArrowDown className={` ${subCategoryModalOpen && 'rotate-180'} duration-150`} />
 					</Button>
 				) : (
 					<Button
@@ -83,7 +84,8 @@ const SubCategoryModal = ({ category }: { category: TCategory }) => {
 							'&:hover': {
 								backgroundColor: '#f9f9f9'
 							},
-							boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)'
+							boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
+							color: 'secondary.main'
 						}}
 					>
 						<Image src={category?.image} alt={category?.name} className='w-8 h-8' width={50} height={50} />
