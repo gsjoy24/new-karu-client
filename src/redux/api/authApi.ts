@@ -17,6 +17,12 @@ const authApi = baseApi.injectEndpoints({
 				data
 			})
 		}),
+		confirmEmail: build.mutation({
+			query: (token) => ({
+				url: `/auth/confirm-email/?token=${token}`,
+				method: 'POST'
+			})
+		}),
 		logout: build.query({
 			query: () => ({
 				url: '/auth/logout',
@@ -44,6 +50,7 @@ const authApi = baseApi.injectEndpoints({
 export const {
 	useLoginMutation,
 	useRegisterMutation,
+	useConfirmEmailMutation,
 	useLogoutQuery,
 	useChangePasswordMutation,
 	useUpdateProfileMutation

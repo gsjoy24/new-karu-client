@@ -24,9 +24,9 @@ const sortOptions = [
 
 const ProductsByCategory = () => {
 	const { slug } = useParams();
-	const [sortParam, setSortParam] = useState('createdAt');
-	const [sortOrder, setSortOrder] = useState('asc');
-	const [searchTerm, setSearchTerm] = useState('');
+	const [sortParam, setSortParam] = useState<string>('createdAt');
+	const [sortOrder, setSortOrder] = useState<string>('asc');
+	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [page, setPage] = useState<number>(1);
 
 	const { data, isFetching } = useGetProductsQuery([
