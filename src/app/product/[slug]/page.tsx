@@ -100,7 +100,7 @@ const ProductDetails = () => {
 						>
 							<TbCurrencyTaka />
 							{data?.data?.old_price}
-							<span className='w-full h-[1px] bg-[#08653A] absolute'></span>
+							<span className='w-full h-[1px] bg-[#242D39] absolute'></span>
 						</Typography>
 						<Typography
 							sx={{
@@ -159,7 +159,7 @@ const ProductDetails = () => {
 								sx={{
 									cursor: 'pointer',
 									':hover': {
-										backgroundColor: '#08653A'
+										backgroundColor: '#242D39'
 									}
 								}}
 							/>

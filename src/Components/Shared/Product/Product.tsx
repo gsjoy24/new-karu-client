@@ -13,7 +13,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					sm: '17rem'
 				}
 			}}
-			className='border hover:border-[#08653A] duration-200 rounded-lg overflow-hidden'
+			className='border hover:border-[#242D39] duration-200 rounded-lg overflow-hidden'
 			component={Link}
 			href={`/product/${product?.slug}`}
 		>
@@ -66,7 +66,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					>
 						<TbCurrencyTaka />
 						{product?.old_price}
-						<span className='w-full h-[1px] bg-[#08653A] absolute'></span>
+						<span className='w-full h-[1px] bg-[#242D39] absolute'></span>
 					</Typography>
 					<Typography
 						sx={{
