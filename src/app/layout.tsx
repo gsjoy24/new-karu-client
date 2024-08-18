@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
 						</Container>
 						<Toaster
 							toastOptions={{
-								style: { background: '#242D39' }
+								style: { background: '#242D39', color: '#fff' }
 							}}
 						/>
 					</AppRouterCacheProvider>

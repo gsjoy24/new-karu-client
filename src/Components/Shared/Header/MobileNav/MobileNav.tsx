@@ -16,7 +16,8 @@ import { MdOutlineArrowOutward } from 'react-icons/md';
 import SocialSection from '../../SocialSection';
 import SearchProduct from '../SearchProduct';
 const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
-	ssr: false
+	ssr: false,
+	loading: () => <Skeleton variant='rectangular' width={150} height={40} />
 });
 
 const MobileNav = () => {
@@ -169,11 +170,7 @@ const MobileNav = () => {
 				<Link href='/'>
 					<Image src={logo} alt='logo' width={60} height={60} />
 				</Link>
-
-				{/* buttons */}
-				<React.Suspense fallback={<Skeleton variant='rectangular' width={210} height={40} />}>
-					<HeaderButtons />
-				</React.Suspense>
+				<HeaderButtons />
 			</Stack>
 			<Drawer open={open} onClose={toggleDrawer(false)}>
 				{DrawerList}

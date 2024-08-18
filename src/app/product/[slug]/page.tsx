@@ -13,7 +13,8 @@ import { CiLogin } from 'react-icons/ci';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
 const AddToCart = dynamic(() => import('../components/AddToCart'), {
-	ssr: false
+	ssr: false,
+	loading: () => <Skeleton variant='rectangular' width={210} height={40} />
 });
 const productImages = [
 	{
@@ -120,9 +121,7 @@ const ProductDetails = () => {
 					</Typography>
 					{/* here */}
 					{user ? (
-						<Suspense fallback={<Skeleton variant='rectangular' width={210} height={40} />}>
-							<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
-						</Suspense>
+						<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
 					) : (
 						<Button
 							component={Link}

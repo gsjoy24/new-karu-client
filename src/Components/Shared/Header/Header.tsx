@@ -8,7 +8,8 @@ import { Suspense } from 'react';
 import BrowseCategory from './BrowseCategory';
 import SearchProduct from './SearchProduct';
 const HeaderButtons = dynamic(() => import('./HeaderButtons'), {
-	ssr: false
+	ssr: false,
+	loading: () => <Skeleton variant='rectangular' width={150} height={40} />
 });
 
 const Header = () => {
@@ -33,9 +34,7 @@ const Header = () => {
 				<Stack direction='row' gap={2} alignItems='center'>
 					<BrowseCategory />
 					<SearchProduct />
-					<Suspense fallback={<Skeleton variant='rectangular' width={150} height={40} />}>
-						<HeaderButtons />
-					</Suspense>
+					<HeaderButtons />
 				</Stack>
 			</Stack>
 			<Divider />
