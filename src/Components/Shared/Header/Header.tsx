@@ -1,5 +1,5 @@
 'use client';
-import logo from '@/assets/Karukon-logo.png';
+import logo from '@/assets/logo.png';
 import { Divider, Skeleton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';

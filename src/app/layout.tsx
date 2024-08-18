@@ -9,22 +9,22 @@ import { roboto } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-	title: 'Karukon - a e-commerce website',
+	title: 'Karukon BD - a e-commerce website',
 	description:
-		'Karukon (কারুকোণ) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-	keywords: 'Karukon, কারুকোণ, home decor, online shop, cynor',
+		'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+	keywords: 'Karukon BD, কারুকোণ বিডি, home decor, online shop, cynor',
 	authors: [{ name: 'Karukon' }],
 	twitter: {
 		card: 'summary_large_image',
-		site: '@karukon',
-		creator: '@karukon',
+		site: '@karukonbd',
+		creator: '@karukonbd',
 		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png'
 	},
 	openGraph: {
 		type: 'website',
-		title: 'Karukon - a e-commerce website',
+		title: 'Karukon BD - a e-commerce website',
 		description:
-			'Karukon (কারুকোণ) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+			'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
 		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png'
 	}
 };

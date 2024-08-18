@@ -1,5 +1,5 @@
 'use client';
-import logo from '@/assets/Karukon-logo.png';
+import logo from '@/assets/logo.png';
 import { Button, IconButton, Skeleton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
