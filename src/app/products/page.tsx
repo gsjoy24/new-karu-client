@@ -1,15 +1,18 @@
 'use client';
-import Loading from '@/app/loading';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
 import EmptyCard from '@/components/Shared/Header/EmptyCard';
+import SearchProduct from '@/components/Shared/Header/SearchProduct';
 import Product from '@/components/Shared/Product/Product';
 import { useGetProductsQuery } from '@/redux/api/productApi';
 import { TProduct } from '@/types/product';
-import { IconButton, MenuItem, Pagination, Select, Stack } from '@mui/material';
-import { useParams } from 'next/navigation';
+import { Breadcrumbs, IconButton, MenuItem, Pagination, Select, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
+import Loading from '../loading';
 
 const sortOptions = [
 	{
@@ -22,38 +25,26 @@ const sortOptions = [
 	}
 ];
 
-const ProductsByCategory = () => {
-	const { slug } = useParams();
+const ProductPage = () => {
+	const params = useSearchParams();
+	const router = useRouter();
+	const search = params.get('search');
 	const [sortParam, setSortParam] = useState<string>('createdAt');
 	const [sortOrder, setSortOrder] = useState<string>('asc');
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(16);
-	const [searchTerm, setSearchTerm] = useState<string>('');
-
-	const { data, isFetching } = useGetProductsQuery([
+	const { data, isLoading } = useGetProductsQuery([
 		{
 			name: 'page',
 			value: page
 		},
 		{
-			name: 'category',
-			value: slug[0]
-		},
-		{
-			name: 'sub_category',
-			value: slug[1]
-		},
-		{
 			name: 'searchTerm',
-			value: searchTerm
+			value: search || ''
 		},
 		{
 			name: 'sort',
 			value: sortParam
-		},
-		{
-			name: 'page',
-			value: page
 		},
 		{
 			name: 'sortOrder',
@@ -66,8 +57,23 @@ const ProductsByCategory = () => {
 	]);
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 
+	const breadcrumbs = [
+		<Link href='/' key='1'>
+			Home
+		</Link>,
+		<Link key='2' href={`/products`}>
+			Products
+		</Link>,
+		<Typography key='3' color='text.primary'>
+			{search ? `Search result of : ${search}` : 'All Products'}
+		</Typography>
+	];
+
 	return (
-		<div>
+		<div className='mt-6'>
+			<Breadcrumbs separator='›' aria-label='breadcrumb'>
+				{breadcrumbs}
+			</Breadcrumbs>
 			<Stack
 				direction='row'
 				sx={{
@@ -83,26 +89,6 @@ const ProductsByCategory = () => {
 					md: 'start'
 				}}
 			>
-				<Select
-					sx={{
-						maxWidth: '120px',
-						width: '100%'
-					}}
-					value={sortParam}
-					onChange={(e) => setSortParam(e.target.value)}
-					placeholder='Sort by'
-					variant='outlined'
-					size='small'
-				>
-					<MenuItem disabled>
-						<em>Sort By</em>
-					</MenuItem>
-					{sortOptions.map((option) => (
-						<MenuItem key={option.value} value={option.value}>
-							{option.label}
-						</MenuItem>
-					))}
-				</Select>
 				{/* for order */}
 				<Select
 					sx={{
@@ -150,7 +136,7 @@ const ProductsByCategory = () => {
 						maxWidth: '80px',
 						width: '100%'
 					}}
-					value={limit}
+					value={limit.toString()}
 					onChange={(e) => setLimit(Number(e.target.value))}
 					placeholder='Items per page'
 					variant='outlined'
@@ -166,50 +152,34 @@ const ProductsByCategory = () => {
 					))}
 				</Select>
 
-				{/* search form */}
-				<KForm
-					onSubmit={(data) => setSearchTerm(data.searchTerm)}
-					styleClasses='w-[300px] md:w-[400px] flex border rounded-md py-[5px]'
-				>
-					<KInput
-						name='searchTerm'
-						placeholder='Search on this category...'
-						sx={{
-							'& .MuiOutlinedInput-root': {
-								'& fieldset': {
-									border: 'none'
-								}
-							},
-							width: '100%'
-						}}
-					/>
-					<IconButton aria-label='search' type='submit'>
-						<HiMagnifyingGlass />
-					</IconButton>
-				</KForm>
+				<div className='block md:hidden'>
+					<SearchProduct />
+				</div>
 			</Stack>
-			{!isFetching ? (
+			{isLoading ? (
+				<Loading />
+			) : (
 				<>
-					{data?.data?.length > 0 ? (
-						<Stack direction='row' justifyContent='center' alignItems='center' gap={3} flexWrap='wrap'>
-							{data?.data?.map((product: TProduct) => (
-								<Product product={product} key={product?._id} />
-							))}
-						</Stack>
-					) : (
+					{data?.data?.length === 0 ? (
 						<EmptyCard />
+					) : (
+						<>
+							<Stack direction='row' justifyContent='center' alignItems='center' gap={3} flexWrap='wrap' mt={3}>
+								{data?.data?.map((product: TProduct) => (
+									<Product product={product} key={product?._id} />
+								))}
+							</Stack>
+							{totalPage > 1 && (
+								<Stack my={5} alignItems='center'>
+									<Pagination count={totalPage} shape='rounded' onChange={(e, value) => setPage(value)} />
+								</Stack>
+							)}
+						</>
 					)}
 				</>
-			) : (
-				<Loading />
-			)}
-			{totalPage > 1 && (
-				<Stack my={5} alignItems='center'>
-					<Pagination count={totalPage} shape='rounded' onChange={(e, value) => setPage(value)} />
-				</Stack>
 			)}
 		</div>
 	);
 };
 
-export default ProductsByCategory;
+export default ProductPage;

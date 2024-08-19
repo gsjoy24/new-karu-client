@@ -1,6 +1,6 @@
 'use client';
 import logo from '@/assets/logo.png';
-import { Button, IconButton, Skeleton, Stack } from '@mui/material';
+import { Button, Divider, IconButton, Skeleton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import dynamic from 'next/dynamic';
@@ -175,6 +175,7 @@ const MobileNav = () => {
 			<Drawer open={open} onClose={toggleDrawer(false)}>
 				{DrawerList}
 			</Drawer>
+			<Divider />
 		</>
 	);
 };

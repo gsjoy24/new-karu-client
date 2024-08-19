@@ -2,12 +2,15 @@
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
 import { IconButton } from '@mui/material';
+import { usePathname, useRouter } from 'next/navigation';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const SearchProduct = () => {
+	const currentPath = usePathname();
+	const router = useRouter();
 	const handleSubmit = (data: FieldValues) => {
-		console.log({ search: data.search });
+		router.push(`/products?search=${data.search}`);
 	};
 
 	return (
