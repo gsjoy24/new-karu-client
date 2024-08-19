@@ -1,17 +1,13 @@
 'use client';
-import KForm from '@/components/Form/KForm';
-import KInput from '@/components/Form/KInput';
 import EmptyCard from '@/components/Shared/Header/EmptyCard';
 import SearchProduct from '@/components/Shared/Header/SearchProduct';
 import Product from '@/components/Shared/Product/Product';
 import { useGetProductsQuery } from '@/redux/api/productApi';
 import { TProduct } from '@/types/product';
-import { Breadcrumbs, IconButton, MenuItem, Pagination, Select, Stack, Typography } from '@mui/material';
+import { Breadcrumbs, MenuItem, Pagination, Select, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { FieldValues } from 'react-hook-form';
-import { HiMagnifyingGlass } from 'react-icons/hi2';
 import Loading from '../loading';
 
 const sortOptions = [
@@ -27,7 +23,6 @@ const sortOptions = [
 
 const ProductPage = () => {
 	const params = useSearchParams();
-	const router = useRouter();
 	const search = params.get('search');
 	const [sortParam, setSortParam] = useState<string>('createdAt');
 	const [sortOrder, setSortOrder] = useState<string>('asc');

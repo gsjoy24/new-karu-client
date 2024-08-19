@@ -8,7 +8,6 @@ import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Suspense } from 'react';
 import { CiLogin } from 'react-icons/ci';
 import { TbCurrencyTaka } from 'react-icons/tb';
 

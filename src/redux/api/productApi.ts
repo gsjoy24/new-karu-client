@@ -14,11 +14,9 @@ const productApis = baseApi.injectEndpoints({
 		getProducts: build.query({
 			query: (args) => {
 				const params = new URLSearchParams();
-				// params.append('limit', '16');
 				args?.forEach((param: TQueryParams) => {
 					params.append(param.name, param.value);
 				});
-				console.log(params.toString());
 				return {
 					url: `/products`,
 					method: 'GET',

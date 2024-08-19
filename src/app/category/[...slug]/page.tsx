@@ -17,6 +17,10 @@ const sortOptions = [
 		label: 'Newest'
 	},
 	{
+		value: 'name',
+		label: 'Name'
+	},
+	{
 		value: 'last_price',
 		label: 'Price'
 	}
@@ -45,7 +49,7 @@ const ProductsByCategory = () => {
 		},
 		{
 			name: 'searchTerm',
-			value: searchTerm
+			value: searchTerm || ''
 		},
 		{
 			name: 'sort',
