@@ -25,39 +25,6 @@ const SubCategoryCollection = () => {
 			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
 				<SubCategoryItem key={subCategory._id} item={subCategory} />
 			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
-			{data?.data?.map((subCategory: TSubCategoryCollectionData) => (
-				<SubCategoryItem key={subCategory._id} item={subCategory} />
-			))}
 		</Stack>
 	);
 };

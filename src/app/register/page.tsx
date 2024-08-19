@@ -13,6 +13,7 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
 
 const RegisterPage = () => {
+	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [register, { isLoading }] = useRegisterMutation();
 
@@ -20,6 +21,7 @@ const RegisterPage = () => {
 		try {
 			const response = await register(data).unwrap();
 			if (response?.success) {
+				setResetForm(true);
 				toast.success(response.message ?? 'Registered successfully!', {
 					duration: Infinity,
 					closeButton: true

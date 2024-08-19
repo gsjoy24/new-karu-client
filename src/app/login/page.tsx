@@ -21,6 +21,7 @@ import ForgotPasswordModal from './components/ForgotPasswordModal';
 const LoginPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [login, { isLoading }] = useLoginMutation();
+	const [resetForm, setResetForm] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const navigate = useRouter();
 
@@ -29,6 +30,7 @@ const LoginPage = () => {
 			const response = await login(data).unwrap();
 
 			if (response?.success) {
+				setResetForm(true);
 				toast.success('Logged in successfully!');
 				const userInfo = verifyToken(response?.data?.accessToken);
 				// save user info and token in redux store
@@ -42,6 +44,7 @@ const LoginPage = () => {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');
 		}
 	};
+
 	return (
 		<Stack
 			direction='column'
@@ -64,6 +67,7 @@ const LoginPage = () => {
 			</Typography>
 			<KForm
 				onSubmit={handleSubmit}
+				resetForm={resetForm}
 				resolver={zodResolver(LoginSchema)}
 				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
 			>
