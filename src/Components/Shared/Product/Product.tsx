@@ -9,7 +9,7 @@ const Product = ({ product }: { product: TProduct }) => {
 		<Box
 			sx={{
 				width: {
-					xs: '10.5rem',
+					xs: '10rem',
 					sm: '17rem'
 				},
 				position: 'relative'
@@ -47,7 +47,12 @@ const Product = ({ product }: { product: TProduct }) => {
 					className='w-full h-full object-cover'
 				/>
 			</Box>
-			<Box p={2}>
+			<Box
+				p={{
+					xs: 1,
+					sm: 2
+				}}
+			>
 				<Typography
 					mb={2}
 					className='line-clamp-2 text-center'
