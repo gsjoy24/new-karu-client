@@ -2,7 +2,6 @@ import { TProduct } from '@/types/product';
 import { Box, Chip, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { TbCurrencyTaka } from 'react-icons/tb';
 
 const Product = ({ product }: { product: TProduct }) => {
 	return (
@@ -63,8 +62,7 @@ const Product = ({ product }: { product: TProduct }) => {
 						}
 					}}
 				>
-					{/* {product?.name} */}
-					Ash Color Design 6 cup 1 jug 1 plate Surai Set
+					{product?.name}
 				</Typography>
 				<Box
 					sx={{
@@ -88,8 +86,7 @@ const Product = ({ product }: { product: TProduct }) => {
 							position: 'relative'
 						}}
 					>
-						<TbCurrencyTaka />
-						{product?.old_price}
+						৳ {product?.old_price}
 						<span className='w-full h-[1px] bg-[#242D39] absolute'></span>
 					</Typography>
 					<Typography
@@ -100,8 +97,7 @@ const Product = ({ product }: { product: TProduct }) => {
 							justifyContent: 'center'
 						}}
 					>
-						<TbCurrencyTaka />
-						{product?.last_price}
+						৳ {product?.last_price}
 					</Typography>
 				</Box>
 			</Box>

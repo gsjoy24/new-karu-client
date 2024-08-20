@@ -3,6 +3,7 @@ import { useGetMeQuery } from '@/redux/api/userApi';
 import { TCart } from '@/types/product';
 import {
 	Box,
+	Button,
 	Divider,
 	Grid,
 	Paper,
@@ -24,13 +25,19 @@ const CartPage = () => {
 	const { data, isLoading } = useGetMeQuery({});
 
 	const cartItems = data?.data?.cart ?? [];
+	const totalPrice = Math.ceil(
+		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)
+	);
+	const shippingCost = 80;
+	const subTotal = totalPrice + shippingCost;
+
 	return (
-		<Box>
+		<Box my={3}>
 			<Typography
 				variant='h1'
 				sx={{
 					fontSize: '2rem',
-					my: '1rem'
+					mb: '1rem'
 				}}
 			>
 				YOUR CART
@@ -79,7 +86,7 @@ const CartPage = () => {
 															fontSize: '0.8rem'
 														}}
 													>
-														${item.product?.last_price}
+														৳{item.product?.last_price}
 													</Typography>
 												</Box>
 											</Box>
@@ -88,7 +95,52 @@ const CartPage = () => {
 											<CartQuantityHandler id={item?.product?._id} quantity={item.quantity} />
 										</TableCell>
 										<TableCell>
-											<Typography>{item.product?.last_price * item.quantity}</Typography>
+											<Typography>৳{item.product?.last_price * item.quantity}</Typography>
+										</TableCell>
+									</TableRow>
+								))}
+								{cartItems.map((item: TCart) => (
+									<TableRow key={item.product._id}>
+										<TableCell>
+											<Box
+												sx={{
+													display: 'flex',
+													minWidth: '250px',
+													maxWidth: '340px',
+													gap: '1rem',
+													alignItems: 'center'
+												}}
+											>
+												<Image
+													src={
+														'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
+													}
+													alt={item.product?.name}
+													width={100}
+													height={100}
+													className='w-[4rem] sm:w-[8rem] rounded-md'
+												/>
+												<Box>
+													<Typography gutterBottom>
+														{/* {item.product?.name} */}
+														Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor distinctio placeat
+														reprehenderit!
+													</Typography>
+													<Typography
+														sx={{
+															fontSize: '0.8rem'
+														}}
+													>
+														৳{item.product?.last_price}
+													</Typography>
+												</Box>
+											</Box>
+										</TableCell>
+										<TableCell>
+											<CartQuantityHandler id={item?.product?._id} quantity={item.quantity} />
+										</TableCell>
+										<TableCell>
+											<Typography>৳{item.product?.last_price * item.quantity}</Typography>
 										</TableCell>
 									</TableRow>
 								))}
@@ -106,7 +158,10 @@ const CartPage = () => {
 								xs: '1rem 0',
 								md: '0 1rem'
 							},
-							height: '100%'
+							maxHeight: '25rem',
+							height: '100%',
+							position: 'relative',
+							pb: '4rem'
 						}}
 					>
 						<Typography
@@ -120,20 +175,68 @@ const CartPage = () => {
 							Cart Summary
 						</Typography>
 						<Divider />
-						<Box p={2}>
+						<Stack gap={1} p={2}>
 							<Stack
 								sx={{
 									flexDirection: 'row',
 									justifyContent: 'space-between',
 									alignItems: 'center',
-									gap: '1rem',
-									my: '1rem'
+									gap: '1rem'
 								}}
 							>
-								<Typography>Subtotal</Typography>
-								<Typography>$100</Typography>
+								<Typography>Total</Typography>
+								<Typography>৳ {totalPrice}</Typography>
 							</Stack>
-						</Box>
+							<Stack
+								sx={{
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									gap: '1rem'
+								}}
+							>
+								<Typography>Shipping</Typography>
+								<Typography>৳ {shippingCost} </Typography>
+							</Stack>
+							<Typography
+								sx={{
+									fontSize: '0.8rem',
+									color: 'gray',
+									textAlign: 'end'
+								}}
+							>
+								*Shipping cost is fixed
+							</Typography>
+							<Divider />
+							<Stack
+								sx={{
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									gap: '1rem'
+								}}
+							>
+								<Typography>Sub Total</Typography>
+								<Typography>৳ {subTotal}</Typography>
+							</Stack>
+						</Stack>
+
+						{/* buttons */}
+						<Stack
+							direction='column'
+							gap={1}
+							sx={{
+								position: 'absolute',
+								bottom: '1rem',
+								width: '100%',
+								padding: '0 1rem'
+							}}
+						>
+							<Button variant='contained'>Checkout</Button>
+							<Button variant='outlined' fullWidth>
+								Continue Shopping
+							</Button>
+						</Stack>
 					</Box>
 				</Grid>
 			</Grid>
