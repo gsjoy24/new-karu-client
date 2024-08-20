@@ -30,7 +30,7 @@ const NewArrivals = () => {
 			>
 				New Arrivals
 			</Typography>
-			<Stack direction='row' justifyContent='center' alignItems='center' gap={3} flexWrap='wrap'>
+			<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap'>
 				{data?.data?.map((product: TProduct) => (
 					<Product product={product} key={product?._id} />
 				))}

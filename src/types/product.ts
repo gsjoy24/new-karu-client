@@ -12,6 +12,8 @@ export type TProduct = {
 	category: TCategory | string;
 	sub_category?: TSubCategory | string;
 	tags: string[];
+	discountPercentage: number;
+	isOutOfStock: boolean;
 	createdAt?: Date;
 	updatedAt?: Date;
 };
