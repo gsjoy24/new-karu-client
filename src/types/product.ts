@@ -17,3 +17,8 @@ export type TProduct = {
 	createdAt?: Date;
 	updatedAt?: Date;
 };
+
+export type TCart = {
+	product: TProduct;
+	quantity: number;
+};
