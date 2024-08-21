@@ -2,15 +2,16 @@
 import { useConfirmEmailMutation } from '@/redux/api/authApi';
 import { Box, Typography } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import Loading from '../loading';
 
 const ConfirmEmail = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const params = useSearchParams();
 	const router = useRouter();
 	const token = params.get('token');
-	const [confirmEmail, { isLoading, data }] = useConfirmEmailMutation();
+	const [confirmEmail, { data }] = useConfirmEmailMutation();
 
 	useEffect(() => {
 		if (!token) {
@@ -30,10 +31,13 @@ const ConfirmEmail = () => {
 				}
 			} catch (error: any) {
 				toast.error(error.message ?? 'Something went wrong');
+			} finally {
+				setIsLoading(false);
 			}
 		}
 		confirmEmailHandler();
 	}, [token, router, confirmEmail]);
+
 	return isLoading ? (
 		<Loading />
 	) : (
