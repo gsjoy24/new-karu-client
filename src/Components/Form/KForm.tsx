@@ -2,7 +2,6 @@ import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-fo
 type TFormConfig = {
 	resolver?: any;
 	defaultValues?: Record<string, any>;
-	resetForm?: boolean;
 };
 
 type TFormProps = {
@@ -11,7 +10,7 @@ type TFormProps = {
 	styleClasses?: string;
 } & TFormConfig;
 
-const KForm = ({ children, onSubmit, resolver, defaultValues, styleClasses, resetForm }: TFormProps) => {
+const KForm = ({ children, onSubmit, resolver, defaultValues, styleClasses }: TFormProps) => {
 	const formConfig: TFormConfig = {};
 
 	if (resolver) {
@@ -26,7 +25,6 @@ const KForm = ({ children, onSubmit, resolver, defaultValues, styleClasses, rese
 	const { handleSubmit, reset } = methods;
 	const submit: SubmitHandler<FieldValues> = (data) => {
 		onSubmit(data);
-		resetForm === true && reset();
 	};
 	return (
 		<FormProvider {...methods}>

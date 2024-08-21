@@ -7,25 +7,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
 import { IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
 
 const RegisterPage = () => {
-	const [resetForm, setResetForm] = useState<boolean>(false);
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [register, { isLoading }] = useRegisterMutation();
+	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {
 			const response = await register(data).unwrap();
 			if (response?.success) {
-				setResetForm(true);
 				toast.success(response.message ?? 'Registered successfully!', {
 					duration: Infinity,
 					closeButton: true
 				});
+				router.push('/login');
 			}
 		} catch (error: any) {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');

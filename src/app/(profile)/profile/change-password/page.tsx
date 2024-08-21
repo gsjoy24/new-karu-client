@@ -7,6 +7,7 @@ import { ChangePasswordSchema } from '@/validationSchemas/auth.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
 import { IconButton, Stack, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
@@ -17,12 +18,15 @@ const ChangePassword = () => {
 	const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
+	const router = useRouter();
+
 	const [changePassword, { isLoading }] = useChangePasswordMutation();
 	const handleSubmit = async (data: FieldValues) => {
 		try {
 			const res = await changePassword(data).unwrap();
 			if (res?.success) {
 				toast.success(res?.message);
+				router.push('/profile');
 			} else {
 				toast.error(res?.message);
 			}
