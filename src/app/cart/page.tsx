@@ -17,8 +17,7 @@ import {
 	Typography
 } from '@mui/material';
 import Image from 'next/image';
-import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
-import { IoAddCircleOutline } from 'react-icons/io5';
+import Loading from '../loading';
 import CartQuantityHandler from './components/CartQuantityHandler';
 
 const CartPage = () => {
@@ -31,7 +30,9 @@ const CartPage = () => {
 	const shippingCost = 80;
 	const subTotal = totalPrice + shippingCost;
 
-	return (
+	return isLoading ? (
+		<Loading />
+	) : (
 		<Box my={3}>
 			<Typography
 				variant='h1'
@@ -61,7 +62,8 @@ const CartPage = () => {
 												sx={{
 													display: 'flex',
 													minWidth: '250px',
-													maxWidth: '340px',
+													maxWidth: '450px',
+													width: '100%',
 													gap: '1rem',
 													alignItems: 'center'
 												}}
@@ -76,11 +78,7 @@ const CartPage = () => {
 													className='w-[4rem] sm:w-[8rem] rounded-md'
 												/>
 												<Box>
-													<Typography gutterBottom>
-														{/* {item.product?.name} */}
-														Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor distinctio placeat
-														reprehenderit!
-													</Typography>
+													<Typography gutterBottom>{item.product?.name}</Typography>
 													<Typography
 														sx={{
 															fontSize: '0.8rem'
@@ -92,52 +90,7 @@ const CartPage = () => {
 											</Box>
 										</TableCell>
 										<TableCell>
-											<CartQuantityHandler id={item?.product?._id} quantity={item.quantity} />
-										</TableCell>
-										<TableCell>
-											<Typography>৳{item.product?.last_price * item.quantity}</Typography>
-										</TableCell>
-									</TableRow>
-								))}
-								{cartItems.map((item: TCart) => (
-									<TableRow key={item.product._id}>
-										<TableCell>
-											<Box
-												sx={{
-													display: 'flex',
-													minWidth: '250px',
-													maxWidth: '340px',
-													gap: '1rem',
-													alignItems: 'center'
-												}}
-											>
-												<Image
-													src={
-														'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
-													}
-													alt={item.product?.name}
-													width={100}
-													height={100}
-													className='w-[4rem] sm:w-[8rem] rounded-md'
-												/>
-												<Box>
-													<Typography gutterBottom>
-														{/* {item.product?.name} */}
-														Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor distinctio placeat
-														reprehenderit!
-													</Typography>
-													<Typography
-														sx={{
-															fontSize: '0.8rem'
-														}}
-													>
-														৳{item.product?.last_price}
-													</Typography>
-												</Box>
-											</Box>
-										</TableCell>
-										<TableCell>
-											<CartQuantityHandler id={item?.product?._id} quantity={item.quantity} />
+											<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
 										</TableCell>
 										<TableCell>
 											<Typography>৳{item.product?.last_price * item.quantity}</Typography>
@@ -158,6 +111,7 @@ const CartPage = () => {
 								xs: '1rem 0',
 								md: '0 1rem'
 							},
+							minHeight: '20rem',
 							maxHeight: '25rem',
 							height: '100%',
 							position: 'relative',
