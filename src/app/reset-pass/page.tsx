@@ -37,7 +37,7 @@ const ResetPassPage = () => {
 
 	const handleSubmit = async ({ password }: FieldValues) => {
 		try {
-			const res = await resetPass({ token, password }).unwrap();
+			const res = await resetPass({ token, newPassword: password }).unwrap();
 
 			if (res.success) {
 				toast.success('Password reset successfully');
