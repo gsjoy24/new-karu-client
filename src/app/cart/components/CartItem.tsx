@@ -1,12 +1,10 @@
 import { TCart } from '@/types/product';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { Box, IconButton, TableCell, TableRow, Typography } from '@mui/material';
+import { Box, TableCell, TableRow, Typography } from '@mui/material';
 import Image from 'next/image';
 import CartQuantityHandler from './CartQuantityHandler';
 import DeleteCartItem from './DeleteCartItem';
 
 const CartItem = ({ item }: { item: TCart }) => {
-	const handleDelete = () => {};
 	return (
 		<TableRow key={item?.product?._id}>
 			<TableCell>
