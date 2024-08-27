@@ -149,8 +149,10 @@ const CartPage = () => {
 										padding: '0 1rem'
 									}}
 								>
-									<Button variant='contained'>Proceed to checkout</Button>
-									<Button variant='outlined' fullWidth LinkComponent={Link} href={'/products'}>
+									<Button LinkComponent={Link} href={'/checkout'}>
+										Proceed to checkout
+									</Button>
+									<Button fullWidth LinkComponent={Link} href={'/products'}>
 										Continue Shopping
 									</Button>
 								</Stack>
