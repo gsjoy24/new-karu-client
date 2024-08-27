@@ -84,8 +84,8 @@ const AddToCart = ({ product, stock }: { product: string; stock: number }) => {
 					>
 						Remove from Cart
 					</LoadingButton>
-					<Button LinkComponent={Link} size='small' href='/checkout'>
-						Checkout
+					<Button LinkComponent={Link} size='small' href='/cart'>
+						See cart
 					</Button>
 				</>
 			)}
