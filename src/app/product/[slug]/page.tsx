@@ -3,7 +3,7 @@ import Loading from '@/app/loading';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
 import { useGetProductBySlugQuery } from '@/redux/api/productApi';
 import { useAppSelector } from '@/redux/hooks';
-import { Box, Breadcrumbs, Button, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Button, Chip, Grid, List, ListItem, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -53,7 +53,7 @@ const ProductDetails = () => {
 				sm: '0'
 			}}
 		>
-			<Grid item xs={12} md={6}>
+			<Grid item xs={12} md={5}>
 				<Box
 					sx={{
 						maxWidth: '500px',
@@ -67,8 +67,29 @@ const ProductDetails = () => {
 					<KImageGallery productImages={productImages} />
 				</Box>
 			</Grid>
-			<Grid item xs={12} md={6}>
-				<Box mt={2.5}>
+			<Grid
+				item
+				xs={12}
+				md={7}
+				sx={{
+					display: 'flex',
+					flexDirection: {
+						xs: 'column',
+						sm: 'row'
+					},
+					justifyContent: 'space-between',
+					gap: 3,
+					p: '0.5rem'
+				}}
+			>
+				<Box
+					mt={2.5}
+					sx={{
+						minWidth: '320px',
+						maxWidth: '500px',
+						width: '100%'
+					}}
+				>
 					<Typography
 						sx={{
 							fontSize: { xs: '1.5rem', sm: '2rem' }
@@ -134,6 +155,9 @@ const ProductDetails = () => {
 						</Button>
 					)}
 					<Box mt={2}>
+						<Typography>
+							<strong>Serial number: </strong> {data?.data?.sm ?? 'N/A'}
+						</Typography>
 						<Box>
 							<strong>Categories: </strong>
 							<Typography component={Link} href={`/category/${data?.data?.category?.slug}`}>
@@ -157,12 +181,42 @@ const ProductDetails = () => {
 								sx={{
 									cursor: 'pointer',
 									':hover': {
-										backgroundColor: '#242D39'
+										backgroundColor: '#242D39',
+										color: 'white'
 									}
 								}}
 							/>
 						))}
 					</Stack>
+				</Box>
+
+				<Box mt={2}>
+					<ul>
+						<li>
+							ঢাকা সিটিতে সম্পূর্ণ ক্যাশ অন ডেলিভারি। আমাদের নিজস্ব ডেলিভারি ম্যানের মাধ্যমে নিরাপদ ডেলিভারি। ডেলিভারির
+							সময় ১-৩ দিন সর্বচ্চো ৭ দিন।
+						</li>
+
+						<li>
+							ঢাকা সিটির বাহিরে SteadFast Courier Home Delivery অথবা সুন্দরবন কুরিয়ারের মাধ্যমে নিরাপদ ডেলিভারি।
+							এক্ষেত্রে অগ্রিম ৩০০ টাকা পেমেন্ট করতে হবে। পণ্যের মূল্য ৫,০০০ টাকার বেশি হলে অগ্রিম ৫০০ টাকা, ১০,০০০
+							টাকার বেশি হলে ১০০০ টাকা টাকা পেমেন্ট করতে হবে। ডেলিভারির সময় ৩-৫ দিন সর্বচ্চো ১০ দিন।
+						</li>
+
+						<li>
+							ডেলিভারির সময় পণ্য দেখে বুঝে নিয়ে তারপর পেমেন্ট করতে পারবেন। পণ্যে কোন সমস্যা থাকলে ফেরত দিতে পারবেন। ৭
+							দিনের মধ্যে কোন সমস্যা হলে পণ্য পরিবর্তন করে নিতে পারবেন।
+						</li>
+
+						<li>
+							Connect on{' '}
+							<Link className='text-green-600' href='https://wa.me/8801877089771'>
+								WhatsApp
+							</Link>
+						</li>
+
+						<li>Call Us: +8801877089771</li>
+					</ul>
 				</Box>
 			</Grid>
 		</Grid>
