@@ -27,8 +27,8 @@ const CartPage = () => {
 	const totalPrice = Math.ceil(
 		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)
 	);
-	const shippingCost = 80;
-	const subTotal = totalPrice + shippingCost;
+
+	const totalProducts = cartItems.reduce((acc: number, item: TCart) => acc + item.quantity, 0);
 
 	return isLoading ? (
 		<Loading />
@@ -101,29 +101,10 @@ const CartPage = () => {
 											gap: '1rem'
 										}}
 									>
-										<Typography>Total</Typography>
-										<Typography>৳ {totalPrice}</Typography>
+										<Typography>Total Products</Typography>
+										<Typography>{totalProducts}</Typography>
 									</Stack>
-									<Stack
-										sx={{
-											flexDirection: 'row',
-											justifyContent: 'space-between',
-											alignItems: 'center',
-											gap: '1rem'
-										}}
-									>
-										<Typography>Shipping</Typography>
-										<Typography>৳ {shippingCost} </Typography>
-									</Stack>
-									<Typography
-										sx={{
-											fontSize: '0.8rem',
-											color: 'gray',
-											textAlign: 'end'
-										}}
-									>
-										*Shipping cost is fixed
-									</Typography>
+
 									<Divider />
 									<Stack
 										sx={{
@@ -133,9 +114,20 @@ const CartPage = () => {
 											gap: '1rem'
 										}}
 									>
-										<Typography>Sub Total</Typography>
-										<Typography>৳ {subTotal}</Typography>
+										<Typography>Total Price</Typography>
+										<Typography>৳ {totalPrice}</Typography>
 									</Stack>
+									<Divider />
+									<Typography
+										variant='h3'
+										sx={{
+											fontSize: '0.8rem',
+											my: '1rem',
+											textAlign: 'center'
+										}}
+									>
+										Shipping fee will include at checkout.
+									</Typography>
 								</Stack>
 
 								{/* buttons */}
@@ -149,11 +141,11 @@ const CartPage = () => {
 										padding: '0 1rem'
 									}}
 								>
+									<Button variant='outlined' fullWidth LinkComponent={Link} href={'/products'}>
+										Continue Shopping
+									</Button>
 									<Button LinkComponent={Link} href={'/checkout'}>
 										Proceed to checkout
-									</Button>
-									<Button fullWidth LinkComponent={Link} href={'/products'}>
-										Continue Shopping
 									</Button>
 								</Stack>
 							</Box>
