@@ -37,9 +37,22 @@ const authApi = baseApi.injectEndpoints({
 				method: 'PATCH'
 			}),
 			invalidatesTags: [reduxTagTypes.user]
+		}),
+		placeOrder: build.mutation({
+			query: (data) => ({
+				url: `/orders`,
+				method: 'POST',
+				data
+			}),
+			invalidatesTags: [reduxTagTypes.user]
 		})
 	})
 });
 
-export const { useGetMeQuery, useAddToCartMutation, useRemoveFromCartMutation, useManipulateQuantityMutation } =
-	authApi;
+export const {
+	useGetMeQuery,
+	useAddToCartMutation,
+	useRemoveFromCartMutation,
+	useManipulateQuantityMutation,
+	usePlaceOrderMutation
+} = authApi;

@@ -8,6 +8,9 @@ import {
 	Grid,
 	Paper,
 	Stack,
+	Step,
+	StepButton,
+	Stepper,
 	Table,
 	TableBody,
 	TableCell,
@@ -19,6 +22,19 @@ import {
 import Link from 'next/link';
 import Loading from '../loading';
 import CartItem from './components/CartItem';
+const steps = [
+	{
+		label: 'Shopping Cart',
+		link: '/cart'
+	},
+	{
+		label: 'Check Out',
+		link: '/checkout'
+	},
+	{
+		label: 'Order Status'
+	}
+];
 
 const CartPage = () => {
 	const { data, isLoading } = useGetMeQuery({});
@@ -36,15 +52,26 @@ const CartPage = () => {
 		<>
 			{cartItems?.length ? (
 				<Box my={3}>
-					<Typography
-						variant='h1'
+					<Stepper
+						alternativeLabel
+						nonLinear
 						sx={{
-							fontSize: '2rem',
-							mb: '1rem'
+							maxWidth: '50rem',
+							mx: 'auto',
+							my: 5
 						}}
+						activeStep={0}
 					>
-						YOUR CART
-					</Typography>
+						{steps.map(({ label, link }, i) => (
+							<Step key={label}>
+								<Link href={link ?? '/checkout'}>
+									<StepButton disabled={i === 2} color='inherit'>
+										{label}
+									</StepButton>
+								</Link>
+							</Step>
+						))}
+					</Stepper>
 					<Grid container>
 						<Grid item xs={12} md={7}>
 							<TableContainer component={Paper}>
