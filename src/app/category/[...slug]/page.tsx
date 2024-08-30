@@ -71,7 +71,7 @@ const ProductsByCategory = () => {
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 
 	return (
-		<div>
+		<div className='py-4'>
 			<Stack
 				direction='row'
 				sx={{
@@ -87,26 +87,6 @@ const ProductsByCategory = () => {
 					md: 'start'
 				}}
 			>
-				<Select
-					sx={{
-						maxWidth: '120px',
-						width: '100%'
-					}}
-					value={sortParam}
-					onChange={(e) => setSortParam(e.target.value)}
-					placeholder='Sort by'
-					variant='outlined'
-					size='small'
-				>
-					<MenuItem disabled>
-						<em>Sort By</em>
-					</MenuItem>
-					{sortOptions.map((option) => (
-						<MenuItem key={option.value} value={option.value}>
-							{option.label}
-						</MenuItem>
-					))}
-				</Select>
 				{/* for order */}
 				<Select
 					sx={{
@@ -163,7 +143,7 @@ const ProductsByCategory = () => {
 					<MenuItem disabled>
 						<em>Items per page</em>
 					</MenuItem>
-					{[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30].map((option) => (
+					{[8, 16, 24].map((option) => (
 						<MenuItem key={option} value={option}>
 							{option}
 						</MenuItem>

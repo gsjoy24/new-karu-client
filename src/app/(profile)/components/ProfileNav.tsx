@@ -10,7 +10,7 @@ import { BiSolidDashboard } from 'react-icons/bi';
 import { FaBoxOpen } from 'react-icons/fa';
 import { FaGlobe, FaKey } from 'react-icons/fa6';
 import { IoIosLogOut, IoMdHeart } from 'react-icons/io';
-import { MdDelete } from 'react-icons/md';
+
 const profileNavLinks = [
 	{
 		icon: <BiSolidDashboard />,
@@ -27,11 +27,11 @@ const profileNavLinks = [
 		text: 'Address',
 		href: '/profile/address'
 	},
-	{
-		icon: <IoMdHeart />,
-		text: 'Wishlist',
-		href: '/wishlist'
-	},
+	// {
+	// 	icon: <IoMdHeart />,
+	// 	text: 'Wishlist',
+	// 	href: '/wishlist'
+	// },
 	{
 		icon: <FaKey />,
 		text: 'Change Password',
@@ -45,10 +45,6 @@ const ProfileNav = () => {
 
 	const dispatch = useAppDispatch();
 	const handleLogout = () => {
-		dispatch(setUser({ user: null, token: null }));
-		removeFromLocalStorage('accessToken');
-	};
-	const handleDeleteAccount = () => {
 		dispatch(setUser({ user: null, token: null }));
 		removeFromLocalStorage('accessToken');
 	};
@@ -117,10 +113,10 @@ const ProfileNav = () => {
 							direction='row'
 							alignItems='center'
 							sx={{
-								color: 'inherit',
 								justifyContent: 'flex-start',
 								'&:hover': {
-									bgcolor: 'primary.main'
+									bgcolor: 'primary.main',
+									color: 'white'
 								}
 							}}
 							startIcon={link.icon}
@@ -135,22 +131,11 @@ const ProfileNav = () => {
 					direction='row'
 					alignItems='center'
 					sx={{
-						color: 'inherit',
-						justifyContent: 'flex-start'
-					}}
-					startIcon={<MdDelete />}
-					onClick={handleDeleteAccount}
-				>
-					Delete Account
-				</Stack>
-				<Stack
-					component={Button}
-					variant='text'
-					direction='row'
-					alignItems='center'
-					sx={{
-						color: 'inherit',
-						justifyContent: 'flex-start'
+						justifyContent: 'flex-start',
+						'&:hover': {
+							bgcolor: 'primary.main',
+							color: 'white'
+						}
 					}}
 					startIcon={<IoIosLogOut />}
 					onClick={handleLogout}

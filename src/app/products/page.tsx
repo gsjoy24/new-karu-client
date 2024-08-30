@@ -65,7 +65,7 @@ const ProductPage = () => {
 	];
 
 	return (
-		<div className='mt-6'>
+		<div className='my-6'>
 			<Breadcrumbs separator='›' aria-label='breadcrumb'>
 				{breadcrumbs}
 			</Breadcrumbs>
@@ -140,7 +140,7 @@ const ProductPage = () => {
 					<MenuItem disabled>
 						<em>Items per page</em>
 					</MenuItem>
-					{[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30].map((option) => (
+					{[8, 16, 24].map((option) => (
 						<MenuItem key={option} value={option}>
 							{option}
 						</MenuItem>

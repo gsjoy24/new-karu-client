@@ -30,6 +30,13 @@ const ProfileMenu = () => {
 		prevOpen.current = menuOpen;
 	}, [menuOpen]);
 
+	const handleScrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	};
+
 	return (
 		<Stack
 			direction='row'
@@ -75,6 +82,7 @@ const ProfileMenu = () => {
 											startIcon={<FiUser />}
 											LinkComponent={Link}
 											href='/profile'
+											onClick={handleScrollToTop}
 										>
 											Profile
 										</Button>

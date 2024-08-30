@@ -1,9 +1,13 @@
 import { z } from 'zod';
 
 export const UserAddressSchema = z.object({
-	courier_address: z.string().min(3, {
-		message: 'Courier Address should be at least 3 characters long!'
-	}),
+	address: z
+		.string({
+			required_error: 'Address is required!'
+		})
+		.min(3, {
+			message: 'Address should be at least 3 characters long!'
+		}),
 	city: z
 		.string({
 			required_error: 'City name is required!'
@@ -19,15 +23,18 @@ export const UserAddressSchema = z.object({
 			message: 'District name should be at least 3 characters long!'
 		})
 		.optional(),
-	postal_code: z.string().optional(),
-	mobile_number: z.string().refine(
-		(value) => {
-			// at least 10 digits and at most 14 digits and only digits are allowed
-			const regex = /^(\+?88)?01[0-9]{9}$/;
-			return regex.test(value);
-		},
-		{
-			message: 'Enter a valid phone number!'
-		}
-	)
+	mobile_number: z
+		.string({
+			required_error: 'Mobile number is required!'
+		})
+		.refine(
+			(value) => {
+				// at least 11 digits and at most 14 digits and only digits are allowed
+				const regex = /^(\+?88)?01[0-9]{9}$/;
+				return regex.test(value);
+			},
+			{
+				message: 'Enter a valid phone number!'
+			}
+		)
 });

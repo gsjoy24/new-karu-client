@@ -11,15 +11,15 @@ import { LoadingButton } from '@mui/lab';
 import { Stack, Typography } from '@mui/material';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
+
 const AddressPage = () => {
 	const user = useAppSelector((state) => state.auth.user);
 	const { data, isFetching } = useGetMeQuery({});
 	const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 	const defaultAddress = {
-		courier_address: data?.data?.courier_address,
+		address: data?.data?.address,
 		city: data?.data?.city,
 		district: data?.data?.district,
-		postal_code: data?.data?.postal_code,
 		mobile_number: data?.data?.mobile_number
 	};
 
@@ -39,6 +39,7 @@ const AddressPage = () => {
 			toast.error(error.data?.message ?? error.error.message ?? 'An error occurred! Please try again later.');
 		}
 	};
+
 	return isFetching ? (
 		<Loading />
 	) : (
@@ -71,10 +72,9 @@ const AddressPage = () => {
 				defaultValues={defaultAddress}
 				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
 			>
-				<KInput label='Courier Address' placeholder='Shaheb bazar, Sundarban courier service' name='courier_address' />
+				<KInput label='Address' placeholder='Your detail address' name='address' />
 				<KInput label='City' placeholder='Dhaka' name='city' />
-				<KInput label='district' placeholder='Dhaka' name='district' />
-				<KInput label='Postal Code' placeholder='6400' name='postal_code' />
+				<KInput label='District' placeholder='Dhaka' name='district' />
 				<KInput label='Mobile Number' placeholder='01xxxxxxxxx' name='mobile_number' />
 
 				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Loading' variant='contained'>
