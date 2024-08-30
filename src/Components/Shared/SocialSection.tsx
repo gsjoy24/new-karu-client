@@ -1,5 +1,5 @@
 import XIcon from '@mui/icons-material/X';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FaFacebookF, FaYoutube } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa6';
@@ -15,10 +15,11 @@ const SocialSection = () => {
 		'text-[20px] h-10 w-10 flex justify-center items-center bg-[#29A56C] hover:bg-[#004D29] duration-200 rounded-full text-white';
 
 	return (
-		<>
+		<Box>
 			<Typography variant='h6' gutterBottom>
 				Follow Us
 			</Typography>
+			<br />
 			<Stack direction='row' align-items='center' gap={1}>
 				<Link href={socialLinks.facebook} className={iconDesign}>
 					<FaFacebookF />
@@ -33,7 +34,7 @@ const SocialSection = () => {
 					<XIcon />
 				</Link>
 			</Stack>
-		</>
+		</Box>
 	);
 };
 

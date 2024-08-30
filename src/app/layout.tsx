@@ -1,3 +1,4 @@
+import Footer from '@/components/Shared/Footer';
 import Header from '@/components/Shared/Header/Header';
 import MobileNav from '@/components/Shared/Header/MobileNav/MobileNav';
 import Providers from '@/lib/Providers/Providers';
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
 							<MobileNav />
 							{children}
 						</Container>
+						<Footer />
 						<Toaster
 							toastOptions={{
 								style: { background: '#242D39', color: '#fff' }

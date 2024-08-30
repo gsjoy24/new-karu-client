@@ -29,7 +29,6 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 			const res = await removeFromCart(id).unwrap();
 			toast.success(res?.message);
 		} catch (error: any) {
-			// console.log(error);
 			toast.error(error?.data?.message ?? 'Something went wrong');
 		}
 	};

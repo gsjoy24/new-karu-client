@@ -21,7 +21,6 @@ const CartQuantityHandler = ({ id, quantity }: CartQuantityHandlerProps) => {
 				toast.error(res?.message ?? 'Failed to update quantity!');
 			}
 		} catch (error) {
-			// console.error(error);
 			toast.error('Failed to update quantity!');
 		}
 	};

@@ -46,7 +46,7 @@ const ResetPassPage = () => {
 				toast.error(res.message);
 			}
 		} catch (error) {
-			console.error(error);
+			toast.error('Something went wrong!');
 		}
 	};
 

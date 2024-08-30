@@ -29,7 +29,7 @@ const AddressPage = () => {
 				id: user?.id,
 				data
 			}).unwrap();
-			console.log(res);
+
 			if (res?.success) {
 				toast.success(res?.message);
 			} else {
