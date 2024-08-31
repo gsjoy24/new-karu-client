@@ -15,6 +15,7 @@ import { LuPhoneCall } from 'react-icons/lu';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import SocialSection from '../../SocialSection';
 import SearchProduct from '../SearchProduct';
+import CategoryAccordion from './CategoryAccordion';
 const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
 	ssr: false,
 	loading: () => <Skeleton variant='rectangular' width={150} height={40} />
@@ -85,6 +86,7 @@ const MobileNav = () => {
 
 			{/* links */}
 			<Stack direction='column' gap={2} p={2} mt={2}>
+				<CategoryAccordion />
 				{mobileNavLinks.map((link) => (
 					<Button
 						key={link?.href}
