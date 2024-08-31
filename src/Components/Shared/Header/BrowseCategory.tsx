@@ -41,7 +41,7 @@ const BrowseCategory = () => {
 					aria-expanded={categoryModalOpen ? 'true' : undefined}
 					aria-haspopup='true'
 					onClick={handleToggleCategoryModal}
-					disabled={isFetching || !categoryData?.data.length}
+					disabled={isFetching || !categoryData?.data?.length}
 					sx={{
 						textTransform: 'capitalize',
 						display: 'flex',

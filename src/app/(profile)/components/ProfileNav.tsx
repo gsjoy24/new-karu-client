@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { BiSolidDashboard } from 'react-icons/bi';
 import { FaBoxOpen } from 'react-icons/fa';
 import { FaGlobe, FaKey } from 'react-icons/fa6';
-import { IoIosLogOut, IoMdHeart } from 'react-icons/io';
+import { IoIosLogOut } from 'react-icons/io';
 
 const profileNavLinks = [
 	{
@@ -27,11 +27,6 @@ const profileNavLinks = [
 		text: 'Address',
 		href: '/profile/address'
 	},
-	// {
-	// 	icon: <IoMdHeart />,
-	// 	text: 'Wishlist',
-	// 	href: '/wishlist'
-	// },
 	{
 		icon: <FaKey />,
 		text: 'Change Password',

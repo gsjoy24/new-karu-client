@@ -31,6 +31,7 @@ const ProfileMenu = () => {
 	}, [menuOpen]);
 
 	const handleScrollToTop = () => {
+		handleToggleModal();
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth'

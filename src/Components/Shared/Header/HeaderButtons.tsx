@@ -12,14 +12,6 @@ const CartButton = () => {
 
 	return (
 		<Stack direction='row'>
-			{/* wishlist button */}
-			{/* <Stack direction='row' alignItems='center' component={Link} href='/wishlist' gap={1.5} aria-label='Wishlist'>
-						<div className='relative'>
-							<Chip label={wishlist} color='primary' size='small' className='absolute top-[-10px] left-[18px]' />
-							<IoIosHeartEmpty size={30} />
-						</div>
-						<span className='text-gray-600'>Wishlist</span>
-					</Stack> */}
 			{user && (
 				<IconButton className='relative' component={Link} href='/cart' aria-label='Cart'>
 					<Chip
