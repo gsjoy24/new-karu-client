@@ -45,7 +45,10 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 					position: 'absolute',
 					boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.1)',
 					top: '-1rem',
-					left: '6.6rem',
+					left: {
+						xs: '2.6rem',
+						sm: '6.6rem'
+					},
 					': hover': {
 						bgcolor: 'white'
 					}

@@ -33,7 +33,7 @@ const OrdersPage = () => {
 							<TableCell align='right'>Product</TableCell>
 							<TableCell align='right'>Status</TableCell>
 							<TableCell align='right'>Date</TableCell>
-							<TableCell align='right'>Actions</TableCell>
+							{/* <TableCell align='right'>Actions</TableCell> */}
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -59,7 +59,7 @@ const OrdersPage = () => {
 								</TableCell>
 								<TableCell align='right'>{order.status}</TableCell>
 								<TableCell align='right'>{new Date(order.createdAt).toLocaleString()}</TableCell>
-								<TableCell align='right'>Actions</TableCell>
+								{/* <TableCell align='right'>Actions</TableCell> */}
 							</TableRow>
 						))}
 					</TableBody>

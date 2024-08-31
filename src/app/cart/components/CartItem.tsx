@@ -15,20 +15,21 @@ const CartItem = ({ item }: { item: TCart }) => {
 						maxWidth: '450px',
 						width: '100%',
 						gap: '1rem',
-						alignItems: 'center',
-						position: 'relative'
+						alignItems: 'center'
 					}}
 				>
-					<Image
-						src={
-							'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
-						}
-						alt={item.product?.name}
-						width={100}
-						height={100}
-						className='w-[4rem] sm:w-[8rem] rounded-md'
-					/>
-					<DeleteCartItem id={item?.product?._id as string} />
+					<Box sx={{ position: 'relative' }}>
+						<Image
+							src={
+								'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
+							}
+							alt={item.product?.name}
+							width={100}
+							height={100}
+							className='w-[4rem] sm:w-[8rem] rounded-md'
+						/>
+						<DeleteCartItem id={item?.product?._id as string} />
+					</Box>
 
 					<Box>
 						<Typography gutterBottom>{item.product?.name}</Typography>
