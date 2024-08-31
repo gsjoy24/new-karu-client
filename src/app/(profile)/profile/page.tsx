@@ -9,21 +9,30 @@ const Profile = () => {
 		<Loading />
 	) : (
 		<Box>
-			<Typography variant='h4' textAlign='center'>
-				Profile
-			</Typography>
-			<Stack
-				direction='row'
+			<Typography
+				variant='h4'
 				sx={{
-					fontSize: '1.5rem'
+					mb: 2
 				}}
 			>
-				<Typography>Name: </Typography>
-				<Typography>{data?.data?.full_name}</Typography>
-			</Stack>
-			<Stack direction='row'>
-				<Typography>Email: </Typography>
-				<Typography>{data?.data?.email}</Typography>
+				Welcome, {data?.data?.name?.first_name ?? data?.data?.full_name}!
+			</Typography>
+			<Stack spacing={2}>
+				<Typography>
+					<strong>Email:</strong> {data?.data?.email}
+				</Typography>
+				<Typography>
+					<strong>Phone:</strong> {data?.data?.mobile_number || 'N/A'}
+				</Typography>
+				<Typography>
+					<strong>Address:</strong> {data?.data?.address || 'N/A'}
+				</Typography>
+				<Typography>
+					<strong>District:</strong> {data?.data?.district || 'N/A'}
+				</Typography>
+				<Typography>
+					<strong>City:</strong> {data?.data?.city || 'N/A'}
+				</Typography>
 			</Stack>
 		</Box>
 	);

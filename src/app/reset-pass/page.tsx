@@ -86,11 +86,11 @@ const ResetPassPage = () => {
 							cursor: 'pointer'
 						}}
 					>
-						{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
+						{showConfirmPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
 					</IconButton>
 				</div>
 				<LoadingButton type='submit' loading={isLoading} loadingIndicator='Logging in' variant='contained'>
-					Login
+					Submit
 				</LoadingButton>
 			</KForm>
 		</div>
