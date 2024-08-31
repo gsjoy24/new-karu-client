@@ -2,6 +2,7 @@
 import Loading from '@/app/loading';
 import { useGetMeQuery } from '@/redux/api/userApi';
 import { Box, Stack, Typography } from '@mui/material';
+
 const Profile = () => {
 	const { data, isLoading } = useGetMeQuery({});
 
@@ -22,16 +23,16 @@ const Profile = () => {
 					<strong>Email:</strong> {data?.data?.email}
 				</Typography>
 				<Typography>
-					<strong>Phone:</strong> {data?.data?.mobile_number || 'N/A'}
+					<strong>Phone:</strong> {data?.data?.mobile_number ?? 'N/A'}
 				</Typography>
 				<Typography>
-					<strong>Address:</strong> {data?.data?.address || 'N/A'}
+					<strong>Address:</strong> {data?.data?.address ?? 'N/A'}
 				</Typography>
 				<Typography>
-					<strong>District:</strong> {data?.data?.district || 'N/A'}
+					<strong>District:</strong> {data?.data?.district ?? 'N/A'}
 				</Typography>
 				<Typography>
-					<strong>City:</strong> {data?.data?.city || 'N/A'}
+					<strong>City:</strong> {data?.data?.city ?? 'N/A'}
 				</Typography>
 			</Stack>
 		</Box>

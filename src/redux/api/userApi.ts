@@ -44,7 +44,14 @@ const authApi = baseApi.injectEndpoints({
 				method: 'POST',
 				data
 			}),
-			invalidatesTags: [reduxTagTypes.user]
+			invalidatesTags: [reduxTagTypes.user, reduxTagTypes.orders]
+		}),
+		getOrders: build.query({
+			query: () => ({
+				url: `/orders`,
+				method: 'GET'
+			}),
+			providesTags: [reduxTagTypes.orders]
 		})
 	})
 });
@@ -54,5 +61,6 @@ export const {
 	useAddToCartMutation,
 	useRemoveFromCartMutation,
 	useManipulateQuantityMutation,
-	usePlaceOrderMutation
+	usePlaceOrderMutation,
+	useGetOrdersQuery
 } = authApi;
