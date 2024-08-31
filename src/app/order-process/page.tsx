@@ -6,7 +6,7 @@ import {
 	PersonAdd,
 	ShoppingCartOutlined
 } from '@mui/icons-material';
-import { Card, CardContent, Container, Grid, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { Card, CardContent, Container, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 

@@ -30,12 +30,9 @@ const CategoryAccordion = () => {
 								gap: '0.5rem'
 							}}
 						>
-							<Link href={`/products?category=${category.slug}`}>See All</Link>
+							<Link href={`/category=${category.slug}`}>See All</Link>
 							{category.subcategories.map((subcategory) => (
-								<Link
-									key={subcategory._id}
-									href={`/products?category=${category.slug}&subcategory=${subcategory.slug}`}
-								>
+								<Link key={subcategory._id} href={`/category=${category.slug}/${subcategory.slug}`}>
 									<span>{subcategory.name}</span>
 								</Link>
 							))}
