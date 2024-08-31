@@ -1,4 +1,6 @@
+import logo from '@/assets/logo.png';
 import { Box, Container, Divider, Stack, Typography } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
 import SocialSection from './SocialSection';
 
@@ -21,6 +23,8 @@ const Footer = () => {
 			<Container>
 				<Stack direction='row' gap={3} justifyContent='space-between' flexWrap={'wrap'}>
 					<Box sx={{ maxWidth: '20rem' }}>
+						<Image src={logo} alt='Karukon BD' width={100} height={100} />
+						<br />
 						<Typography variant='h6' gutterBottom>
 							About us
 						</Typography>
@@ -29,9 +33,6 @@ const Footer = () => {
 							Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s
 							customer with the best available product at the lowest possible price.
 						</Typography>
-						<br />
-						<Typography variant='subtitle1'>Contact: 01711-111111</Typography>
-						<Typography variant='subtitle1'>Email: karukonbd@gmail.com</Typography>
 					</Box>
 					<Box>
 						<Typography variant='h6' gutterBottom>
@@ -46,7 +47,11 @@ const Footer = () => {
 							))}
 						</Stack>
 					</Box>
-					<SocialSection />
+					<Box>
+						<SocialSection /> <br />
+						<Typography variant='subtitle1'>Contact: 01711-111111</Typography>
+						<Typography variant='subtitle1'>Email: karukonbd@gmail.com</Typography>
+					</Box>
 				</Stack>
 				<Stack direction='row' justifyContent='center' mt={5}>
 					<Typography variant='subtitle1'>&copy; {currentYear} Karukon BD. All Rights Reserved.</Typography>

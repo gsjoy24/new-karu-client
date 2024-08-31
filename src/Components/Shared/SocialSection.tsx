@@ -16,9 +16,7 @@ const SocialSection = () => {
 
 	return (
 		<Box>
-			<Typography variant='h6' gutterBottom>
-				Follow Us
-			</Typography>
+			<Typography variant='h6'>Follow Us</Typography>
 			<br />
 			<Stack direction='row' align-items='center' gap={1}>
 				<Link href={socialLinks.facebook} className={iconDesign}>
