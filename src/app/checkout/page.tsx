@@ -26,17 +26,6 @@ import { toast } from 'sonner';
 import Loading from '../loading';
 import OrderConfirmationModal from './components/OrderConfirmationModal';
 
-const response = {
-	success: true,
-	message: 'Order created successfully!',
-	statusCode: 200,
-	data: {
-		order_id: 'BDW4j0317',
-		status: 'pending',
-		createdAt: '2024-03-16T21:36:28.669Z'
-	}
-};
-
 const steps = [
 	{
 		label: 'Shopping Cart',
@@ -54,7 +43,7 @@ const steps = [
 const CheckOutPage = () => {
 	const router = useRouter();
 	const [isAgree, setIsAgree] = useState<boolean>(false);
-	const [statusModalOpen, setStatusModalOpen] = useState<boolean>(true);
+	const [statusModalOpen, setStatusModalOpen] = useState<boolean>(false);
 	const [orderResponse, setOrderResponse] = useState(null);
 
 	const handleCloseStatusModal = () => {
@@ -87,7 +76,8 @@ const CheckOutPage = () => {
 			const res = await placeOrder({ ...data, products }).unwrap();
 			if (res.success) {
 				toast.success('Order placed successfully!');
-				router.push('/products');
+				setStatusModalOpen(true);
+				setOrderResponse(res?.data);
 			} else {
 				toast.error(res?.message ?? 'Something went wrong!');
 			}
@@ -280,7 +270,7 @@ const CheckOutPage = () => {
 					</Button>
 				</Box>
 			)}
-			<OrderConfirmationModal open={statusModalOpen} onClose={handleCloseStatusModal} response={response} />
+			<OrderConfirmationModal open={statusModalOpen} onClose={handleCloseStatusModal} response={orderResponse} />
 		</>
 	);
 };

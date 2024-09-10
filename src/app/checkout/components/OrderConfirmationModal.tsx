@@ -4,23 +4,21 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 
 const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; onClose: () => void; response: any }) => {
-	// Extract data from the response object
-	const { order_id, createdAt } = response?.data || {};
+	const { order_id, createdAt } = response || {};
 	const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric'
 	});
 
-	// // Close modal after a few seconds (optional)
-	// useEffect(() => {
-	// 	if (open) {
-	// 		const timer = setTimeout(() => {
-	// 			onClose();
-	// 		}, 10000); // Closes after 10 seconds
-	// 		return () => clearTimeout(timer);
-	// 	}
-	// }, [open, onClose]);
+	useEffect(() => {
+		if (open) {
+			const timer = setTimeout(() => {
+				onClose();
+			}, 10000);
+			return () => clearTimeout(timer);
+		}
+	}, [open, onClose]);
 
 	return (
 		<Dialog
@@ -81,7 +79,6 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 				</Typography>
 			</Stack>
 
-			{/* Divider */}
 			<Divider sx={{ my: 2 }} />
 
 			{/* CTA Buttons */}
