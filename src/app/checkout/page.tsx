@@ -130,14 +130,6 @@ const CheckOutPage = () => {
 									placeholder='Write your order note here if you have any special instruction for us.'
 									multiline
 								/>
-								<FormControlLabel
-									sx={{
-										width: 'fit-content'
-									}}
-									control={<Checkbox />}
-									label='Agree with terms & conditions.'
-									onChange={(e) => setIsAgree((e.target as any).checked as boolean)}
-								/>
 							</Grid>
 
 							<Grid item xs={12} md={5}>
@@ -230,6 +222,14 @@ const CheckOutPage = () => {
 											padding: '0 1rem'
 										}}
 									>
+										<FormControlLabel
+											sx={{
+												width: 'fit-content'
+											}}
+											control={<Checkbox />}
+											label='Agree with terms & conditions.'
+											onChange={(e) => setIsAgree((e.target as any).checked as boolean)}
+										/>
 										<Button variant='outlined' fullWidth LinkComponent={Link} href={'/products'}>
 											Continue Shopping
 										</Button>

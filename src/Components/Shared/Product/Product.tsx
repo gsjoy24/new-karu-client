@@ -8,12 +8,13 @@ const Product = ({ product }: { product: TProduct }) => {
 		<Box
 			sx={{
 				width: {
-					xs: '12rem',
-					sm: '18rem'
+					xs: '10rem',
+					sm: '14rem',
+					md: '17rem'
 				},
 				position: 'relative',
 				borderRadius: 2,
-				boxShadow: 3,
+				boxShadow: 2,
 				transition: 'all 0.3s ease',
 				overflow: 'hidden',
 				backgroundColor: 'background.paper',
@@ -30,12 +31,13 @@ const Product = ({ product }: { product: TProduct }) => {
 					width: '100%',
 					height: {
 						xs: '10rem',
-						md: '14rem'
+						sm: '14rem',
+						md: '17rem'
 					},
 					overflow: 'hidden',
 					position: 'relative',
 					'&:hover img': {
-						transform: 'scale(1.1)'
+						transform: 'scale(1.05)'
 					}
 				}}
 			>
@@ -73,13 +75,12 @@ const Product = ({ product }: { product: TProduct }) => {
 				<Typography
 					variant='h6'
 					component='h2'
-					className='line-clamp-2'
+					className='line-clamp-3 lg:line-clamp-2'
 					sx={{
 						fontSize: {
-							xs: '1rem',
-							sm: '1.2rem'
+							xs: '0.8rem',
+							sm: '1rem'
 						},
-						fontWeight: 'bold',
 						color: 'text.primary',
 						mb: 1
 					}}
@@ -91,13 +92,14 @@ const Product = ({ product }: { product: TProduct }) => {
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-						gap: '0.5rem'
+						gap: '1.5rem'
 					}}
 				>
 					<Typography
 						sx={{
 							color: 'red',
 							textDecoration: 'line-through',
+							opacity: 0.7,
 							fontSize: {
 								xs: '0.9rem',
 								sm: '1rem'
@@ -108,7 +110,6 @@ const Product = ({ product }: { product: TProduct }) => {
 					</Typography>
 					<Typography
 						sx={{
-							fontWeight: 'bold',
 							color: 'primary.main',
 							fontSize: {
 								xs: '1rem',
