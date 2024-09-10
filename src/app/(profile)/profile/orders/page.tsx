@@ -3,12 +3,41 @@ import Loading from '@/app/loading';
 import { useGetOrdersQuery } from '@/redux/api/userApi';
 import { TProduct } from '@/types/product';
 import { Cancel, CheckCircle, HourglassEmpty, LocalShipping, ShoppingCart, Sync } from '@mui/icons-material';
-import { Box, Card, CardContent, CardHeader, Chip, Divider, Stack, Typography } from '@mui/material';
+import {
+	Box,
+	Card,
+	CardContent,
+	CardHeader,
+	Chip,
+	Divider,
+	Pagination,
+	Stack,
+	TextField,
+	Typography
+} from '@mui/material';
+import { useState } from 'react';
 
 const OrdersPage = () => {
-	const { data, isLoading } = useGetOrdersQuery({});
+	// State for pagination and search
+	const [page, setPage] = useState(1);
+	const [searchTerm, setSearchTerm] = useState('');
 
-	if (isLoading) return <Loading />;
+	// Fetch orders with pagination parameters
+	const { data, isLoading } = useGetOrdersQuery({ page, searchTerm });
+
+	// Pagination handler
+	const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+		setPage(value);
+	};
+
+	// Search handler
+	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		// set one half second delay to avoid multiple API calls
+		setTimeout(() => {
+			setSearchTerm(event.target.value);
+			setPage(1);
+		}, 1000);
+	};
 
 	// Function to get the icon and color based on order status
 	const getStatusChip = (status: string) => {
@@ -28,54 +57,73 @@ const OrdersPage = () => {
 		}
 	};
 
+	if (isLoading) return <Loading />;
+
 	return (
 		<Box sx={{ maxWidth: 800, mx: 'auto', p: 2 }}>
 			<Typography variant='h4' gutterBottom>
 				Your Orders
 			</Typography>
 
+			{/* Search Field */}
+			<TextField
+				label='Search Orders'
+				variant='outlined'
+				fullWidth
+				sx={{ mb: 3 }}
+				onChange={handleSearchChange}
+				placeholder='Search by Order ID...'
+			/>
+
 			{data?.data?.length > 0 ? (
-				data.data.map((order: any, index: number) => (
-					<Card key={order._id} variant='outlined' sx={{ mb: 3 }}>
-						{/* Order Header */}
-						<CardHeader
-							avatar={<ShoppingCart color='primary' />}
-							title={`Order #${order.order_id}`}
-							subheader={new Date(order.createdAt).toLocaleString()}
-							action={getStatusChip(order.status)}
-						/>
+				<>
+					{data?.data.map((order: any, index: number) => (
+						<Card key={order._id} variant='outlined' sx={{ mb: 3 }}>
+							{/* Order Header */}
+							<CardHeader
+								avatar={<ShoppingCart color='primary' />}
+								title={`Order #${order.order_id}`}
+								subheader={new Date(order.createdAt).toLocaleString()}
+								action={getStatusChip(order.status)}
+							/>
 
-						{/* Divider */}
-						<Divider />
+							{/* Divider */}
+							<Divider />
 
-						{/* Order Content */}
-						<CardContent>
-							<Stack spacing={2}>
-								{/* Product Details */}
-								{order.products.map((product: { product: TProduct; quantity: number; total_price: number }) => (
-									<Stack key={product.product._id} direction='row' justifyContent='space-between' alignItems='center'>
-										<Typography variant='body1'>
-											{product.product.name} x {product.quantity}
-										</Typography>
-										<Typography
-											variant='body1'
-											fontWeight='bold'
-											sx={{
-												whiteSpace: 'nowrap',
-												p: 0.5
-											}}
-										>
-											৳ {product.total_price}
-										</Typography>
-									</Stack>
-								))}
-							</Stack>
-						</CardContent>
-					</Card>
-				))
+							{/* Order Content */}
+							<CardContent>
+								<Stack spacing={2}>
+									{/* Product Details */}
+									{order.products.map((product: { product: TProduct; quantity: number; total_price: number }) => (
+										<Stack key={product.product._id} direction='row' justifyContent='space-between' alignItems='center'>
+											<Typography variant='body1'>
+												{product.product.name} x {product.quantity}
+											</Typography>
+											<Typography
+												variant='body1'
+												fontWeight='bold'
+												sx={{
+													whiteSpace: 'nowrap',
+													p: 0.5
+												}}
+											>
+												৳ {product.total_price}
+											</Typography>
+										</Stack>
+									))}
+								</Stack>
+							</CardContent>
+						</Card>
+					))}
+
+					{/* Pagination Component */}
+					<Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+						<Pagination count={data.meta.totalPages} page={page} onChange={handlePageChange} color='primary' />
+					</Box>
+				</>
 			) : (
 				<Typography variant='body1' sx={{ textAlign: 'center', mt: 4 }}>
-					You have no orders yet.
+					No orders found.
 				</Typography>
 			)}
 		</Box>

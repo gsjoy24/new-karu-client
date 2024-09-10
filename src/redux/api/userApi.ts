@@ -47,9 +47,10 @@ const authApi = baseApi.injectEndpoints({
 			invalidatesTags: [reduxTagTypes.user, reduxTagTypes.orders]
 		}),
 		getOrders: build.query({
-			query: () => ({
+			query: ({ page, searchTerm }: { page: number; searchTerm: string } = { page: 1, searchTerm: '' }) => ({
 				url: `/orders`,
-				method: 'GET'
+				method: 'GET',
+				params: { page, limit: 2, searchTerm }
 			}),
 			providesTags: [reduxTagTypes.orders]
 		})
