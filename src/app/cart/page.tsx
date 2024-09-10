@@ -81,7 +81,7 @@ const CartPage = () => {
 								<Table>
 									<TableHead>
 										<TableRow>
-											<TableCell>Product</TableCell>
+											<TableCell>Products</TableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>

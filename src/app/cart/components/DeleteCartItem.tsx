@@ -34,26 +34,7 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 	};
 	return (
 		<>
-			<IconButton
-				onClick={handleClickOpen}
-				color='error'
-				size='small'
-				disabled={!'isLoading'}
-				sx={{
-					bgcolor: '#fff',
-					p: 1,
-					position: 'absolute',
-					boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.1)',
-					top: '-1rem',
-					left: {
-						xs: '2.6rem',
-						sm: '6.6rem'
-					},
-					': hover': {
-						bgcolor: 'white'
-					}
-				}}
-			>
+			<IconButton onClick={handleClickOpen} color='error' size='small' disabled={!'isLoading'}>
 				{!isRemoving ? <DeleteOutlineIcon fontSize='small' /> : <CircularProgress size={20} />}
 			</IconButton>
 			<Dialog

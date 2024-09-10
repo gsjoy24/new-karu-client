@@ -1,8 +1,8 @@
 import { TCart } from '@/types/product';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import CartQuantityHandler from './CartQuantityHandler';
+import DeleteCartItem from './DeleteCartItem';
 
 const CartItem = ({ item }: { item: TCart }) => {
 	return (
@@ -65,9 +65,7 @@ const CartItem = ({ item }: { item: TCart }) => {
 				<Typography variant='body2'>৳ {item.product?.last_price * item.quantity}</Typography>
 				{/* Quantity Handler */}
 				<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
-				<IconButton aria-label='delete' size='small'>
-					<DeleteIcon fontSize='small' />
-				</IconButton>
+				<DeleteCartItem id={item?.product?._id as string} />
 			</Box>
 		</Box>
 	);
