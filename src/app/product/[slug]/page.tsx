@@ -95,7 +95,7 @@ const ProductDetails = () => {
 					<Box
 						mt={2.5}
 						sx={{
-							minWidth: '320px',
+							minWidth: '300px',
 							maxWidth: '600px',
 							width: '100%'
 						}}
@@ -153,11 +153,7 @@ const ProductDetails = () => {
 							</Typography>
 						</Box>
 						<Box className='custom-font'>{parse(data?.data?.description ?? 'Loading...')}</Box>
-						{!data?.data?.isOutOfStock && (
-							<Typography>
-								Stock: <strong>{data?.data?.stock}</strong>
-							</Typography>
-						)}
+
 						{data?.data?.isOutOfStock ? (
 							<Chip
 								label='Out of stock'
@@ -183,6 +179,11 @@ const ProductDetails = () => {
 							</>
 						)}
 						<Box mt={2}>
+							{!data?.data?.isOutOfStock && (
+								<Typography>
+									<strong>Stock:</strong> {data?.data?.stock}
+								</Typography>
+							)}
 							<Typography>
 								<strong>SKU: </strong> {data?.data?.sku ?? 'N/A'}
 							</Typography>
@@ -199,7 +200,7 @@ const ProductDetails = () => {
 								</Typography>
 							</Box>
 						</Box>
-						<Stack direction='row' gap={1} mt={1}>
+						<Stack direction='row' gap={1} mt={1} flexWrap='wrap'>
 							{data?.data?.tags?.map((tag: string) => (
 								<Chip
 									key={tag}
@@ -208,6 +209,7 @@ const ProductDetails = () => {
 									href={`/products?search=${tag}`}
 									sx={{
 										cursor: 'pointer',
+										fontSize: '0.7rem',
 										':hover': {
 											backgroundColor: '#242D39',
 											color: 'white'
