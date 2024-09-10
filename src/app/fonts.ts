@@ -1,13 +1,8 @@
-import { Quicksand, Roboto } from 'next/font/google';
+import { Karla } from 'next/font/google';
 
-export const roboto = Roboto({
+export const karla = Karla({
 	weight: ['400', '500', '700'],
-	subsets: ['latin'],
-	display: 'swap'
-});
-
-export const quicksand = Quicksand({
-	weight: ['400', '500', '700'],
+	variable: '--font-karla',
 	subsets: ['latin'],
 	display: 'swap'
 });

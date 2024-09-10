@@ -1,5 +1,4 @@
 'use client';
-import { quicksand } from '@/app/fonts';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import Carousel from 'react-material-ui-carousel';
@@ -105,9 +104,7 @@ const HeroSection = () => {
 						}}
 					>
 						<div className='w-full md:max-w-[500px] lg:max-w-[600px]'>
-							<h1
-								className={`${quicksand.className} text-gray-700 text-[30px] md:text-[52px] font-[700] leading-tight mb-5`}
-							>
+							<h1 className={` text-gray-700 text-[30px] md:text-[52px] font-[700] leading-tight mb-5`}>
 								{item.title}
 							</h1>
 							<Typography

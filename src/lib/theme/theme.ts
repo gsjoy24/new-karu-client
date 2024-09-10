@@ -1,6 +1,10 @@
+import { karla } from '@/app/fonts';
 import { createTheme } from '@mui/material';
 
 export const theme = createTheme({
+	typography: {
+		fontFamily: karla.style.fontFamily
+	},
 	palette: {
 		primary: {
 			main: '#242D39',

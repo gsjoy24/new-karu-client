@@ -6,10 +6,13 @@ const Loading = () => {
 		<div className='w-full min-h-[80vh] flex flex-col items-center justify-center gap-10'>
 			<Loader />
 			<Typography
-				variant='h4'
 				sx={{
-					fontFamily: 'Karla, sans-serif',
-					fontWeight: 700
+					fontSize: {
+						xs: '1.5rem',
+						sm: '2rem',
+						md: '2.5rem',
+						lg: '3rem'
+					}
 				}}
 			>
 				KARUKON

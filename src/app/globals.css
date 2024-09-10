@@ -50,7 +50,7 @@ h6 {
 }
 
 ul {
-	@apply list-outside list-disc;
+	@apply list-inside list-disc;
 }
 
 li {
@@ -58,5 +58,5 @@ li {
 }
 
 ol {
-	@apply list-outside list-decimal;
+	@apply list-inside list-decimal;
 }

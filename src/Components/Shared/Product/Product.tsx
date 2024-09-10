@@ -8,7 +8,7 @@ const Product = ({ product }: { product: TProduct }) => {
 		<Box
 			sx={{
 				width: {
-					xs: '10rem',
+					xs: '9.5rem',
 					sm: '14rem',
 					md: '17rem'
 				},
@@ -92,7 +92,7 @@ const Product = ({ product }: { product: TProduct }) => {
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-						gap: '1.5rem'
+						gap: '1rem'
 					}}
 				>
 					<Typography

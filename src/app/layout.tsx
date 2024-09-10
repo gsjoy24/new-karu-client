@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
-import { roboto } from './fonts';
+import { karla } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
 	return (
 		<Providers>
 			<html lang='en'>
-				<body className={roboto.className}>
+				<body className={karla.className}>
 					<AppRouterCacheProvider>
 						<Container>
 							<Header />

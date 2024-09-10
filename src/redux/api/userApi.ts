@@ -50,7 +50,7 @@ const authApi = baseApi.injectEndpoints({
 			query: ({ page, searchTerm }: { page: number; searchTerm: string } = { page: 1, searchTerm: '' }) => ({
 				url: `/orders`,
 				method: 'GET',
-				params: { page, limit: 2, searchTerm }
+				params: { page, searchTerm }
 			}),
 			providesTags: [reduxTagTypes.orders]
 		})

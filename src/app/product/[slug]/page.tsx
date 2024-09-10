@@ -257,7 +257,7 @@ const ProductDetails = () => {
 			</Grid>
 			{otherProducts?.length > 0 && (
 				<Box mt={2}>
-					<Typography variant='h4' gutterBottom>
+					<Typography variant='h4' my={4} align='center'>
 						Related Products
 					</Typography>
 					<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap'>
