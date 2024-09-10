@@ -11,7 +11,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
-import { TbCurrencyTaka } from 'react-icons/tb';
 
 const AddToCart = dynamic(() => import('../components/AddToCart'), {
 	ssr: false,
@@ -122,28 +121,35 @@ const ProductDetails = () => {
 						>
 							<Typography
 								sx={{
-									color: 'primary.main',
+									textDecoration: 'line-through',
 									display: 'flex',
 									width: 'fit-content',
 									alignItems: 'center',
 									justifyContent: 'center',
-									position: 'relative'
+									position: 'relative',
+									color: 'red',
+									fontSize: {
+										xs: '1rem',
+										sm: '1.2rem'
+									}
 								}}
 							>
-								<TbCurrencyTaka />
-								{data?.data?.old_price}
-								<span className='w-full h-[1px] bg-[#242D39] absolute'></span>
+								৳ {data?.data?.old_price}
 							</Typography>
 							<Typography
 								sx={{
 									display: 'flex',
 									width: 'fit-content',
 									alignItems: 'center',
-									justifyContent: 'center'
+									justifyContent: 'center',
+									color: 'primary.dark',
+									fontSize: {
+										xs: '1.2rem',
+										sm: '1.5rem'
+									}
 								}}
 							>
-								<TbCurrencyTaka />
-								{data?.data?.last_price}
+								৳ {data?.data?.last_price}
 							</Typography>
 						</Box>
 						<Box className='custom-font'>{parse(data?.data?.description ?? 'Loading...')}</Box>

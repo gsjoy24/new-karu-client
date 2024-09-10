@@ -4,12 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
-	// const productImages= item.products.map((product) => product[0]);
 	const productImages = [
-		'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg',
-		'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg',
-		'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg',
-		'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg'
+		...item.products.slice(0, 4).map((product) => {
+			return product[0];
+		})
 	];
 
 	return (
