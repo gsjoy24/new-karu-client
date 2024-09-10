@@ -22,6 +22,7 @@ import {
 import Link from 'next/link';
 import Loading from '../loading';
 import CartItem from './components/CartItem';
+
 const steps = [
 	{
 		label: 'Shopping Cart',
@@ -49,14 +50,16 @@ const CartPage = () => {
 	return isLoading ? (
 		<Loading />
 	) : (
-		<>
+		<Box sx={{ px: { xs: 2, md: 4 }, my: 3 }}>
+			{' '}
+			{/* Added padding to avoid overflow on smaller devices */}
 			{cartItems?.length ? (
-				<Box my={3}>
+				<>
 					<Stepper
 						alternativeLabel
 						nonLinear
 						sx={{
-							maxWidth: '50rem',
+							maxWidth: '100%', // Ensure the stepper is responsive
 							mx: 'auto',
 							my: 5
 						}}
@@ -64,125 +67,84 @@ const CartPage = () => {
 					>
 						{steps.map(({ label, link }, i) => (
 							<Step key={label}>
-								<Link href={link ?? '/checkout'}>
-									<StepButton disabled={i === 2} color='inherit'>
-										{label}
-									</StepButton>
-								</Link>
+								<StepButton component={Link} href={link ?? '/checkout'} disabled={i === 2} color='inherit'>
+									{label}
+								</StepButton>
 							</Step>
 						))}
 					</Stepper>
-					<Grid container>
+					<Grid container spacing={2}>
+						{' '}
+						{/* Added spacing for better separation */}
 						<Grid item xs={12} md={7}>
 							<TableContainer component={Paper}>
 								<Table>
 									<TableHead>
 										<TableRow>
 											<TableCell>Product</TableCell>
-											<TableCell>Quantity</TableCell>
-											<TableCell>Total</TableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>
 										{cartItems.map((item: TCart) => (
-											<CartItem key={item.product._id} item={item} />
+											<CartItem key={item?.product?._id} item={item} />
 										))}
 									</TableBody>
 								</Table>
 							</TableContainer>
 						</Grid>
-
 						<Grid item xs={12} md={5}>
 							<Box
 								sx={{
 									border: '1px solid #e0e0e0',
-									borderRadius: '5px',
-									margin: {
-										xs: '1rem 0',
-										md: '0 1rem'
-									},
-									minHeight: '20rem',
-									maxHeight: '25rem',
-									height: '100%',
+									borderRadius: 2,
+									p: 3,
 									position: 'relative',
-									pb: '4rem'
+									height: '100%',
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'space-between'
 								}}
 							>
 								<Typography
-									variant='h2'
+									variant='h6'
 									sx={{
 										fontSize: '1.5rem',
-										my: '1rem',
+										my: 1,
 										textAlign: 'center'
 									}}
 								>
 									Cart Summary
 								</Typography>
-								<Divider />
-								<Stack gap={1} p={2}>
-									<Stack
-										sx={{
-											flexDirection: 'row',
-											justifyContent: 'space-between',
-											alignItems: 'center',
-											gap: '1rem'
-										}}
-									>
+								<Divider sx={{ my: 2 }} />
+								<Stack spacing={2}>
+									<Stack direction='row' justifyContent='space-between'>
 										<Typography>Total Products</Typography>
 										<Typography>{totalProducts}</Typography>
 									</Stack>
 
 									<Divider />
-									<Stack
-										sx={{
-											flexDirection: 'row',
-											justifyContent: 'space-between',
-											alignItems: 'center',
-											gap: '1rem'
-										}}
-									>
+									<Stack direction='row' justifyContent='space-between'>
 										<Typography>Total Price</Typography>
 										<Typography>৳ {totalPrice}</Typography>
 									</Stack>
-									<Divider />
-									<Typography
-										variant='h3'
-										sx={{
-											fontSize: '0.8rem',
-											my: '1rem',
-											textAlign: 'center'
-										}}
-									>
-										Shipping fee will include at checkout.
-									</Typography>
 								</Stack>
 
 								{/* buttons */}
-								<Stack
-									direction='column'
-									gap={1}
-									sx={{
-										position: 'absolute',
-										bottom: '1rem',
-										width: '100%',
-										padding: '0 1rem'
-									}}
-								>
-									<Button variant='outlined' fullWidth LinkComponent={Link} href={'/products'}>
+								<Stack direction='column' spacing={2} mt={2}>
+									<Button variant='outlined' fullWidth component={Link} href={'/products'}>
 										Continue Shopping
 									</Button>
-									<Button LinkComponent={Link} href={'/checkout'}>
-										Proceed to checkout
+									<Button variant='contained' fullWidth component={Link} href={'/checkout'}>
+										Proceed to Checkout
 									</Button>
 								</Stack>
 							</Box>
 						</Grid>
 					</Grid>
-				</Box>
+				</>
 			) : (
 				<Box
 					textAlign='center'
-					my={3}
 					sx={{
 						display: 'flex',
 						flexDirection: 'column',
@@ -191,15 +153,15 @@ const CartPage = () => {
 						height: '50vh'
 					}}
 				>
-					<Typography variant='h1' sx={{ fontSize: '2rem', mb: '1rem' }}>
+					<Typography variant='h4' sx={{ mb: 2 }}>
 						Your cart is empty
 					</Typography>
-					<Button variant='contained' LinkComponent={Link} href='/products'>
+					<Button variant='contained' component={Link} href='/products'>
 						Continue Shopping
 					</Button>
 				</Box>
 			)}
-		</>
+		</Box>
 	);
 };
 

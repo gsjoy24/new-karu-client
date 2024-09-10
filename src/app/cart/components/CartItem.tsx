@@ -1,55 +1,75 @@
 import { TCart } from '@/types/product';
-import { Box, TableCell, TableRow, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
 import CartQuantityHandler from './CartQuantityHandler';
-import DeleteCartItem from './DeleteCartItem';
 
 const CartItem = ({ item }: { item: TCart }) => {
 	return (
-		<TableRow key={item?.product?._id}>
-			<TableCell>
-				<Box
-					sx={{
-						display: 'flex',
-						minWidth: '250px',
-						maxWidth: '450px',
-						width: '100%',
-						gap: '1rem',
-						alignItems: 'center'
-					}}
-				>
-					<Box sx={{ position: 'relative' }}>
-						<Image
-							src={
-								'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
-							}
-							alt={item.product?.name}
-							width={100}
-							height={100}
-							className='w-[4rem] sm:w-[8rem] rounded-md'
-						/>
-						<DeleteCartItem id={item?.product?._id as string} />
-					</Box>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: {
+					xs: 'column',
+					sm: 'row'
+				},
+				alignItems: 'center',
+				justifyContent: 'space-between',
+				width: '100%',
+				borderBottom: '1px solid #e0e0e0',
+				p: 1,
+				gap: 2
+			}}
+		>
+			{/* Product Image and Name */}
+			<Box
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					width: {
+						xs: '100%',
+						sm: '60%'
+					},
+					gap: 2
+				}}
+			>
+				{/* Product Image */}
+				<Image
+					src={item.product.images[0]}
+					alt={item.product?.name}
+					width={80}
+					height={80}
+					style={{ borderRadius: '8px', objectFit: 'cover' }}
+				/>
 
-					<Box>
-						<Typography gutterBottom>{item.product?.name}</Typography>
-						<Typography
-							sx={{
-								fontSize: '0.8rem'
-							}}
-						>
-							৳{item.product?.last_price}
-						</Typography>
-					</Box>
-				</Box>
-			</TableCell>
-			<TableCell>
+				{/* Product Name */}
+				<Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+					{item.product?.name}
+				</Typography>
+			</Box>
+
+			{/* Quantity and Price Section */}
+			<Box
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'space-around',
+					width: {
+						xs: '100%',
+						sm: '40%'
+					},
+					gap: 2
+				}}
+			>
+				{/* Total Price */}
+				<Typography variant='body2'>৳ {item.product?.last_price * item.quantity}</Typography>
+				{/* Quantity Handler */}
 				<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
-			</TableCell>
-			<TableCell>
-				<Typography>৳{item.product?.last_price * item.quantity}</Typography>
-			</TableCell>
-		</TableRow>
+				<IconButton aria-label='delete' size='small'>
+					<DeleteIcon fontSize='small' />
+				</IconButton>
+			</Box>
+		</Box>
 	);
 };
 
