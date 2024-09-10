@@ -1,15 +1,5 @@
 import { useRemoveFromCartMutation } from '@/redux/api/userApi';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {
-	Button,
-	CircularProgress,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogContentText,
-	DialogTitle,
-	IconButton
-} from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -34,9 +24,9 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 	};
 	return (
 		<>
-			<IconButton onClick={handleClickOpen} color='error' size='small' disabled={!'isLoading'}>
-				{!isRemoving ? <DeleteOutlineIcon fontSize='small' /> : <CircularProgress size={20} />}
-			</IconButton>
+			<Button onClick={handleClickOpen} variant='text' color='error' size='small' disabled={isRemoving}>
+				Remove
+			</Button>
 			<Dialog
 				open={open}
 				onClose={handleClose}
@@ -53,7 +43,7 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 					<Button onClick={handleClose} variant='text'>
 						Cancel
 					</Button>
-					<Button onClick={handleRemoveFromCart} variant='text' autoFocus>
+					<Button onClick={handleRemoveFromCart} variant='text' autoFocus disabled={isRemoving}>
 						Delete
 					</Button>
 				</DialogActions>

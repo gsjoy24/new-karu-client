@@ -35,8 +35,7 @@ const steps = [
 	},
 	{
 		label: 'Check Out',
-		link: '/checkout',
-		active: true
+		link: '/checkout'
 	},
 	{
 		label: 'Order Status'
@@ -90,7 +89,6 @@ const CheckOutPage = () => {
 				<Box my={3}>
 					<Stepper
 						alternativeLabel
-						nonLinear
 						sx={{
 							maxWidth: '50rem',
 							mx: 'auto',
@@ -185,7 +183,7 @@ const CheckOutPage = () => {
 													<Typography>
 														৳ {item.product?.last_price} x {item.quantity}
 													</Typography>
-													<Typography>{item.product?.last_price * item.quantity}</Typography>
+													<Typography>৳ {item.product?.last_price * item.quantity}</Typography>
 												</Stack>
 												<Divider />
 											</Stack>
@@ -203,46 +201,7 @@ const CheckOutPage = () => {
 										</Stack>
 
 										<Divider />
-										<FormControl>
-											<FormLabel id='demo-controlled-radio-buttons-group'>
-												Select deliver location to calculate delivery charge
-											</FormLabel>
-											<RadioGroup
-												aria-labelledby='demo-controlled-radio-buttons-group'
-												name='controlled-radio-buttons-group'
-												value={value}
-												onChange={handleChange}
-											>
-												<FormControlLabel value='inside' control={<Radio />} label='Inside Dhaka' />
-												<FormControlLabel value='outside' control={<Radio />} label='Outside of Dhaka' />
-											</RadioGroup>
-										</FormControl>
-										<Divider />
 
-										<Stack
-											sx={{
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												alignItems: 'center',
-												gap: '1rem'
-											}}
-										>
-											<Typography>Total Product Price</Typography>
-											<Typography>৳ {totalPrice}</Typography>
-										</Stack>
-										<Divider />
-										<Stack
-											sx={{
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												alignItems: 'center',
-												gap: '1rem'
-											}}
-										>
-											<Typography>Delivery Charge</Typography>
-											<Typography>৳ {deliveryCharge}</Typography>
-										</Stack>
-										<Divider />
 										<Stack
 											sx={{
 												flexDirection: 'row',
