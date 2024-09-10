@@ -8,13 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	Box,
 	Button,
+	Checkbox,
 	Divider,
-	FormControl,
 	FormControlLabel,
-	FormLabel,
 	Grid,
-	Radio,
-	RadioGroup,
 	Stack,
 	Step,
 	StepButton,
@@ -43,7 +40,7 @@ const steps = [
 ];
 
 const CheckOutPage = () => {
-	const [value, setValue] = useState('inside');
+	const [isAgree, setIsAgree] = useState<boolean>(false);
 	const { data, isLoading } = useGetMeQuery({});
 	const router = useRouter();
 	const cartItems = data?.data?.cart ?? [];
@@ -51,17 +48,15 @@ const CheckOutPage = () => {
 	const totalPrice = Math.ceil(
 		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)
 	);
-	const deliveryCharge = value === 'inside' ? 60 : 120;
-	const subTotal = totalPrice + deliveryCharge;
 	const totalProducts = cartItems.reduce((acc: number, item: TCart) => acc + item.quantity, 0);
-
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setValue((event.target as HTMLInputElement).value);
-	};
 
 	const [placeOrder, { isLoading: isOrdering }] = usePlaceOrderMutation();
 
 	const handleOrder = async (data: FieldValues) => {
+		if (!isAgree) {
+			toast.error('Please agree with terms & conditions.');
+			return;
+		}
 		const products = cartItems?.map((item: TCart) => ({
 			product: item?.product?._id,
 			quantity: item?.quantity,
@@ -135,6 +130,14 @@ const CheckOutPage = () => {
 									placeholder='Write your order note here if you have any special instruction for us.'
 									multiline
 								/>
+								<FormControlLabel
+									sx={{
+										width: 'fit-content'
+									}}
+									control={<Checkbox />}
+									label='Agree with terms & conditions.'
+									onChange={(e) => setIsAgree((e.target as any).checked as boolean)}
+								/>
 							</Grid>
 
 							<Grid item xs={12} md={5}>
@@ -183,7 +186,7 @@ const CheckOutPage = () => {
 													<Typography>
 														৳ {item.product?.last_price} x {item.quantity}
 													</Typography>
-													<Typography>৳ {item.product?.last_price * item.quantity}</Typography>
+													<Typography>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
 												</Stack>
 												<Divider />
 											</Stack>
@@ -211,7 +214,7 @@ const CheckOutPage = () => {
 											}}
 										>
 											<Typography>Sub Total</Typography>
-											<Typography>৳ {subTotal}</Typography>
+											<Typography>৳ {totalPrice}</Typography>
 										</Stack>
 										<Divider />
 									</Stack>

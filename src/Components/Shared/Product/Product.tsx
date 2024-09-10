@@ -43,7 +43,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					src={
 						product?.images?.length > 0
 							? product?.images[0]
-							: 'https://industrialphysics.com/wp-content/uploads/2022/02/product-image-coming-soon-1.png'
+							: 'https://res.cloudinary.com/dnz9nobvd/image/upload/v1725990632/458401867_1178594239887038_977139183458686265_n_uflarr.png'
 					}
 					alt={product?.name}
 					width={400}
