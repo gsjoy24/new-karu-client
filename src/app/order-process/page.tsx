@@ -94,7 +94,13 @@ const getStepDescription = (index: number) => {
 		case 2:
 			return (
 				<>
-					<p>Browse our wide range of products and choose your favorites.</p>
+					<p>
+						Browse our wide range of{' '}
+						<Link href='/register' className='text-blue-500'>
+							products
+						</Link>{' '}
+						and choose your favorites.
+					</p>
 					<br />
 					<p>আমাদের বিস্তৃত পণ্যসমূহ ব্রাউজ করুন এবং আপনার পছন্দেরগুলো বেছে নিন।</p>
 				</>
