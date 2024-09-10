@@ -6,7 +6,7 @@ import EmptyCard from '@/components/Shared/Header/EmptyCard';
 import Product from '@/components/Shared/Product/Product';
 import { useGetProductsQuery } from '@/redux/api/productApi';
 import { TProduct } from '@/types/product';
-import { IconButton, MenuItem, Pagination, Select, Stack } from '@mui/material';
+import { Box, IconButton, MenuItem, Pagination, Select, Stack } from '@mui/material';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
@@ -71,7 +71,12 @@ const ProductsByCategory = () => {
 	const totalPage = data?.meta?.total / data?.meta?.limit;
 
 	return (
-		<div className='py-4'>
+		<Box
+			sx={{
+				pt: 2,
+				pb: 5
+			}}
+		>
 			<Stack
 				direction='row'
 				sx={{
@@ -192,7 +197,7 @@ const ProductsByCategory = () => {
 					<Pagination count={totalPage} shape='rounded' onChange={(e, value) => setPage(value)} />
 				</Stack>
 			)}
-		</div>
+		</Box>
 	);
 };
 

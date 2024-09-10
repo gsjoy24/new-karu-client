@@ -8,58 +8,80 @@ const Product = ({ product }: { product: TProduct }) => {
 		<Box
 			sx={{
 				width: {
-					xs: '10rem',
-					sm: '17rem'
+					xs: '12rem',
+					sm: '18rem'
 				},
-				position: 'relative'
+				position: 'relative',
+				borderRadius: 2,
+				boxShadow: 3,
+				transition: 'all 0.3s ease',
+				overflow: 'hidden',
+				backgroundColor: 'background.paper',
+				'&:hover': {
+					boxShadow: 6,
+					transform: 'translateY(-5px)'
+				}
 			}}
-			className='border hover:border-[#242D39] duration-200 rounded-lg overflow-hidden'
 			component={Link}
 			href={`/product/${product?.slug}`}
 		>
-			<Chip
-				label={`${product?.discountPercentage ?? 0}% OFF`}
-				size='small'
+			<Box
 				sx={{
-					bgcolor: 'white',
-					color: 'primary.main',
-					position: 'absolute',
-					top: '0.5rem',
-					right: '0.5rem',
-					borderRadius: '0.5rem',
-					border: '1px solid #242D39',
-					display: product?.discountPercentage && product?.discountPercentage > 0 ? 'flex' : 'none',
-					fontSize: {
-						xs: '0.6rem',
-						sm: '0.8rem'
+					width: '100%',
+					height: {
+						xs: '10rem',
+						md: '14rem'
+					},
+					overflow: 'hidden',
+					position: 'relative',
+					'&:hover img': {
+						transform: 'scale(1.1)'
 					}
 				}}
-			/>
-			<Box className='w-full h-[9rem] md:h-[16rem]'>
+			>
 				<Image
 					src={
-						'https://cynor.b-cdn.net/wp-content/uploads/2024/05/KC181-Ash-Color-Design-6-cup-1-jug-1-plate-Surai-Set-1-300x300.jpg'
+						product?.images?.length > 0
+							? product?.images[0]
+							: 'https://industrialphysics.com/wp-content/uploads/2022/02/product-image-coming-soon-1.png'
 					}
 					alt={product?.name}
 					width={400}
 					height={400}
 					className='w-full h-full object-cover'
+					style={{
+						transition: 'transform 0.3s ease'
+					}}
 				/>
+				{/* a cart if the stoke is out */}
+				{!product?.isOutOfStock && (
+					<Chip
+						label='Out of stock'
+						sx={{
+							position: 'absolute',
+							top: '8rem',
+							left: '5.5rem',
+							backgroundColor: 'red',
+							color: 'white',
+							fontWeight: 'bold',
+							borderRadius: 0
+						}}
+					/>
+				)}
 			</Box>
-			<Box
-				p={{
-					xs: 1,
-					sm: 2
-				}}
-			>
+			<Box p={2} sx={{ textAlign: 'center' }}>
 				<Typography
-					mb={2}
-					className='line-clamp-2 text-center'
+					variant='h6'
+					component='h2'
+					className='line-clamp-2'
 					sx={{
 						fontSize: {
-							xs: '0.8rem',
-							sm: '1rem'
-						}
+							xs: '1rem',
+							sm: '1.2rem'
+						},
+						fontWeight: 'bold',
+						color: 'text.primary',
+						mb: 1
 					}}
 				>
 					{product?.name}
@@ -69,32 +91,29 @@ const Product = ({ product }: { product: TProduct }) => {
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-						gap: '1rem',
-						fontSize: {
-							xs: '0.8rem',
-							sm: '1rem'
-						}
+						gap: '0.5rem'
 					}}
 				>
 					<Typography
 						sx={{
-							color: 'primary.main',
-							display: 'flex',
-							width: 'fit-content',
-							alignItems: 'center',
-							justifyContent: 'center',
-							position: 'relative'
+							color: 'red',
+							textDecoration: 'line-through',
+							fontSize: {
+								xs: '0.9rem',
+								sm: '1rem'
+							}
 						}}
 					>
 						৳ {product?.old_price}
-						<span className='w-full h-[1px] bg-[#242D39] absolute'></span>
 					</Typography>
 					<Typography
 						sx={{
-							display: 'flex',
-							width: 'fit-content',
-							alignItems: 'center',
-							justifyContent: 'center'
+							fontWeight: 'bold',
+							color: 'primary.main',
+							fontSize: {
+								xs: '1rem',
+								sm: '1.1rem'
+							}
 						}}
 					>
 						৳ {product?.last_price}

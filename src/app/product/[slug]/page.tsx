@@ -17,16 +17,6 @@ const AddToCart = dynamic(() => import('../components/AddToCart'), {
 	ssr: false,
 	loading: () => <Skeleton variant='rectangular' width={210} height={40} />
 });
-const productImages = [
-	{
-		original: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy3.jpg',
-		thumbnail: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy3.jpg'
-	},
-	{
-		original: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg',
-		thumbnail: 'https://xelltechnology.com/wp-content/uploads/2022/04/dummy4.jpg'
-	}
-];
 
 const ProductDetails = () => {
 	const user = useAppSelector((state) => state.auth.user);
@@ -38,6 +28,11 @@ const ProductDetails = () => {
 			value: data?.data?.sub_category?.slug
 		}
 	]);
+
+	const productImages = data?.data?.images.map((image: string) => ({
+		original: image,
+		thumbnail: image
+	}));
 
 	const otherProducts = relatedProducts?.data?.filter((product: TProduct) => product._id !== data?.data?._id);
 
@@ -102,7 +97,7 @@ const ProductDetails = () => {
 						mt={2.5}
 						sx={{
 							minWidth: '320px',
-							maxWidth: '500px',
+							maxWidth: '600px',
 							width: '100%'
 						}}
 					>
@@ -172,7 +167,7 @@ const ProductDetails = () => {
 						)}
 						<Box mt={2}>
 							<Typography>
-								<strong>Serial number: </strong> {data?.data?.sm ?? 'N/A'}
+								<strong>SKU: </strong> {data?.data?.sku ?? 'N/A'}
 							</Typography>
 							<Box>
 								<strong>Categories: </strong>
@@ -206,7 +201,12 @@ const ProductDetails = () => {
 						</Stack>
 					</Box>
 
-					<Box mt={2}>
+					<Box
+						mt={2}
+						sx={{
+							maxWidth: '400px'
+						}}
+					>
 						<ul>
 							<li>
 								ঢাকা সিটিতে সম্পূর্ণ ক্যাশ অন ডেলিভারি। আমাদের নিজস্ব ডেলিভারি ম্যানের মাধ্যমে নিরাপদ ডেলিভারি।
