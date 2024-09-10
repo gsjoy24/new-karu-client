@@ -15,9 +15,7 @@ const CartQuantityHandler = ({ id, quantity }: CartQuantityHandlerProps) => {
 	const handleQuantityChange = async (quantity: number) => {
 		try {
 			const res = await manipulateQuantity({ productId: id, quantity }).unwrap();
-			if (res.success) {
-				toast.success('Quantity updated successfully');
-			} else {
+			if (!res.success) {
 				toast.error(res?.message ?? 'Failed to update quantity!');
 			}
 		} catch (error) {

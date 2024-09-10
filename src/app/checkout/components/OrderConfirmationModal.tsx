@@ -1,0 +1,108 @@
+import { CheckCircleOutline, Close as CloseIcon } from '@mui/icons-material';
+import { Box, Button, Dialog, Divider, IconButton, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
+import { useEffect } from 'react';
+
+const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; onClose: () => void; response: any }) => {
+	// Extract data from the response object
+	const { order_id, createdAt } = response?.data || {};
+	const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	});
+
+	// // Close modal after a few seconds (optional)
+	// useEffect(() => {
+	// 	if (open) {
+	// 		const timer = setTimeout(() => {
+	// 			onClose();
+	// 		}, 10000); // Closes after 10 seconds
+	// 		return () => clearTimeout(timer);
+	// 	}
+	// }, [open, onClose]);
+
+	return (
+		<Dialog
+			open={open}
+			onClose={onClose}
+			maxWidth='xs'
+			fullWidth
+			PaperProps={{
+				sx: {
+					borderRadius: 2,
+					p: 3,
+					boxShadow: 3,
+					position: 'relative' // For positioning the close button
+				}
+			}}
+		>
+			{/* Title and Close Button */}
+			<Stack direction='row' alignItems='center' justifyContent='space-between' mb={2}>
+				<Typography variant='h6' fontWeight='bold'>
+					Order Status
+				</Typography>
+				<IconButton onClick={onClose} sx={{ p: 0 }}>
+					<CloseIcon />
+				</IconButton>
+			</Stack>
+
+			{/* Success Icon and Title */}
+			<Stack direction='column' alignItems='center' spacing={2}>
+				<CheckCircleOutline sx={{ color: 'green', fontSize: 80 }} />
+				<Typography
+					variant='h5'
+					fontWeight='bold'
+					sx={{
+						textAlign: 'center',
+						fontSize: { xs: '1.2rem', md: '1.75rem' }
+					}}
+				>
+					Order Created Successfully!
+				</Typography>
+			</Stack>
+
+			{/* Divider */}
+			<Divider sx={{ my: 2 }} />
+
+			{/* Order Details */}
+			<Stack spacing={1} sx={{ mb: 2 }}>
+				<Typography variant='body1'>
+					<strong>Order ID:</strong> {order_id}
+				</Typography>
+				<Typography variant='body1'>
+					<strong>Date:</strong> {formattedDate}
+				</Typography>
+				<Typography variant='body1'>
+					<strong>Status:</strong> Pending
+				</Typography>
+				<Typography variant='body2'>
+					Our team will contact you shortly to confirm your order. Please keep your phone switched on.
+				</Typography>
+			</Stack>
+
+			{/* Divider */}
+			<Divider sx={{ my: 2 }} />
+
+			{/* CTA Buttons */}
+			<Stack
+				direction={{
+					xs: 'column',
+					md: 'row'
+				}}
+				justifyContent='center'
+				spacing={2}
+				mt={2}
+			>
+				<Button variant='contained' color='primary' LinkComponent={Link} href='/orders'>
+					View Orders
+				</Button>
+				<Button variant='outlined' color='primary' LinkComponent={Link} href='/products'>
+					Continue Shopping
+				</Button>
+			</Stack>
+		</Dialog>
+	);
+};
+
+export default OrderConfirmationModal;
