@@ -147,23 +147,34 @@ const ProductDetails = () => {
 							</Typography>
 						</Box>
 						<Box className='custom-font'>{parse(data?.data?.description ?? 'Loading...')}</Box>
-						<Typography>
-							Stock: <strong>{data?.data?.stock}</strong>
-						</Typography>
-						{/* here */}
-						{user ? (
-							<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
+						{!data?.data?.isOutOfStock && (
+							<Typography>
+								Stock: <strong>{data?.data?.stock}</strong>
+							</Typography>
+						)}
+						{data?.data?.isOutOfStock ? (
+							<Chip
+								label='Out of stock'
+								sx={{ backgroundColor: 'red', color: 'white', fontWeight: 'bold', borderRadius: 0 }}
+							/>
 						) : (
-							<Button
-								component={Link}
-								href='/login'
-								endIcon={<CiLogin />}
-								sx={{
-									mt: 2
-								}}
-							>
-								Sign in to add to cart
-							</Button>
+							<>
+								{' '}
+								{user ? (
+									<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
+								) : (
+									<Button
+										component={Link}
+										href='/login'
+										endIcon={<CiLogin />}
+										sx={{
+											mt: 2
+										}}
+									>
+										Sign in to add to cart
+									</Button>
+								)}
+							</>
 						)}
 						<Box mt={2}>
 							<Typography>
@@ -236,17 +247,18 @@ const ProductDetails = () => {
 					</Box>
 				</Grid>
 			</Grid>
-
-			<Box>
-				<Typography variant='h4' gutterBottom>
-					Related Products
-				</Typography>
-				<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap'>
-					{otherProducts?.map((product: TProduct) => (
-						<Product key={product._id} product={product} />
-					))}
-				</Stack>
-			</Box>
+			{otherProducts?.length > 0 && (
+				<Box mt={2}>
+					<Typography variant='h4' gutterBottom>
+						Related Products
+					</Typography>
+					<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap'>
+						{otherProducts?.map((product: TProduct) => (
+							<Product key={product._id} product={product} />
+						))}
+					</Stack>
+				</Box>
+			)}
 		</Box>
 	);
 };

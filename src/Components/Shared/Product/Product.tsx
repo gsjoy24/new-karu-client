@@ -54,7 +54,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					}}
 				/>
 				{/* a cart if the stoke is out */}
-				{!product?.isOutOfStock && (
+				{product?.isOutOfStock && (
 					<Chip
 						label='Out of stock'
 						sx={{
