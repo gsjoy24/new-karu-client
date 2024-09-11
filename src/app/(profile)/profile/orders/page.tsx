@@ -32,7 +32,7 @@ const OrdersPage = () => {
 
 	// Search handler
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		// set one half second delay to avoid multiple API calls
+		// set one second delay to avoid multiple API calls
 		setTimeout(() => {
 			setSearchTerm(event.target.value);
 			setPage(1);
