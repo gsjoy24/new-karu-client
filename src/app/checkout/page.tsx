@@ -73,7 +73,7 @@ const CheckOutPage = () => {
 		}));
 
 		try {
-			const res = await placeOrder({ ...data, products }).unwrap();
+			const res = await placeOrder({ ...data, products, total_price: totalPrice }).unwrap();
 			if (res.success) {
 				toast.success('Order placed successfully!');
 				setStatusModalOpen(true);
