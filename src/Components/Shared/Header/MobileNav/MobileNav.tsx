@@ -66,7 +66,7 @@ const MobileNav = () => {
 
 			{/* links */}
 			<Stack direction='column' gap={2} p={2} mt={2}>
-				<CategoryAccordion />
+				<CategoryAccordion setOpen={setOpen} />
 				{mobileNavLinks.map((link) => (
 					<Button
 						key={link?.href}

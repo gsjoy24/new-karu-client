@@ -77,20 +77,9 @@ const CartPage = () => {
 						{' '}
 						{/* Added spacing for better separation */}
 						<Grid item xs={12} md={7}>
-							<TableContainer component={Paper}>
-								<Table>
-									<TableHead>
-										<TableRow>
-											<TableCell>Products</TableCell>
-										</TableRow>
-									</TableHead>
-									<TableBody>
-										{cartItems.map((item: TCart) => (
-											<CartItem key={item?.product?._id} item={item} />
-										))}
-									</TableBody>
-								</Table>
-							</TableContainer>
+							{cartItems.map((item: TCart) => (
+								<CartItem key={item?.product?._id} item={item} />
+							))}
 						</Grid>
 						<Grid item xs={12} md={5}>
 							<Box

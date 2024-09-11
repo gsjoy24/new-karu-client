@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Link as MuiLink, Typography } from '@mui/material';
 import Link from 'next/link';
 
-const CategoryAccordion = () => {
+const CategoryAccordion = ({ setOpen }: { setOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const { data } = useGetCategoriesQuery({});
 
 	return (
@@ -56,11 +56,12 @@ const CategoryAccordion = () => {
 								<MuiLink
 									key={subcategory._id}
 									component={Link}
+									onClick={() => setOpen(false)}
 									mb={0.5}
 									href={`/category/${category.slug}/${subcategory.slug}`}
 									underline='hover'
 								>
-									<Typography variant='body2'>{subcategory.name}</Typography>
+									<Typography variant='body1'>{subcategory.name}</Typography>
 								</MuiLink>
 							))}
 						</AccordionDetails>
@@ -69,7 +70,8 @@ const CategoryAccordion = () => {
 					<MuiLink
 						key={category._id}
 						component={Link}
-						href={`/category=${category.slug}`}
+						href={`/category/${category.slug}`}
+						onClick={() => setOpen(false)}
 						underline='none'
 						sx={{
 							display: 'block',
