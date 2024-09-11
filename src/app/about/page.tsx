@@ -127,7 +127,7 @@ const AboutPage = () => {
 				</Typography>
 
 				<Typography variant='body1' sx={{ color: 'text.secondary' }}>
-					Phone: +88 01766892662
+					Phone: +8801766892662
 					<br />
 					Email: <Link href='mailto:karukon7@gmail.com'> karukon7@gmail.com</Link>
 				</Typography>

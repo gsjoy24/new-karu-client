@@ -246,12 +246,12 @@ const ProductDetails = () => {
 
 							<li>
 								Connect on{' '}
-								<Link className='text-green-600' href='https://wa.me/8801877089771'>
+								<Link className='text-green-600' href='https://wa.me/01766892662'>
 									WhatsApp
 								</Link>
 							</li>
 
-							<li>Call Us: +8801877089771</li>
+							<li>Call Us: ++8801766892662</li>
 						</ul>
 					</Box>
 				</Grid>

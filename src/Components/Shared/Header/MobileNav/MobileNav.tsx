@@ -107,7 +107,7 @@ const MobileNav = () => {
 				</Stack>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<LuPhoneCall size={22} />
-					<span>+8801877089771</span>
+					<span>+8801766892662</span>
 				</Stack>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<GiFlexibleLamp size={22} />
