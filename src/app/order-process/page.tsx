@@ -8,7 +8,13 @@ import {
 } from '@mui/icons-material';
 import { Card, CardContent, Container, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
+
+export const metadata = {
+	title: 'How to Place an Order - Karukon BD',
+	description:
+		'Follow these simple steps to place an order without paying upfront. Once your order is placed, you will receive a confirmation call from us to verify your delivery address.',
+	keywords: 'Karukon BD, কারুকোণ বিডি, order process, how to place an order, online shop, cynor'
+};
 
 const steps = [
 	{ label: 'Sign Up', icon: <PersonAdd /> },

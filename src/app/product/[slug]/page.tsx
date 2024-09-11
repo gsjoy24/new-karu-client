@@ -8,6 +8,7 @@ import { TProduct } from '@/types/product';
 import { Box, Breadcrumbs, Button, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { CiLogin } from 'react-icons/ci';
@@ -209,7 +210,7 @@ const ProductDetails = () => {
 									href={`/products?search=${tag}`}
 									sx={{
 										cursor: 'pointer',
-										fontSize: '0.7rem',
+										fontSize: '0.8rem',
 										':hover': {
 											backgroundColor: '#242D39',
 											color: 'white'

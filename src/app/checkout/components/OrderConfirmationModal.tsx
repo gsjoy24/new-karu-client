@@ -47,18 +47,22 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 
 			{/* Success Icon and Title */}
 			<Stack direction='column' alignItems='center' spacing={2}>
-				<CheckCircleOutline sx={{ color: 'green', fontSize: 80 }} />
+				<CheckCircleOutline sx={{ color: 'green', fontSize: 10 }} />
 				<Typography
 					variant='h5'
 					fontWeight='bold'
 					sx={{
 						textAlign: 'center',
-						fontSize: { xs: '1.2rem', md: '1.75rem' }
+						fontSize: { xs: '1.1rem', md: '1.75rem' }
 					}}
 				>
-					Order Created Successfully!
+					Order Placed Successfully!
 				</Typography>
 			</Stack>
+
+			<Typography variant='body2' sx={{ mt: 2, textAlign: 'center' }}>
+				Thank you for shopping with us. Your order has been placed successfully.
+			</Typography>
 
 			{/* Divider */}
 			<Divider sx={{ my: 2 }} />
