@@ -8,8 +8,6 @@ const quickLinks = [
 	{ title: 'Home', href: '/' },
 	{ title: 'Products', href: '/products' },
 	{ title: 'About', href: '/about' },
-	{ title: 'Contact', href: '/contact' },
-	{ title: 'FAQ', href: '/faq' },
 	{ title: 'Terms & Conditions', href: '/terms' },
 	{ title: 'Privacy Policy', href: '/privacy' },
 	{ title: 'Return Policy', href: '/return' },
@@ -30,8 +28,9 @@ const Footer = () => {
 						</Typography>
 						<Divider sx={{ bgcolor: 'white', my: 1 }} />
 						<Typography variant='subtitle1'>
-							Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s
-							customer with the best available product at the lowest possible price.
+							Discover the Largest Collection of Home Décor & Gift Items Online Karukon Online Shopping is an online
+							retail store that strives to provide its customers with the best available products at the lowest possible
+							prices.
 						</Typography>
 					</Box>
 					<Box>
@@ -49,8 +48,8 @@ const Footer = () => {
 					</Box>
 					<Box>
 						<SocialSection /> <br />
-						<Typography variant='subtitle1'>Contact: +8801877089771</Typography>
-						<Typography variant='subtitle1'>Email: karukonbd@gmail.com</Typography>
+						<Typography variant='subtitle1'>Contact: +88 01766892662</Typography>
+						<Typography variant='subtitle1'>Email: karukon7@gmail.com</Typography>
 					</Box>
 				</Stack>
 				<Stack direction='row' justifyContent='center' mt={5}>

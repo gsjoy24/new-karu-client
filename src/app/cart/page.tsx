@@ -131,11 +131,11 @@ const CartPage = () => {
 
 								{/* buttons */}
 								<Stack direction='column' spacing={2} mt={2}>
-									<Button variant='outlined' fullWidth component={Link} href={'/products'}>
-										Continue Shopping
-									</Button>
 									<Button variant='contained' fullWidth component={Link} href={'/checkout'}>
 										Proceed to Checkout
+									</Button>
+									<Button variant='outlined' fullWidth component={Link} href={'/products'}>
+										Continue Shopping
 									</Button>
 								</Stack>
 							</Box>

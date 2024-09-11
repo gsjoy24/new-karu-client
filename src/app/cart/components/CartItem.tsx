@@ -1,6 +1,7 @@
 import { TCart } from '@/types/product';
 import { Box, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import CartQuantityHandler from './CartQuantityHandler';
 import DeleteCartItem from './DeleteCartItem';
 
@@ -64,7 +65,18 @@ const CartItem = ({ item }: { item: TCart }) => {
 						}
 					}}
 				>
-					<Typography variant='body1' gutterBottom>
+					<Typography
+						variant='body1'
+						gutterBottom
+						component={Link}
+						href={`/product/${item.product?.slug}`}
+						sx={{
+							' &:hover': {
+								textDecoration: 'underline',
+								textUnderlineOffset: '5px'
+							}
+						}}
+					>
 						{item.product?.name}
 					</Typography>
 					<Typography variant='body2'>৳ {item.product?.last_price}</Typography>
