@@ -1,8 +1,14 @@
 import { Box, Container, Divider, Typography } from '@mui/material';
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+	title: 'Return Policy - Karukon BD',
+	description:
+		'Before initiating a return or replacement, please carefully read through our policy to ensure that your purchased item is eligible.'
+};
+
 const ReturnPolicyPage = () => {
 	return (
 		<Container maxWidth='md' sx={{ py: 4 }}>
-			{/* Header */}
 			<Box mb={4}>
 				<Typography variant='h4' component='h1' sx={{ fontWeight: 'bold', mb: 2 }}>
 					Return Policy
