@@ -28,9 +28,9 @@ const Footer = () => {
 						</Typography>
 						<Divider sx={{ bgcolor: 'white', my: 1 }} />
 						<Typography variant='subtitle1'>
-							Discover the Largest Collection of Home Décor & Gift Items Online Karukon Online Shopping is an online
-							retail store that strives to provide its customers with the best available products at the lowest possible
-							prices.
+							Discover the Largest Collection of Home Décor & Gift Items Online. <br /> Karukon Online Shopping is an
+							online retail store that strives to provide its customers with the best available products at the lowest
+							possible prices.
 						</Typography>
 					</Box>
 					<Box>

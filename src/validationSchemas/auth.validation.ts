@@ -12,8 +12,8 @@ export const LoginSchema = z.object({
 		.string({
 			required_error: 'Password is required'
 		})
-		.min(6, {
-			message: 'Password must be at least 6 characters long'
+		.min(8, {
+			message: 'Password must be at least 8 characters long'
 		})
 });
 
@@ -51,16 +51,9 @@ export const RegisterSchema = z.object({
 		.string({
 			required_error: 'Password is required!'
 		})
-		.refine(
-			(data) => {
-				const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-				return passwordRegex.test(data);
-			},
-			{
-				message:
-					'The password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.'
-			}
-		)
+		.min(8, {
+			message: 'Password must be at least 8 characters long!'
+		})
 });
 
 export const ChangePasswordSchema = z
