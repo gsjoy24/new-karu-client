@@ -237,13 +237,27 @@ const CheckOutPage = () => {
 												width: 'fit-content'
 											}}
 											control={<Checkbox />}
-											label='Agree with terms & conditions.'
+											label={
+												<Link href='/terms' passHref>
+													<Typography
+														variant='body2'
+														sx={{
+															cursor: 'pointer',
+															textDecoration: 'underline',
+															textUnderlineOffset: '0.4rem'
+														}}
+														color='primary'
+													>
+														I agree with the terms & conditions
+													</Typography>
+												</Link>
+											}
 											onChange={(e) => setIsAgree((e.target as any).checked as boolean)}
 										/>
+										<Button type='submit'>{isOrdering ? 'Loading' : 'Place Order'}</Button>
 										<Button variant='outlined' fullWidth LinkComponent={Link} href={'/products'}>
 											Continue Shopping
 										</Button>
-										<Button type='submit'>{isOrdering ? 'Loading' : 'Place Order'}</Button>
 									</Stack>
 								</Box>
 							</Grid>

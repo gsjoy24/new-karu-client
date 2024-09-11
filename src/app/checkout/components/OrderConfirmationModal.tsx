@@ -11,15 +11,6 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 		day: 'numeric'
 	});
 
-	useEffect(() => {
-		if (open) {
-			const timer = setTimeout(() => {
-				onClose();
-			}, 10000);
-			return () => clearTimeout(timer);
-		}
-	}, [open, onClose]);
-
 	return (
 		<Dialog
 			open={open}
@@ -47,7 +38,7 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 
 			{/* Success Icon and Title */}
 			<Stack direction='column' alignItems='center' spacing={2}>
-				<CheckCircleOutline sx={{ color: 'green', fontSize: 10 }} />
+				<CheckCircleOutline sx={{ color: 'green', fontSize: 100 }} />
 				<Typography
 					variant='h5'
 					fontWeight='bold'
@@ -95,7 +86,7 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 				spacing={2}
 				mt={2}
 			>
-				<Button variant='contained' color='primary' LinkComponent={Link} href='/orders'>
+				<Button variant='contained' color='primary' LinkComponent={Link} href='/profile/orders'>
 					View Orders
 				</Button>
 				<Button variant='outlined' color='primary' LinkComponent={Link} href='/products'>

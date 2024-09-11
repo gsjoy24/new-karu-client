@@ -23,27 +23,7 @@ const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
 
 const MobileNav = () => {
 	const [open, setOpen] = React.useState(false);
-	const mobileNavLinks = [
-		{ name: 'Home', href: '/' },
-		{ name: 'Products', href: '/products' },
-		{ name: 'Wishlist', href: '/wishlist' },
-		{
-			name: 'About Us',
-			href: '/about-us'
-		},
-		{
-			name: 'Term of Service',
-			href: '/term-of-service'
-		},
-		{
-			name: 'Privacy Policy',
-			href: '/privacy-policy'
-		},
-		{
-			name: 'Contact Us',
-			href: '/contact-us'
-		}
-	];
+	const mobileNavLinks = [{ name: 'Products', href: '/products' }];
 
 	const currentYear = new Date().getFullYear();
 
