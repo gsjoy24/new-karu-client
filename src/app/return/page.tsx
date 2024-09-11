@@ -17,7 +17,8 @@ const ReturnPolicyPage = () => {
 					Before initiating a return or replacement, please carefully read through our policy to ensure that your
 					purchased item is eligible.
 				</Typography>
-				<Divider />
+
+				<Divider sx={{ my: 2 }} />
 
 				<Typography variant='h5' component='h2' sx={{ mb: 2, fontWeight: 'bold' }}>
 					Procedure to Return a Product

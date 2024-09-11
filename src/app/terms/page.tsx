@@ -306,7 +306,7 @@ const TermsPage = () => {
 				<Typography variant='body1' sx={{ mt: 2 }}>
 					Most of the products offered by karukonbd carry a warranty. Customers can avail themselves of the warranty
 					directly at any brand-authorized service center or through karukonbd. However, any injury, loss, or damage
-					resulting from the use of the product, whether direct or indirect, will not make cynor.com.bd liable for
+					resulting from the use of the product, whether direct or indirect, will not make karukonbd.com.bd liable for
 					providing service facilities, provided that such use and the resulting consequences are not covered or
 					supported by the warranty provisions.
 				</Typography>
