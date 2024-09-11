@@ -24,9 +24,9 @@ const Profile = () => {
 				<Card>
 					<CardContent>
 						<Stack direction='row' alignItems='center' spacing={2} mb={3}>
-							<Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>{fullName.charAt(0)}</Avatar>
+							<Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>{fullName?.charAt(0) ?? 'User'}</Avatar>
 							<Typography variant='h5' component='h2' fontWeight='bold'>
-								Welcome, {fullName}!
+								Welcome, {fullName ?? 'User'}!
 							</Typography>
 						</Stack>
 

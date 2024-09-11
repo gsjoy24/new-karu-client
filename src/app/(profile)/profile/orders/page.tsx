@@ -50,7 +50,7 @@ const OrdersPage = () => {
 				return <Chip icon={<LocalShipping />} label='Shipped' color='info' variant='outlined' size='small' />;
 			case 'delivered':
 				return <Chip icon={<CheckCircle />} label='Delivered' color='success' variant='outlined' size='small' />;
-			case 'cancel':
+			case 'cancelled':
 				return <Chip icon={<Cancel />} label='Canceled' color='error' variant='outlined' size='small' />;
 			default:
 				return <Chip label={status} variant='outlined' />;
@@ -92,7 +92,7 @@ const OrdersPage = () => {
 
 							{/* Order Content */}
 							<CardContent>
-								<Stack spacing={2}>
+								<Stack>
 									{/* Product Details */}
 									{order.products.map((product: { product: TProduct; quantity: number; total_price: number }) => (
 										<Stack key={product.product._id} direction='row' justifyContent='space-between' alignItems='center'>
@@ -112,6 +112,24 @@ const OrdersPage = () => {
 										</Stack>
 									))}
 								</Stack>
+								{order.products.length > 1 && (
+									<>
+										<Divider />
+										<Stack direction='row' justifyContent='space-between' alignItems='center'>
+											<Typography variant='body1'>Total Price:</Typography>
+											<Typography
+												variant='body1'
+												fontWeight='bold'
+												sx={{
+													whiteSpace: 'nowrap',
+													p: 0.5
+												}}
+											>
+												৳ {order?.total_price}
+											</Typography>
+										</Stack>
+									</>
+								)}
 							</CardContent>
 						</Card>
 					))}
