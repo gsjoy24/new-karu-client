@@ -6,7 +6,7 @@ import { FaInstagram } from 'react-icons/fa6';
 
 const SocialSection = () => {
 	const socialLinks = {
-		facebook: 'https://www.facebook.com/',
+		facebook: 'https://www.facebook.com/karukonbd71',
 		instagram: 'https://www.instagram.com/',
 		youtube: 'https://www.youtube.com/',
 		x: 'https://www.x.com/'

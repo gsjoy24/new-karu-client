@@ -238,19 +238,12 @@ const CheckOutPage = () => {
 											}}
 											control={<Checkbox />}
 											label={
-												<Link href='/terms' passHref>
-													<Typography
-														variant='body2'
-														sx={{
-															cursor: 'pointer',
-															textDecoration: 'underline',
-															textUnderlineOffset: '0.4rem'
-														}}
-														color='primary'
-													>
-														I agree with the terms & conditions
-													</Typography>
-												</Link>
+												<Typography variant='body2'>
+													Agree with the{' '}
+													<Link className='text-blue-500' href='/terms' passHref>
+														terms & conditions
+													</Link>
+												</Typography>
 											}
 											onChange={(e) => setIsAgree((e.target as any).checked as boolean)}
 										/>
