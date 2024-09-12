@@ -61,12 +61,14 @@ const Product = ({ product }: { product: TProduct }) => {
 						label='Out of stock'
 						sx={{
 							position: 'absolute',
-							top: '8rem',
-							left: '5.5rem',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
 							backgroundColor: 'red',
 							color: 'white',
 							fontWeight: 'bold',
-							borderRadius: 0
+							borderRadius: 0,
+							zIndex: 10
 						}}
 					/>
 				)}

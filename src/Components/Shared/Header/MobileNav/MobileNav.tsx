@@ -106,9 +106,7 @@ const MobileNav = () => {
 			>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<CiLocationOn size={22} />
-					<span>
-						West Agargaon,Dhaka-1207 <br /> Online - Always Open
-					</span>
+					<span>West Agargaon,Dhaka-1207</span>
 				</Stack>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<LuPhoneCall size={22} />
@@ -116,7 +114,7 @@ const MobileNav = () => {
 				</Stack>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<GiFlexibleLamp size={22} />
-					<span>Monday - Friday: 9:00 AM - 6:00 PM</span>
+					<span>Online - Always Open</span>
 				</Stack>
 			</Stack>
 			<SocialSection />
