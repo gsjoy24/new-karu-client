@@ -22,7 +22,6 @@ const steps = [
 
 const CartPage = () => {
 	const { data, isLoading } = useGetMeQuery({});
-
 	const cartItems = data?.data?.cart ?? [];
 	const totalPrice = Math.ceil(
 		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)

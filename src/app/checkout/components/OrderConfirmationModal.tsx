@@ -1,7 +1,6 @@
 import { CheckCircleOutline, Close as CloseIcon } from '@mui/icons-material';
-import { Box, Button, Dialog, Divider, IconButton, Stack, Typography } from '@mui/material';
+import { Button, Dialog, Divider, IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useEffect } from 'react';
 
 const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; onClose: () => void; response: any }) => {
 	const { order_id, createdAt } = response || {};

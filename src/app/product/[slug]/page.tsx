@@ -8,10 +8,11 @@ import { TProduct } from '@/types/product';
 import { Box, Breadcrumbs, Button, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import { CiLogin } from 'react-icons/ci';
+import CartModal from '../components/CartModal';
 
 const AddToCart = dynamic(() => import('../components/AddToCart'), {
 	ssr: false,
@@ -19,6 +20,8 @@ const AddToCart = dynamic(() => import('../components/AddToCart'), {
 });
 
 const ProductDetails = () => {
+	const [open, setOpen] = useState<boolean>(false);
+
 	const user = useAppSelector((state) => state.auth.user);
 	const { slug } = useParams();
 	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
@@ -164,7 +167,7 @@ const ProductDetails = () => {
 							<>
 								{' '}
 								{user ? (
-									<AddToCart product={data?.data?._id} stock={data?.data?.stock} />
+									<AddToCart product={data?.data?._id} stock={data?.data?.stock} setOpen={() => setOpen(true)} />
 								) : (
 									<Button
 										component={Link}
@@ -230,7 +233,7 @@ const ProductDetails = () => {
 						<ul>
 							<li>
 								ঢাকা সিটিতে সম্পূর্ণ ক্যাশ অন ডেলিভারি। আমাদের নিজস্ব ডেলিভারি ম্যানের মাধ্যমে নিরাপদ ডেলিভারি।
-								ডেলিভারির সময় ১-৩ দিন সর্বচ্চো ৭ দিন।
+								ডেলিভারির সময় ১-৩ দিন সর্বোচ্চ ৭ দিন।
 							</li>
 
 							<li>
@@ -268,6 +271,7 @@ const ProductDetails = () => {
 					</Stack>
 				</Box>
 			)}
+			<CartModal open={open} onClose={() => setOpen(false)} />
 		</Box>
 	);
 };

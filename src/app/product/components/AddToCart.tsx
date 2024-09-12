@@ -9,7 +9,7 @@ import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { LiaCartPlusSolid } from 'react-icons/lia';
 import { toast } from 'sonner';
 
-const AddToCart = ({ product, stock }: { product: string; stock: number }) => {
+const AddToCart = ({ product, stock, setOpen }: { product: string; stock: number; setOpen: () => void }) => {
 	const [quantity, setQuantity] = useState<number>(1);
 	const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
 	const [removeFromCart, { isLoading: isRemoving }] = useRemoveFromCartMutation();
@@ -22,7 +22,7 @@ const AddToCart = ({ product, stock }: { product: string; stock: number }) => {
 		const data = { product, quantity };
 		try {
 			const res = await addToCart(data).unwrap();
-			toast.success(res?.message);
+			setOpen();
 		} catch (error: any) {
 			toast.error(error?.data?.message ?? 'Something went wrong');
 		}
