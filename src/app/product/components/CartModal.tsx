@@ -93,7 +93,7 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 										alt={item.product?.name}
 										width={80}
 										height={80}
-										className='mt-[10px] w-8 h-8 sm:w-10 sm:h-10'
+										className='mt-[10px] w-8 h-8 sm:w-12 sm:h-12 rounded-md'
 									/>
 									<Typography
 										variant='body1'
@@ -150,6 +150,9 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 				</Button>
 				<Button variant='outlined' color='primary' LinkComponent={Link} href='/profile/cart'>
 					View Cart
+				</Button>
+				<Button variant='outlined' color='primary' LinkComponent={Link} href='/products'>
+					Continue Shopping
 				</Button>
 			</Stack>
 		</Dialog>
