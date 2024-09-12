@@ -1,24 +1,7 @@
 'use client';
 import { useGetMeQuery } from '@/redux/api/userApi';
 import { TCart } from '@/types/product';
-import {
-	Box,
-	Button,
-	Divider,
-	Grid,
-	Paper,
-	Stack,
-	Step,
-	StepButton,
-	Stepper,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
-	Typography
-} from '@mui/material';
+import { Box, Button, Divider, Grid, Paper, Stack, Step, StepButton, Stepper, Typography } from '@mui/material';
 import Link from 'next/link';
 import Loading from '../loading';
 import CartItem from './components/CartItem';

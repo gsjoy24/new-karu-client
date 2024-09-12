@@ -99,7 +99,7 @@ const CartItem = ({ item }: { item: TCart }) => {
 				{/* Total Price */}
 				<Typography variant='body2'>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
 				{/* Quantity Handler */}
-				<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
+				<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} stock={item.product?.stock} />
 				<DeleteCartItem id={item?.product?._id as string} />
 			</Box>
 		</Box>

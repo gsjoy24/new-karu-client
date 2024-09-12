@@ -7,9 +7,10 @@ import { toast } from 'sonner';
 type CartQuantityHandlerProps = {
 	id: string;
 	quantity: number;
+	stock: number;
 };
 
-const CartQuantityHandler = ({ id, quantity }: CartQuantityHandlerProps) => {
+const CartQuantityHandler = ({ id, quantity, stock }: CartQuantityHandlerProps) => {
 	const [manipulateQuantity, { isLoading }] = useManipulateQuantityMutation();
 
 	const handleQuantityChange = async (quantity: number) => {
@@ -37,7 +38,10 @@ const CartQuantityHandler = ({ id, quantity }: CartQuantityHandlerProps) => {
 				<CiCircleMinus />
 			</IconButton>
 			<Typography>{quantity}</Typography>
-			<IconButton onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity === 10 || isLoading}>
+			<IconButton
+				onClick={() => handleQuantityChange(quantity + 1)}
+				disabled={quantity === 10 || isLoading || stock === quantity}
+			>
 				<CiCirclePlus />
 			</IconButton>
 		</Stack>
