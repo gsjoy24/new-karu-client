@@ -40,6 +40,7 @@ const SubCategoryItem = ({ item }: { item: TSubCategoryCollectionData }) => {
 						xs: '1rem',
 						sm: '1.2rem'
 					}}
+					textAlign={'center'}
 				>
 					{item.name}
 				</Typography>

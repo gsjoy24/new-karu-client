@@ -23,7 +23,10 @@ const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
 
 const MobileNav = () => {
 	const [open, setOpen] = React.useState(false);
-	const mobileNavLinks = [{ name: 'Products', href: '/products' }];
+	const mobileNavLinks = [
+		{ name: 'Home', href: '/' },
+		{ name: 'Products', href: '/products' }
+	];
 
 	const currentYear = new Date().getFullYear();
 
@@ -65,8 +68,7 @@ const MobileNav = () => {
 			<SearchProduct />
 
 			{/* links */}
-			<Stack direction='column' gap={2} p={2} mt={2}>
-				<CategoryAccordion setOpen={setOpen} />
+			<Stack direction='column' gap={2} p={1} mt={2}>
 				{mobileNavLinks.map((link) => (
 					<Button
 						key={link?.href}
@@ -89,6 +91,7 @@ const MobileNav = () => {
 					</Button>
 				))}
 			</Stack>
+			<CategoryAccordion setOpen={setOpen} />
 
 			{/* info */}
 			<Stack
@@ -103,7 +106,9 @@ const MobileNav = () => {
 			>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<CiLocationOn size={22} />
-					<span>232 A, Dim para, Dhaka</span>
+					<span>
+						West Agargaon,Dhaka-1207 <br /> Online - Always Open
+					</span>
 				</Stack>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<LuPhoneCall size={22} />
