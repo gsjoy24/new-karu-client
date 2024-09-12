@@ -1,5 +1,7 @@
+import { reduxTagTypes } from '@/constants/reduxTagTypes';
 import { TAuthState } from '@/types/TAuthState';
 import { createSlice } from '@reduxjs/toolkit';
+import baseApi from '../api/baseApi';
 import { RootState } from '../store';
 
 const initialState: TAuthState = {
@@ -19,6 +21,7 @@ const authSlice = createSlice({
 		logOut: (state) => {
 			state.user = null;
 			state.token = null;
+			baseApi.util.invalidateTags([reduxTagTypes.user]);
 		}
 	}
 });
