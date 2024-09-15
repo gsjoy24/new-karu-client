@@ -1,4 +1,3 @@
-import { useAddToCartMutation, useGetMeQuery, useRemoveFromCartMutation } from '@/redux/api/userApi';
 import { TProduct } from '@/types/product';
 import { LoadingButton } from '@mui/lab';
 import { Box, Button, IconButton, Skeleton, Stack } from '@mui/material';
@@ -11,35 +10,12 @@ import { toast } from 'sonner';
 
 const AddToCart = ({ product, stock, setOpen }: { product: string; stock: number; setOpen: () => void }) => {
 	const [quantity, setQuantity] = useState<number>(1);
-	const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
-	const [removeFromCart, { isLoading: isRemoving }] = useRemoveFromCartMutation();
 
-	const { data, isLoading } = useGetMeQuery({});
-	const isAlreadyInCart = data?.data?.cart?.some(
-		(item: { product: TProduct; quantity: number }) => item?.product?._id === product
-	);
-	const handleAddToCart = async () => {
-		const data = { product, quantity };
-		try {
-			const res = await addToCart(data).unwrap();
-			setOpen();
-		} catch (error: any) {
-			toast.error(error?.data?.message ?? 'Something went wrong');
-		}
-	};
+	const isAlreadyInCart = false;
 
-	const handleRemoveFromCart = async () => {
-		try {
-			const res = await removeFromCart(product).unwrap();
-			toast.success(res?.message);
-		} catch (error: any) {
-			toast.error(error?.data?.message ?? 'Something went wrong');
-		}
-	};
+	const handleAddToCart = async () => {};
 
-	if (isLoading) {
-		return <Skeleton animation='wave' />;
-	}
+	const handleRemoveFromCart = async () => {};
 
 	return (
 		<Stack direction='row' spacing={2} mt={2}>
@@ -63,7 +39,6 @@ const AddToCart = ({ product, stock, setOpen }: { product: string; stock: number
 					<LoadingButton
 						startIcon={<LiaCartPlusSolid />}
 						onClick={handleAddToCart}
-						loading={isAdding}
 						loadingPosition='start'
 						variant='contained'
 					>
@@ -75,7 +50,6 @@ const AddToCart = ({ product, stock, setOpen }: { product: string; stock: number
 					<LoadingButton
 						startIcon={<AiOutlineDelete />}
 						onClick={handleRemoveFromCart}
-						loading={isRemoving}
 						loadingPosition='start'
 						variant='outlined'
 						size='small'
