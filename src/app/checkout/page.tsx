@@ -2,6 +2,8 @@
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
 import { useGetMeQuery, usePlaceOrderMutation } from '@/redux/api/userApi';
+import { selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
+import { useAppSelector } from '@/redux/hooks';
 import { TCart } from '@/types/product';
 import { OrderValidation } from '@/validationSchemas/order.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,7 +22,7 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
 import Loading from '../loading';
@@ -51,13 +53,14 @@ const CheckOutPage = () => {
 		router.push('/');
 	};
 
-	const { data, isLoading } = useGetMeQuery({});
-	const cartItems = data?.data?.cart ?? [];
+	const cartItems = useAppSelector(selectCartItems);
+	const totalAmount = useAppSelector(selectTotalAmount);
+	const totalItems = useAppSelector(selectTotalItems);
+	const [hasMounted, setHasMounted] = useState(false);
 
-	const totalPrice = Math.ceil(
-		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)
-	);
-	const totalProducts = cartItems.reduce((acc: number, item: TCart) => acc + item.quantity, 0);
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
 
 	const [placeOrder, { isLoading: isOrdering }] = usePlaceOrderMutation();
 
@@ -66,14 +69,16 @@ const CheckOutPage = () => {
 			toast.error('Please agree with terms & conditions.');
 			return;
 		}
-		const products = cartItems?.map((item: TCart) => ({
-			product: item?.product?._id,
-			quantity: item?.quantity,
-			total_price: Math.ceil(item?.product?.last_price * item?.quantity)
-		}));
+		const products = cartItems?.map(
+			(item: { id: string; name: string; price: number; quantity: number; image: string }) => ({
+				product: item?.id,
+				quantity: item?.quantity,
+				total_price: Math.ceil(item?.price * item?.quantity)
+			})
+		);
 
 		try {
-			const res = await placeOrder({ ...data, products, total_price: totalPrice }).unwrap();
+			const res = await placeOrder({ ...data, products, total_price: totalAmount }).unwrap();
 			if (res.success) {
 				toast.success('Order placed successfully!');
 				setStatusModalOpen(true);
@@ -85,10 +90,11 @@ const CheckOutPage = () => {
 			toast.error('Something went wrong!');
 		}
 	};
+	if (!hasMounted) {
+		return <Loading />;
+	}
 
-	return isLoading ? (
-		<Loading />
-	) : (
+	return (
 		<>
 			{cartItems?.length ? (
 				<Box my={3}>
@@ -169,30 +175,32 @@ const CheckOutPage = () => {
 									<Divider />
 									<Stack gap={1} p={2}>
 										{/* products */}
-										{cartItems.map((item: TCart) => (
-											<Stack
-												key={item.product?._id}
-												sx={{
-													gap: '0.5rem'
-												}}
-											>
-												<Typography>{item?.product?.name}</Typography>
+										{cartItems.map(
+											(item: { id: string; name: string; price: number; quantity: number; image: string }) => (
 												<Stack
+													key={item?.id}
 													sx={{
-														flexDirection: 'row',
-														justifyContent: 'space-between',
-														alignItems: 'center',
-														gap: '1rem'
+														gap: '0.5rem'
 													}}
 												>
-													<Typography>
-														৳ {item.product?.last_price} x {item.quantity}
-													</Typography>
-													<Typography>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
+													<Typography>{item?.name}</Typography>
+													<Stack
+														sx={{
+															flexDirection: 'row',
+															justifyContent: 'space-between',
+															alignItems: 'center',
+															gap: '1rem'
+														}}
+													>
+														<Typography>
+															৳ {item?.price} x {item.quantity}
+														</Typography>
+														<Typography>৳ {Math.ceil(item?.price * item.quantity)}</Typography>
+													</Stack>
+													<Divider />
 												</Stack>
-												<Divider />
-											</Stack>
-										))}
+											)
+										)}
 										<Stack
 											sx={{
 												flexDirection: 'row',
@@ -202,7 +210,7 @@ const CheckOutPage = () => {
 											}}
 										>
 											<Typography>Total Products</Typography>
-											<Typography>{totalProducts}</Typography>
+											<Typography>{totalItems}</Typography>
 										</Stack>
 
 										<Divider />
@@ -216,7 +224,7 @@ const CheckOutPage = () => {
 											}}
 										>
 											<Typography>Sub Total</Typography>
-											<Typography>৳ {totalPrice}</Typography>
+											<Typography>৳ {totalAmount}</Typography>
 										</Stack>
 										<Divider />
 									</Stack>

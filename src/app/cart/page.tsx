@@ -1,5 +1,5 @@
 'use client';
-import { selectCartItems, selectTotalAmount } from '@/redux/features/cartSlice';
+import { selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
 import { useAppSelector } from '@/redux/hooks';
 import { Box, Button, Divider, Grid, Stack, Step, StepButton, Stepper, Typography } from '@mui/material';
 import Link from 'next/link';
@@ -24,6 +24,7 @@ const steps = [
 const CartPage = () => {
 	const cartItems = useAppSelector(selectCartItems);
 	const totalAmount = useAppSelector(selectTotalAmount);
+	const totalItems = useAppSelector(selectTotalItems);
 	const [hasMounted, setHasMounted] = useState(false);
 
 	useEffect(() => {
@@ -36,8 +37,6 @@ const CartPage = () => {
 
 	return (
 		<Box sx={{ px: { xs: 2, md: 4 }, my: 3 }}>
-			{' '}
-			{/* Added padding to avoid overflow on smaller devices */}
 			{cartItems?.length ? (
 				<>
 					<Stepper
@@ -59,8 +58,6 @@ const CartPage = () => {
 						))}
 					</Stepper>
 					<Grid container spacing={2}>
-						{' '}
-						{/* Added spacing for better separation */}
 						<Grid item xs={12} md={7}>
 							{cartItems.map((item: { id: string; name: string; price: number; quantity: number; image: string }) => (
 								<CartItem key={item?.id} item={item} />
@@ -73,6 +70,7 @@ const CartPage = () => {
 									borderRadius: 2,
 									p: 3,
 									position: 'relative',
+									maxHeight: '19rem',
 									height: '100%',
 									display: 'flex',
 									flexDirection: 'column',
@@ -83,7 +81,6 @@ const CartPage = () => {
 									variant='h6'
 									sx={{
 										fontSize: '1.5rem',
-										my: 1,
 										textAlign: 'center'
 									}}
 								>
@@ -93,7 +90,7 @@ const CartPage = () => {
 								<Stack spacing={2}>
 									<Stack direction='row' justifyContent='space-between'>
 										<Typography>Total Products</Typography>
-										<Typography>{}</Typography>
+										<Typography>{totalItems}</Typography>
 									</Stack>
 
 									<Divider />
