@@ -5,7 +5,7 @@ import Link from 'next/link';
 import CartQuantityHandler from './CartQuantityHandler';
 import DeleteCartItem from './DeleteCartItem';
 
-const CartItem = ({ item }: { item: TCart }) => {
+const CartItem = ({ item }: { item: { id: string; name: string; price: number; quantity: number; image: string } }) => {
 	return (
 		<Box
 			sx={{
@@ -44,8 +44,8 @@ const CartItem = ({ item }: { item: TCart }) => {
 			>
 				{/* Product Image */}
 				<Image
-					src={item.product.images[0]}
-					alt={item.product?.name}
+					src={item.image}
+					alt={item.name}
 					width={80}
 					height={80}
 					style={{ borderRadius: '8px', objectFit: 'cover' }}
@@ -59,6 +59,7 @@ const CartItem = ({ item }: { item: TCart }) => {
 						alignItems: 'flex-start',
 						justifyContent: 'center',
 						gap: 1,
+						pr: 1,
 						borderRight: {
 							xs: 'none',
 							sm: '1px solid #e0e0e0'
@@ -68,8 +69,6 @@ const CartItem = ({ item }: { item: TCart }) => {
 					<Typography
 						variant='body1'
 						gutterBottom
-						component={Link}
-						href={`/product/${item.product?.slug}`}
 						sx={{
 							' &:hover': {
 								textDecoration: 'underline',
@@ -77,9 +76,9 @@ const CartItem = ({ item }: { item: TCart }) => {
 							}
 						}}
 					>
-						{item.product?.name}
+						{item?.name}
 					</Typography>
-					<Typography variant='body2'>৳ {item.product?.last_price}</Typography>
+					<Typography variant='body2'>৳ {item?.price}</Typography>
 				</Box>
 			</Box>
 
@@ -97,10 +96,10 @@ const CartItem = ({ item }: { item: TCart }) => {
 				}}
 			>
 				{/* Total Price */}
-				<Typography variant='body2'>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
+				<Typography variant='body2'>৳ {Math.ceil(item?.price * item?.quantity)}</Typography>
 				{/* Quantity Handler */}
-				<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} stock={item.product?.stock} />
-				<DeleteCartItem id={item?.product?._id as string} />
+				<CartQuantityHandler id={item?.id} quantity={item.quantity} />
+				{/* <DeleteCartItem id={item?.product?._id as string} /> */}
 			</Box>
 		</Box>
 	);

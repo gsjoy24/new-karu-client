@@ -1,27 +1,18 @@
 'use client';
-import { useManipulateQuantityMutation } from '@/redux/api/userApi';
+import { updateItemQuantity } from '@/redux/features/cartSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { IconButton, Stack, Typography } from '@mui/material';
 import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
-import { toast } from 'sonner';
 
 type CartQuantityHandlerProps = {
 	id: string;
 	quantity: number;
-	stock: number;
 };
 
-const CartQuantityHandler = ({ id, quantity, stock }: CartQuantityHandlerProps) => {
-	const [manipulateQuantity, { isLoading }] = useManipulateQuantityMutation();
-
+const CartQuantityHandler = ({ id, quantity }: CartQuantityHandlerProps) => {
+	const dispatch = useAppDispatch();
 	const handleQuantityChange = async (quantity: number) => {
-		try {
-			const res = await manipulateQuantity({ productId: id, quantity }).unwrap();
-			if (!res.success) {
-				toast.error(res?.message ?? 'Failed to update quantity!');
-			}
-		} catch (error) {
-			toast.error('Failed to update quantity!');
-		}
+		dispatch(updateItemQuantity({ id, quantity }));
 	};
 	return (
 		<Stack
@@ -34,14 +25,11 @@ const CartQuantityHandler = ({ id, quantity, stock }: CartQuantityHandlerProps) 
 				color: 'primary.main'
 			}}
 		>
-			<IconButton onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1 || isLoading}>
+			<IconButton onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity === 1}>
 				<CiCircleMinus />
 			</IconButton>
 			<Typography>{quantity}</Typography>
-			<IconButton
-				onClick={() => handleQuantityChange(quantity + 1)}
-				disabled={quantity === 10 || isLoading || stock === quantity}
-			>
+			<IconButton onClick={() => handleQuantityChange(quantity + 1)}>
 				<CiCirclePlus />
 			</IconButton>
 		</Stack>

@@ -1,8 +1,9 @@
 'use client';
-import { useGetMeQuery } from '@/redux/api/userApi';
-import { TCart } from '@/types/product';
+import { selectCartItems, selectTotalAmount } from '@/redux/features/cartSlice';
+import { useAppSelector } from '@/redux/hooks';
 import { Box, Button, Divider, Grid, Stack, Step, StepButton, Stepper, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Loading from '../loading';
 import CartItem from './components/CartItem';
 
@@ -21,17 +22,19 @@ const steps = [
 ];
 
 const CartPage = () => {
-	const { data, isLoading } = useGetMeQuery({});
-	const cartItems = data?.data?.cart ?? [];
-	const totalPrice = Math.ceil(
-		cartItems.reduce((acc: number, item: TCart) => acc + item.product?.last_price * item.quantity, 0)
-	);
+	const cartItems = useAppSelector(selectCartItems);
+	const totalAmount = useAppSelector(selectTotalAmount);
+	const [hasMounted, setHasMounted] = useState(false);
 
-	const totalProducts = cartItems.reduce((acc: number, item: TCart) => acc + item.quantity, 0);
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
 
-	return isLoading ? (
-		<Loading />
-	) : (
+	if (!hasMounted) {
+		return <Loading />;
+	}
+
+	return (
 		<Box sx={{ px: { xs: 2, md: 4 }, my: 3 }}>
 			{' '}
 			{/* Added padding to avoid overflow on smaller devices */}
@@ -41,7 +44,7 @@ const CartPage = () => {
 						alternativeLabel
 						nonLinear
 						sx={{
-							maxWidth: '100%', // Ensure the stepper is responsive
+							maxWidth: '100%',
 							mx: 'auto',
 							my: 5
 						}}
@@ -59,8 +62,8 @@ const CartPage = () => {
 						{' '}
 						{/* Added spacing for better separation */}
 						<Grid item xs={12} md={7}>
-							{cartItems.map((item: TCart) => (
-								<CartItem key={item?.product?._id} item={item} />
+							{cartItems.map((item: { id: string; name: string; price: number; quantity: number; image: string }) => (
+								<CartItem key={item?.id} item={item} />
 							))}
 						</Grid>
 						<Grid item xs={12} md={5}>
@@ -90,13 +93,13 @@ const CartPage = () => {
 								<Stack spacing={2}>
 									<Stack direction='row' justifyContent='space-between'>
 										<Typography>Total Products</Typography>
-										<Typography>{totalProducts}</Typography>
+										<Typography>{}</Typography>
 									</Stack>
 
 									<Divider />
 									<Stack direction='row' justifyContent='space-between'>
 										<Typography>Total Price</Typography>
-										<Typography>৳ {totalPrice}</Typography>
+										<Typography>৳ {totalAmount}</Typography>
 									</Stack>
 								</Stack>
 

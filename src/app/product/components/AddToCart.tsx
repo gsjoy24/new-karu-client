@@ -26,6 +26,7 @@ const AddToCart = ({ product, stock, setOpen }: { product: TProduct; stock: numb
 		};
 
 		dispatch(addItemToCart(data));
+		setQuantity(1);
 
 		// setOpen();
 	};
