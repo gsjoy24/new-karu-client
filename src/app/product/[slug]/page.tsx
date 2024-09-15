@@ -5,13 +5,12 @@ import Product from '@/components/Shared/Product/Product';
 import { useGetProductBySlugQuery, useGetProductsQuery } from '@/redux/api/productApi';
 import { useAppSelector } from '@/redux/hooks';
 import { TProduct } from '@/types/product';
-import { Box, Breadcrumbs, Button, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { CiLogin } from 'react-icons/ci';
 import CartModal from '../components/CartModal';
 
 const AddToCart = dynamic(() => import('../components/AddToCart'), {
@@ -164,24 +163,9 @@ const ProductDetails = () => {
 								sx={{ backgroundColor: 'red', color: 'white', fontWeight: 'bold', borderRadius: 0 }}
 							/>
 						) : (
-							<>
-								{' '}
-								{user ? (
-									<AddToCart product={data?.data?._id} stock={data?.data?.stock} setOpen={() => setOpen(true)} />
-								) : (
-									<Button
-										component={Link}
-										href='/login'
-										endIcon={<CiLogin />}
-										sx={{
-											mt: 2
-										}}
-									>
-										Sign in to add to cart
-									</Button>
-								)}
-							</>
+							<AddToCart product={data?.data} stock={data?.data?.stock} setOpen={() => setOpen(true)} />
 						)}
+
 						<Box mt={2}>
 							{!data?.data?.isOutOfStock && (
 								<Typography>
@@ -249,12 +233,12 @@ const ProductDetails = () => {
 
 							<li>
 								Connect on{' '}
-								<Link className='text-green-600' href='https://wa.me/01766892662'>
+								<Link className='text-green-600' href='https://wa.me/+8801766892662'>
 									WhatsApp
 								</Link>
 							</li>
 
-							<li>Call Us: ++8801766892662</li>
+							<li>Call Us: +8801766892662</li>
 						</ul>
 					</Box>
 				</Grid>

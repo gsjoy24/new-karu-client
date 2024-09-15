@@ -1,66 +1,60 @@
+import { addItemToCart } from '@/redux/features/cartSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { TProduct } from '@/types/product';
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, IconButton, Skeleton, Stack } from '@mui/material';
-import Link from 'next/link';
+import { Box, IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { LiaCartPlusSolid } from 'react-icons/lia';
 import { toast } from 'sonner';
 
-const AddToCart = ({ product, stock, setOpen }: { product: string; stock: number; setOpen: () => void }) => {
+const AddToCart = ({ product, stock, setOpen }: { product: TProduct; stock: number; setOpen: () => void }) => {
 	const [quantity, setQuantity] = useState<number>(1);
+	const dispatch = useAppDispatch();
 
-	const isAlreadyInCart = false;
+	const handleAddToCart = async () => {
+		if (quantity > stock) {
+			toast.error('Quantity exceeds the available stock');
+			return;
+		}
+		const data = {
+			id: product._id,
+			quantity,
+			price: product.last_price,
+			name: product.name,
+			image: product.images[0]
+		};
 
-	const handleAddToCart = async () => {};
+		dispatch(addItemToCart(data));
 
-	const handleRemoveFromCart = async () => {};
+		// setOpen();
+	};
 
 	return (
 		<Stack direction='row' spacing={2} mt={2}>
-			{!isAlreadyInCart ? (
-				<>
-					<Box
-						sx={{
-							display: 'flex',
-							gap: '0.3rem',
-							alignItems: 'center'
-						}}
-					>
-						<IconButton disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>
-							<CiSquareMinus />
-						</IconButton>
-						<span>{quantity}</span>
-						<IconButton disabled={quantity === stock} onClick={() => setQuantity(quantity + 1)}>
-							<CiSquarePlus />
-						</IconButton>
-					</Box>
-					<LoadingButton
-						startIcon={<LiaCartPlusSolid />}
-						onClick={handleAddToCart}
-						loadingPosition='start'
-						variant='contained'
-					>
-						Add to Cart
-					</LoadingButton>
-				</>
-			) : (
-				<>
-					<LoadingButton
-						startIcon={<AiOutlineDelete />}
-						onClick={handleRemoveFromCart}
-						loadingPosition='start'
-						variant='outlined'
-						size='small'
-					>
-						Remove from Cart
-					</LoadingButton>
-					<Button LinkComponent={Link} size='small' href='/cart'>
-						See cart
-					</Button>
-				</>
-			)}
+			<Box
+				sx={{
+					display: 'flex',
+					gap: '0.3rem',
+					alignItems: 'center'
+				}}
+			>
+				<IconButton disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}>
+					<CiSquareMinus />
+				</IconButton>
+				<span>{quantity}</span>
+				<IconButton disabled={quantity === stock} onClick={() => setQuantity(quantity + 1)}>
+					<CiSquarePlus />
+				</IconButton>
+			</Box>
+			<LoadingButton
+				startIcon={<LiaCartPlusSolid />}
+				onClick={handleAddToCart}
+				loadingPosition='start'
+				variant='contained'
+			>
+				Add to Cart
+			</LoadingButton>
 		</Stack>
 	);
 };
