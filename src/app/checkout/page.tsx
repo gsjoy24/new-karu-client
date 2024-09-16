@@ -226,7 +226,10 @@ const CheckOutPage = () => {
 										},
 										minHeight: '30rem',
 										position: 'relative',
-										pb: '14rem'
+										pb: {
+											xs: '15rem',
+											md: '14rem'
+										}
 									}}
 								>
 									<Typography
@@ -250,7 +253,14 @@ const CheckOutPage = () => {
 														gap: '0.5rem'
 													}}
 												>
-													<Typography>{item?.name}</Typography>
+													<Typography
+														sx={{
+															fontSize: '1rem',
+															fontWeight: 'bold'
+														}}
+													>
+														{item?.name}
+													</Typography>
 													<Stack
 														sx={{
 															flexDirection: 'row',

@@ -20,8 +20,7 @@ const HeroSection = () => {
 			}}
 			activeIndicatorIconButtonProps={{
 				style: {
-					backgroundColor: '#29A56C',
-					border: 'none'
+					display: 'none'
 				}
 			}}
 			indicatorContainerProps={{
@@ -40,7 +39,7 @@ const HeroSection = () => {
 				}
 			}}
 			duration={700}
-			interval={5000}
+			interval={3000}
 			sx={{
 				mt: 3
 			}}

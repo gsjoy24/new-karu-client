@@ -10,7 +10,7 @@ import { karla } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-	title: 'The largest platform for luxury home decor and gift items',
+	title: 'Karukon - The largest platform for luxury home decor and gift items',
 	description:
 		'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
 	keywords: 'Karukon BD, কারুকোণ বিডি, home decor, online shop, cynor',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		type: 'website',
-		title: 'Karukon BD - a e-commerce website',
+		title: 'Karukon - The largest platform for luxury home decor and gift items',
 		description:
 			'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
 		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png'
