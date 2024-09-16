@@ -1,10 +1,11 @@
-import { useRemoveFromCartMutation } from '@/redux/api/userApi';
+import { removeItemFromCart } from '@/redux/features/cartSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
 const DeleteCartItem = ({ id }: { id: string }) => {
 	const [open, setOpen] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -13,18 +14,12 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const [removeFromCart, { isLoading: isRemoving }] = useRemoveFromCartMutation();
 	const handleRemoveFromCart = async () => {
-		try {
-			const res = await removeFromCart(id).unwrap();
-			toast.success(res?.message);
-		} catch (error: any) {
-			toast.error(error?.data?.message ?? 'Something went wrong');
-		}
+		dispatch(removeItemFromCart(id));
 	};
 	return (
 		<>
-			<Button onClick={handleClickOpen} variant='text' color='error' size='small' disabled={isRemoving}>
+			<Button onClick={handleClickOpen} variant='text' color='error' size='small'>
 				Remove
 			</Button>
 			<Dialog
@@ -43,7 +38,7 @@ const DeleteCartItem = ({ id }: { id: string }) => {
 					<Button onClick={handleClose} variant='text'>
 						Cancel
 					</Button>
-					<Button onClick={handleRemoveFromCart} variant='text' autoFocus disabled={isRemoving}>
+					<Button onClick={handleRemoveFromCart} variant='text' autoFocus>
 						Delete
 					</Button>
 				</DialogActions>

@@ -170,36 +170,6 @@ const CheckOutPage = () => {
 								}}
 								gap={2}
 							>
-								{!currentUser && (
-									<>
-										<Box>
-											<Typography variant='h2' sx={{ fontSize: '1.5rem', my: '1rem' }}>
-												Create an account (optional)
-											</Typography>
-											<Typography variant='body2' mt={'-10px'} mb={2}>
-												by creating an account you will be able to view your order status by going to your profile. If
-												you don&#39;t want to create an account, you can still place your order as a guest.
-											</Typography>
-											<KInput name='email' label='Email' />
-											<div className='relative'>
-												<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
-												<IconButton
-													onClick={() => setShowPassword(!showPassword)}
-													sx={{
-														position: 'absolute',
-														top: '25px',
-														right: '10px',
-														cursor: 'pointer'
-													}}
-												>
-													{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
-												</IconButton>
-											</div>
-										</Box>
-										<Divider />
-									</>
-								)}
-
 								<KInput name='name' label='Name' />
 								<KInput name='phone' label='Phone Number' />
 								<KInput
@@ -216,6 +186,35 @@ const CheckOutPage = () => {
 									placeholder='Write your order note here if you have any special instruction for us.'
 									multiline
 								/>
+								{!currentUser && (
+									<>
+										<Divider />
+										<Box>
+											<Typography variant='h2' sx={{ fontSize: '1.5rem', my: '1rem' }}>
+												Create an account (optional)
+											</Typography>
+											<Typography variant='body2' mt={'-10px'} mb={2}>
+												by creating an account you will be able to view your order status by going to your profile. If
+												you don&#39;t want to create an account, you can still place your order as a guest.
+											</Typography>
+											<KInput name='email' label='Email (optional)' />
+											<div className='relative'>
+												<KInput label='Password (optional)' name='password' type={showPassword ? 'text' : 'password'} />
+												<IconButton
+													onClick={() => setShowPassword(!showPassword)}
+													sx={{
+														position: 'absolute',
+														top: '25px',
+														right: '10px',
+														cursor: 'pointer'
+													}}
+												>
+													{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
+												</IconButton>
+											</div>
+										</Box>
+									</>
+								)}
 							</Grid>
 
 							<Grid item xs={12} md={5}>

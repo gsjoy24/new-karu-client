@@ -80,7 +80,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					className='line-clamp-3 lg:line-clamp-2'
 					sx={{
 						fontSize: {
-							xs: '0.8rem',
+							xs: '0.9rem',
 							sm: '1rem'
 						},
 						color: 'text.primary',
@@ -92,9 +92,9 @@ const Product = ({ product }: { product: TProduct }) => {
 				<Box
 					sx={{
 						display: 'flex',
-						justifyContent: 'center',
+						justifyContent: 'space-between',
 						alignItems: 'center',
-						gap: '1rem'
+						gap: '0.3rem'
 					}}
 				>
 					<Typography
@@ -103,7 +103,7 @@ const Product = ({ product }: { product: TProduct }) => {
 							textDecoration: 'line-through',
 							opacity: 0.7,
 							fontSize: {
-								xs: '0.9rem',
+								xs: '0.8rem',
 								sm: '1rem'
 							}
 						}}

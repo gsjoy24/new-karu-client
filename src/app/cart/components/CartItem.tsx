@@ -1,5 +1,4 @@
-import { TCart } from '@/types/product';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import CartQuantityHandler from './CartQuantityHandler';
@@ -99,7 +98,7 @@ const CartItem = ({ item }: { item: { id: string; name: string; price: number; q
 				<Typography variant='body2'>৳ {Math.ceil(item?.price * item?.quantity)}</Typography>
 				{/* Quantity Handler */}
 				<CartQuantityHandler id={item?.id} quantity={item.quantity} />
-				{/* <DeleteCartItem id={item?.product?._id as string} /> */}
+				<DeleteCartItem id={item?.id} />
 			</Box>
 		</Box>
 	);
