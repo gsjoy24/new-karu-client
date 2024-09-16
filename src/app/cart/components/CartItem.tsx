@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import Link from 'next/link';
 import CartQuantityHandler from './CartQuantityHandler';
 import DeleteCartItem from './DeleteCartItem';
 
@@ -62,7 +61,8 @@ const CartItem = ({ item }: { item: { id: string; name: string; price: number; q
 						borderRight: {
 							xs: 'none',
 							sm: '1px solid #e0e0e0'
-						}
+						},
+						flex: 1
 					}}
 				>
 					<Typography
