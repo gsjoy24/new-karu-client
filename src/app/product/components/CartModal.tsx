@@ -1,16 +1,25 @@
 import CartQuantityHandler from '@/app/cart/components/CartQuantityHandler';
 import DeleteCartItem from '@/app/cart/components/DeleteCartItem';
 import Loading from '@/app/loading';
-import { useGetMeQuery } from '@/redux/api/userApi';
-import { TCart } from '@/types/product';
+import { selectCartItems } from '@/redux/features/cartSlice';
+import { useAppSelector } from '@/redux/hooks';
 import { Close } from '@mui/icons-material';
 import { Box, Button, Dialog, IconButton, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-	const { data, isLoading } = useGetMeQuery({});
-	const cartItems = data?.data?.cart ?? [];
+	const cartItems = useAppSelector(selectCartItems);
+	const [hasMounted, setHasMounted] = useState(false);
+
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
+
+	if (!hasMounted) {
+		return <Loading />;
+	}
 
 	return (
 		<Dialog
@@ -23,7 +32,8 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 					borderRadius: 2,
 					p: 4,
 					boxShadow: 3,
-					position: 'relative'
+					position: 'relative',
+					maxWidth: '500px'
 				}
 			}}
 		>
@@ -45,92 +55,82 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 					<Close />
 				</IconButton>
 			</Box>
-			{isLoading ? (
-				<Loading />
-			) : (
-				<Stack
-					direction='column'
-					alignItems='center'
-					spacing={2}
-					sx={{
-						my: 2
-					}}
-				>
-					{cartItems.map((item: TCart) => (
+
+			<Stack
+				direction='column'
+				alignItems='center'
+				spacing={2}
+				sx={{
+					my: 2
+				}}
+			>
+				{cartItems.map((item: { id: string; name: string; price: number; quantity: number; image: string }) => (
+					<Box
+						key={item?.id}
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							alignItems: 'center',
+							justifyContent: 'space-between',
+							width: '100%',
+							borderBottom: '1px solid #e0e0e0',
+							gap: 2
+						}}
+					>
+						{/* Product Image and Name */}
 						<Box
-							key={item.product?._id}
 							sx={{
 								display: 'flex',
 								flexDirection: 'column',
-								alignItems: 'center',
-								justifyContent: 'space-between',
-								width: '100%',
-								borderBottom: '1px solid #e0e0e0',
+								alignItems: 'flex-start',
 								gap: 2
 							}}
 						>
-							{/* Product Image and Name */}
+							{/* Product Name */}
 							<Box
 								sx={{
 									display: 'flex',
-									flexDirection: 'column',
+									flexDirection: 'row',
 									alignItems: 'flex-start',
-									gap: 2
+									justifyContent: 'center',
+									gap: 1
 								}}
 							>
-								{/* Product Name */}
-								<Box
-									sx={{
-										display: 'flex',
-										flexDirection: 'row',
-										alignItems: 'flex-start',
-										justifyContent: 'center',
-										gap: 1
-									}}
-								>
-									<Image
-										src={item.product.images[0]}
-										alt={item.product?.name}
-										width={80}
-										height={80}
-										className='mt-[10px] w-8 h-8 sm:w-12 sm:h-12 rounded-md'
-									/>
-									<Typography
-										variant='body1'
-										gutterBottom
-										component={Link}
-										href={`/product/${item.product?.slug}`}
-										sx={{
-											' &:hover': {
-												textDecoration: 'underline',
-												textUnderlineOffset: '5px'
-											}
-										}}
-									>
-										{item.product?.name}
+								<Image
+									src={item?.image}
+									alt={item?.name}
+									width={80}
+									height={80}
+									className='mt-[10px] w-8 h-8 sm:w-12 sm:h-12 rounded-md'
+								/>
+								<div>
+									<Typography variant='body1' gutterBottom>
+										{item?.name} Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos tenetur distinctio?
 									</Typography>
-								</Box>
-								<Box
-									sx={{
-										display: 'flex',
-										flexDirection: 'row',
-										alignItems: 'center',
-										justifyContent: 'space-between',
-										gap: 1,
-										width: '100%'
-									}}
-								>
-									{/* Total Price */}
-									<Typography variant='body2'>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
-									{/* Quantity Handler */}
-									<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
-									<DeleteCartItem id={item.product?._id as string} />
-								</Box>
+									<Typography variant='body2'>৳ {item?.price}</Typography>
+								</div>
+							</Box>
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'row',
+									alignItems: 'center',
+									justifyContent: 'space-between',
+									gap: 1,
+									width: '100%'
+								}}
+							>
+								{/* Total Price */}
+								<Typography variant='body2'>৳ {Math.ceil(item?.price * item.quantity)}</Typography>
+								{/* Quantity Handler */}
+								<CartQuantityHandler id={item?.id} quantity={item.quantity} />
+								<DeleteCartItem id={item?.id} />
 							</Box>
 						</Box>
-					))}
-				</Stack>
-			)}
+					</Box>
+				))}
+			</Stack>
+
 			{/* CTA Buttons */}
 			<Stack
 				direction={{
@@ -141,10 +141,10 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 				spacing={2}
 				mt={2}
 			>
-				<Button variant='contained' color='primary' LinkComponent={Link} href='/profile/checkout'>
+				<Button variant='contained' color='primary' LinkComponent={Link} href='/checkout'>
 					Check Out
 				</Button>
-				<Button variant='outlined' color='primary' LinkComponent={Link} href='/profile/cart'>
+				<Button variant='outlined' color='primary' LinkComponent={Link} href='/cart'>
 					View Cart
 				</Button>
 				<Button variant='outlined' color='primary' LinkComponent={Link} href='/products'>
