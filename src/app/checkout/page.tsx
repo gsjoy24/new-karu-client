@@ -1,10 +1,10 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { useGetMeQuery, usePlaceOrderMutation } from '@/redux/api/userApi';
+import { usePlaceOrderMutation } from '@/redux/api/userApi';
+import { selectCurrentUser } from '@/redux/features/authSlice';
 import { selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
 import { useAppSelector } from '@/redux/hooks';
-import { TCart } from '@/types/product';
 import { OrderValidation } from '@/validationSchemas/order.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -44,6 +44,8 @@ const steps = [
 
 const CheckOutPage = () => {
 	const router = useRouter();
+	const currentUser = useAppSelector(selectCurrentUser);
+	console.log(currentUser);
 	const [isAgree, setIsAgree] = useState<boolean>(false);
 	const [statusModalOpen, setStatusModalOpen] = useState<boolean>(false);
 	const [orderResponse, setOrderResponse] = useState(null);
@@ -130,8 +132,22 @@ const CheckOutPage = () => {
 								}}
 								gap={2}
 							>
-								<KInput name='name' label='Receiver Name' />
-								<KInput name='phone' label='Receiver Phone Number' />
+								{!currentUser && (
+									<Box>
+										<Typography variant='h2' sx={{ fontSize: '1.5rem', my: '1rem' }}>
+											Create an account (optional)
+										</Typography>
+										<Typography variant='body2' mt={'-10px'} mb={2}>
+											by creating an account you will be able to view your order status by going to your profile. If you
+											don&#39;t want to create an account, you can still place your order as a guest.
+										</Typography>
+										<KInput name='email' label='Email' />
+										<KInput name='password' label='Password' />
+									</Box>
+								)}
+								<Divider />
+								<KInput name='name' label='Name' />
+								<KInput name='phone' label='Phone Number' />
 								<KInput
 									name='address'
 									label='Address'

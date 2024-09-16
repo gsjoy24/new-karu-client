@@ -1,5 +1,6 @@
 'use client';
 import { useGetMeQuery } from '@/redux/api/userApi';
+import { selectTotalItems } from '@/redux/features/cartSlice';
 import { useAppSelector } from '@/redux/hooks';
 import { Chip, IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
@@ -9,22 +10,18 @@ import ProfileMenu from './ProfileMenu';
 const CartButton = () => {
 	const { data } = useGetMeQuery({});
 	const user = useAppSelector((state) => state.auth.user);
+	const cartItems = useAppSelector(selectTotalItems);
 
 	return (
 		<Stack direction='row' gap={2} alignItems='center'>
+			<IconButton className='relative' component={Link} href='/cart' aria-label='Cart'>
+				<Chip label={cartItems ?? 0} color='primary' size='small' className='absolute top-0 left-[1.6rem]' />
+				<IoCartOutline size={30} />
+			</IconButton>
 			{user ? (
 				<ProfileMenu />
 			) : (
 				<>
-					<IconButton className='relative' component={Link} href='/cart' aria-label='Cart'>
-						<Chip
-							label={data?.data?.cart.length ?? 0}
-							color='primary'
-							size='small'
-							className='absolute top-0 left-[1.6rem]'
-						/>
-						<IoCartOutline size={30} />
-					</IconButton>
 					<Typography
 						component={Link}
 						href='/login'
