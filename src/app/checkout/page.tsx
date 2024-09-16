@@ -18,6 +18,7 @@ import {
 	FormControlLabel,
 	Grid,
 	IconButton,
+	Radio,
 	Stack,
 	Step,
 	StepButton,
@@ -309,6 +310,10 @@ const CheckOutPage = () => {
 											padding: '0 1rem'
 										}}
 									>
+										<FormControlLabel value='cash on delivery' control={<Radio checked />} label='Cash On Delivery' />
+										<Typography variant='body2' ml={4} mt={-2}>
+											Pay with cash upon delivery. Outside Dhaka, customers have to pay delivery charge in advance.
+										</Typography>
 										<FormControlLabel
 											sx={{
 												width: 'fit-content'
