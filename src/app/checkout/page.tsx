@@ -95,13 +95,14 @@ const CheckOutPage = () => {
 		try {
 			if (email && password) {
 				const response = await register(registerData).unwrap();
+				console.log(response);
 				if (response?.success) {
 					toast.success('Registered successfully! Placing order...');
 				}
 				orderData.email = email;
 			}
 			const res = await placeOrder(orderData).unwrap();
-			console.log(res);
+
 			if (res.success) {
 				toast.success('Order placed successfully!');
 				setStatusModalOpen(true);
@@ -154,32 +155,35 @@ const CheckOutPage = () => {
 								gap={2}
 							>
 								{!currentUser && (
-									<Box>
-										<Typography variant='h2' sx={{ fontSize: '1.5rem', my: '1rem' }}>
-											Create an account (optional)
-										</Typography>
-										<Typography variant='body2' mt={'-10px'} mb={2}>
-											by creating an account you will be able to view your order status by going to your profile. If you
-											don&#39;t want to create an account, you can still place your order as a guest.
-										</Typography>
-										<KInput name='email' label='Email' />
-										<div className='relative'>
-											<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
-											<IconButton
-												onClick={() => setShowPassword(!showPassword)}
-												sx={{
-													position: 'absolute',
-													top: '25px',
-													right: '10px',
-													cursor: 'pointer'
-												}}
-											>
-												{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
-											</IconButton>
-										</div>
-									</Box>
+									<>
+										<Box>
+											<Typography variant='h2' sx={{ fontSize: '1.5rem', my: '1rem' }}>
+												Create an account (optional)
+											</Typography>
+											<Typography variant='body2' mt={'-10px'} mb={2}>
+												by creating an account you will be able to view your order status by going to your profile. If
+												you don&#39;t want to create an account, you can still place your order as a guest.
+											</Typography>
+											<KInput name='email' label='Email' />
+											<div className='relative'>
+												<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
+												<IconButton
+													onClick={() => setShowPassword(!showPassword)}
+													sx={{
+														position: 'absolute',
+														top: '25px',
+														right: '10px',
+														cursor: 'pointer'
+													}}
+												>
+													{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
+												</IconButton>
+											</div>
+										</Box>
+										<Divider />
+									</>
 								)}
-								<Divider />
+
 								<KInput name='name' label='Name' />
 								<KInput name='phone' label='Phone Number' />
 								<KInput
