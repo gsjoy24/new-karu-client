@@ -59,8 +59,7 @@ const RegisterPage = () => {
 				resolver={zodResolver(RegisterSchema)}
 				styleClasses='p-4 md:p-12 border max-w-[600px] w-full flex flex-col gap-4'
 			>
-				<KInput label='First Name' name='name.firstName' />
-				<KInput label='Last Name' name='name.lastName' />
+				<KInput label='Name' name='name' />
 				<KInput label='Email Address' placeholder='*example@gmail.com' name='email' type='email' />
 				<div className='relative'>
 					<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />

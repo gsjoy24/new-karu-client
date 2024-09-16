@@ -1,8 +1,11 @@
+import { selectCurrentUser } from '@/redux/features/authSlice';
+import { useAppSelector } from '@/redux/hooks';
 import { CheckCircleOutline, Close as CloseIcon } from '@mui/icons-material';
 import { Button, Dialog, Divider, IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
 const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; onClose: () => void; response: any }) => {
+	const currentUser = useAppSelector(selectCurrentUser);
 	const { order_id, createdAt } = response || {};
 	const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
 		year: 'numeric',
@@ -62,6 +65,11 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 				<Typography variant='body1'>
 					<strong>Order ID:</strong> {order_id}
 				</Typography>
+				{!currentUser && (
+					<Typography variant='body2'>
+						Save this order ID for future reference. You can use this to track your order.
+					</Typography>
+				)}
 				<Typography variant='body1'>
 					<strong>Date:</strong> {formattedDate}
 				</Typography>
@@ -85,9 +93,11 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 				spacing={2}
 				mt={2}
 			>
-				<Button variant='contained' color='primary' LinkComponent={Link} href='/profile/orders'>
-					View Orders
-				</Button>
+				{currentUser && (
+					<Button variant='contained' color='primary' href='/orders'>
+						View Order Details
+					</Button>
+				)}
 				<Button variant='outlined' color='primary' LinkComponent={Link} href='/products'>
 					Continue Shopping
 				</Button>

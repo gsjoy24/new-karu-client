@@ -1,6 +1,7 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
+import { useRegisterMutation } from '@/redux/api/authApi';
 import { usePlaceOrderMutation } from '@/redux/api/userApi';
 import { selectCurrentUser } from '@/redux/features/authSlice';
 import { selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
@@ -14,6 +15,7 @@ import {
 	Divider,
 	FormControlLabel,
 	Grid,
+	IconButton,
 	Stack,
 	Step,
 	StepButton,
@@ -24,6 +26,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
 import Loading from '../loading';
 import OrderConfirmationModal from './components/OrderConfirmationModal';
@@ -46,6 +49,7 @@ const CheckOutPage = () => {
 	const router = useRouter();
 	const currentUser = useAppSelector(selectCurrentUser);
 	console.log(currentUser);
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [isAgree, setIsAgree] = useState<boolean>(false);
 	const [statusModalOpen, setStatusModalOpen] = useState<boolean>(false);
 	const [orderResponse, setOrderResponse] = useState(null);
@@ -65,6 +69,7 @@ const CheckOutPage = () => {
 	}, []);
 
 	const [placeOrder, { isLoading: isOrdering }] = usePlaceOrderMutation();
+	const [register, { isLoading }] = useRegisterMutation();
 
 	const handleOrder = async (data: FieldValues) => {
 		if (!isAgree) {
@@ -79,8 +84,24 @@ const CheckOutPage = () => {
 			})
 		);
 
+		const { email, password, ...rest } = data;
+		const registerData = { name: rest.name, email, password };
+		const orderData = { ...rest, products, total_price: totalAmount } as any;
+
+		if (currentUser) {
+			orderData.email = currentUser?.email;
+		}
+
 		try {
-			const res = await placeOrder({ ...data, products, total_price: totalAmount }).unwrap();
+			if (email && password) {
+				const response = await register(registerData).unwrap();
+				if (response?.success) {
+					toast.success('Registered successfully! Placing order...');
+				}
+				orderData.email = email;
+			}
+			const res = await placeOrder(orderData).unwrap();
+			console.log(res);
 			if (res.success) {
 				toast.success('Order placed successfully!');
 				setStatusModalOpen(true);
@@ -142,7 +163,20 @@ const CheckOutPage = () => {
 											don&#39;t want to create an account, you can still place your order as a guest.
 										</Typography>
 										<KInput name='email' label='Email' />
-										<KInput name='password' label='Password' />
+										<div className='relative'>
+											<KInput label='Password' name='password' type={showPassword ? 'text' : 'password'} />
+											<IconButton
+												onClick={() => setShowPassword(!showPassword)}
+												sx={{
+													position: 'absolute',
+													top: '25px',
+													right: '10px',
+													cursor: 'pointer'
+												}}
+											>
+												{showPassword ? <IoMdEye size={20} /> : <IoMdEyeOff size={20} />}
+											</IconButton>
+										</div>
 									</Box>
 								)}
 								<Divider />
