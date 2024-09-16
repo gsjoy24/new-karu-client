@@ -1,4 +1,6 @@
 'use client';
+import profile_bg from '@/assets/profile-cover.jpg';
+import user_img from '@/assets/user-img.png';
 import { useGetMeQuery } from '@/redux/api/userApi';
 import { setUser } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
@@ -8,7 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BiSolidDashboard } from 'react-icons/bi';
 import { FaBoxOpen } from 'react-icons/fa';
-import { FaGlobe, FaKey } from 'react-icons/fa6';
+import { FaKey } from 'react-icons/fa6';
 import { IoIosLogOut } from 'react-icons/io';
 
 const profileNavLinks = [
@@ -22,11 +24,7 @@ const profileNavLinks = [
 		text: 'Orders',
 		href: '/profile/orders'
 	},
-	{
-		icon: <FaGlobe />,
-		text: 'Address',
-		href: '/profile/address'
-	},
+
 	{
 		icon: <FaKey />,
 		text: 'Change Password',
@@ -59,7 +57,7 @@ const ProfileNav = () => {
 		>
 			{/* cover */}
 			<Image
-				src='https://res.cloudinary.com/dwgozodq0/image/upload/v1723319263/profile-bg_lfgbtx.jpg'
+				src={profile_bg}
 				alt={'profile background'}
 				width={500}
 				height={200}
@@ -67,11 +65,11 @@ const ProfileNav = () => {
 			/>
 			{/* profile */}
 			<Image
-				src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
+				src={user_img}
 				alt={profile?.full_name ?? 'profile picture'}
 				width={120}
 				height={120}
-				className='rounded-full mx-auto border-4 border-white z-10 mt-[5rem] '
+				className='rounded-full mx-auto border-4 border-white z-10 mt-[8rem]'
 			/>
 			<Typography
 				variant='h1'
@@ -84,7 +82,7 @@ const ProfileNav = () => {
 					textAlign: 'center'
 				}}
 			>
-				{profile?.full_name}
+				{profile?.name}
 			</Typography>
 			<Typography variant='body2' sx={{ color: '#555', textAlign: 'center' }} gutterBottom>
 				{profile?.email}

@@ -1,11 +1,13 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { useRegisterMutation } from '@/redux/api/authApi';
+import { useLoginMutation, useRegisterMutation } from '@/redux/api/authApi';
 import { usePlaceOrderMutation } from '@/redux/api/userApi';
-import { selectCurrentUser } from '@/redux/features/authSlice';
-import { selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
-import { useAppSelector } from '@/redux/hooks';
+import { selectCurrentUser, setUser } from '@/redux/features/authSlice';
+import { clearCart, selectCartItems, selectTotalAmount, selectTotalItems } from '@/redux/features/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setTOLocalStorage } from '@/utils/local-storage';
+import verifyToken from '@/utils/verifyToken';
 import { OrderValidation } from '@/validationSchemas/order.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -48,7 +50,10 @@ const steps = [
 const CheckOutPage = () => {
 	const router = useRouter();
 	const currentUser = useAppSelector(selectCurrentUser);
-	console.log(currentUser);
+	console.log({
+		currentUser
+	});
+	const dispatch = useAppDispatch();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [isAgree, setIsAgree] = useState<boolean>(false);
 	const [statusModalOpen, setStatusModalOpen] = useState<boolean>(false);
@@ -69,7 +74,8 @@ const CheckOutPage = () => {
 	}, []);
 
 	const [placeOrder, { isLoading: isOrdering }] = usePlaceOrderMutation();
-	const [register, { isLoading }] = useRegisterMutation();
+	const [register] = useRegisterMutation();
+	const [login] = useLoginMutation();
 
 	const handleOrder = async (data: FieldValues) => {
 		if (!isAgree) {
@@ -95,18 +101,28 @@ const CheckOutPage = () => {
 		try {
 			if (email && password) {
 				const response = await register(registerData).unwrap();
-				console.log(response);
 				if (response?.success) {
 					toast.success('Registered successfully! Placing order...');
+					const loginRes = await login({
+						email,
+						password
+					}).unwrap();
+					if (loginRes?.success) {
+						const userInfo = verifyToken(loginRes?.data?.accessToken);
+						// save user info and token in redux store
+						dispatch(setUser({ user: userInfo, token: loginRes?.data?.accessToken }));
+						setTOLocalStorage('accessToken', loginRes?.data?.accessToken);
+					}
 				}
 				orderData.email = email;
 			}
-			const res = await placeOrder(orderData).unwrap();
 
+			const res = await placeOrder(orderData).unwrap();
 			if (res.success) {
 				toast.success('Order placed successfully!');
 				setStatusModalOpen(true);
 				setOrderResponse(res?.data);
+				dispatch(clearCart());
 			} else {
 				toast.error(res?.message ?? 'Something went wrong!');
 			}

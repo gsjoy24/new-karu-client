@@ -94,7 +94,7 @@ const OrderConfirmationModal = ({ open, onClose, response }: { open: boolean; on
 				mt={2}
 			>
 				{currentUser && (
-					<Button variant='contained' color='primary' href='/orders'>
+					<Button variant='contained' color='primary' href='/profile/orders'>
 						View Order Details
 					</Button>
 				)}
