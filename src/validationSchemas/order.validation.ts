@@ -1,19 +1,8 @@
 import { z } from 'zod';
 
 export const OrderValidation = z.object({
-	email: z
-		.string()
-		.email({
-			message: 'Enter a valid email address!'
-		})
-		.optional(),
-	password: z
-		.string()
-		.min(8, {
-			message: 'Password must be at least 8 characters long!'
-		})
-		.optional(),
-
+	email: z.string().optional(),
+	password: z.string().optional(),
 	name: z.string({
 		required_error: 'Name is required!'
 	}),
@@ -39,5 +28,6 @@ export const OrderValidation = z.object({
 	}),
 	city: z.string({
 		required_error: 'City is required!'
-	})
+	}),
+	order_note: z.string().optional()
 });
