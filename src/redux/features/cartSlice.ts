@@ -28,7 +28,6 @@ const cartSlice = createSlice({
 		addItemToCart: (state, action) => {
 			const newItem = action.payload;
 			const existingItem = state.cartItems.find((item) => item.id === newItem.id);
-			console.log(newItem);
 
 			if (existingItem) {
 				// If item already exists, just increase the quantity

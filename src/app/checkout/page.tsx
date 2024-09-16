@@ -51,9 +51,6 @@ const steps = [
 const CheckOutPage = () => {
 	const router = useRouter();
 	const currentUser = useAppSelector(selectCurrentUser);
-	console.log({
-		currentUser
-	});
 	const dispatch = useAppDispatch();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [isAgree, setIsAgree] = useState<boolean>(false);
