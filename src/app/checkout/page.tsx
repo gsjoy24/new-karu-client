@@ -226,7 +226,7 @@ const CheckOutPage = () => {
 										},
 										minHeight: '30rem',
 										position: 'relative',
-										pb: '10rem'
+										pb: '14rem'
 									}}
 								>
 									<Typography

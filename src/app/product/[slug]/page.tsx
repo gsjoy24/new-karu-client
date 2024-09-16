@@ -3,7 +3,6 @@ import Loading from '@/app/loading';
 import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
 import Product from '@/components/Shared/Product/Product';
 import { useGetProductBySlugQuery, useGetProductsQuery } from '@/redux/api/productApi';
-import { useAppSelector } from '@/redux/hooks';
 import { TProduct } from '@/types/product';
 import { Box, Breadcrumbs, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
@@ -20,8 +19,6 @@ const AddToCart = dynamic(() => import('../components/AddToCart'), {
 
 const ProductDetails = () => {
 	const [open, setOpen] = useState<boolean>(false);
-
-	const user = useAppSelector((state) => state.auth.user);
 	const { slug } = useParams();
 	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
 	const { data: relatedProducts } = useGetProductsQuery([
