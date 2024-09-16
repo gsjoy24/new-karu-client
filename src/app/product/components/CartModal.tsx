@@ -123,11 +123,7 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 									{/* Total Price */}
 									<Typography variant='body2'>৳ {Math.ceil(item.product?.last_price * item.quantity)}</Typography>
 									{/* Quantity Handler */}
-									<CartQuantityHandler
-										id={item?.product?._id as string}
-										quantity={item.quantity}
-										stock={item.product?.stock}
-									/>
+									<CartQuantityHandler id={item?.product?._id as string} quantity={item.quantity} />
 									<DeleteCartItem id={item.product?._id as string} />
 								</Box>
 							</Box>
