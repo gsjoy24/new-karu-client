@@ -55,6 +55,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const data = await response.json();
 	const products = data.data; // Array of products
 
+	const categoryRes = await fetch(`${config.server_url}/categories`);
+	const categoryData = await categoryRes.json();
+	const categories = categoryData.data; // Array of categories
+
+	// Map category URLs to sitemap format
+	const categorySitemap = categories.map((category: { slug: string }) => ({
+		url: `${config.app_url}/category/${category.slug}`,
+		lastModified: new Date(),
+		changeFrequency: 'daily',
+		priority: 0.7
+	}));
+
 	// Map product URLs to sitemap format
 	const productSitemap = products.map((product: { slug: string; updatedAt: string }) => ({
 		url: `${config.app_url}/product/${product.slug}`,
@@ -64,5 +76,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	}));
 
 	// Step 3: Combine static and dynamic routes
-	return [...staticSitemap, ...productSitemap];
+	return [...staticSitemap, ...categorySitemap, ...productSitemap];
 }

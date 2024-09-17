@@ -18,8 +18,15 @@ export const metadata: Metadata = {
 	},
 	description:
 		'Karukon BD (কারুকোণ বিডি) Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-	keywords: 'Karukon BD, কারুকোণ বিডি, home decor, online shop, cynor',
-	authors: [{ name: 'Karukon' }],
+	keywords: [
+		'Karukon',
+		'Karukon BD',
+		'Karukon Online Shopping',
+		'Karukon Online Store',
+		'Karukon Home Decor',
+		'Karukon Gift Items'
+	],
+	authors: [{ name: 'Gour Saha Joy', url: 'https://github.com/gsjoy24' }],
 	twitter: {
 		card: 'summary_large_image',
 		site: '@karukonbd',
