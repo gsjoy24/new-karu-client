@@ -1,7 +1,11 @@
 'use client';
 import KForm from '@/components/Form/KForm';
 import KInput from '@/components/Form/KInput';
-import { useRegisterMutation } from '@/redux/api/authApi';
+import { useLoginMutation, useRegisterMutation } from '@/redux/api/authApi';
+import { setUser } from '@/redux/features/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
+import { setTOLocalStorage } from '@/utils/local-storage';
+import verifyToken from '@/utils/verifyToken';
 import { RegisterSchema } from '@/validationSchemas/auth.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
@@ -16,17 +20,26 @@ import { toast } from 'sonner';
 const RegisterPage = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [register, { isLoading }] = useRegisterMutation();
+	const [login] = useLoginMutation();
+	const dispatch = useAppDispatch();
 	const router = useRouter();
 
 	const handleSubmit = async (data: FieldValues) => {
 		try {
 			const response = await register(data).unwrap();
 			if (response?.success) {
-				toast.success(response.message ?? 'Registered successfully!', {
-					duration: Infinity,
-					closeButton: true
-				});
-				router.push('/login');
+				toast.success('Registered successfully.');
+				const loginRes = await login({
+					email: data.email,
+					password: data.password
+				}).unwrap();
+				if (loginRes?.success) {
+					const userInfo = verifyToken(loginRes?.data?.accessToken);
+					// save user info and token in redux store
+					dispatch(setUser({ user: userInfo, token: loginRes?.data?.accessToken }));
+					setTOLocalStorage('accessToken', loginRes?.data?.accessToken);
+				}
+				router.push('/products');
 			}
 		} catch (error: any) {
 			toast.error(error?.data?.message || 'Something went wrong! Please try again.');

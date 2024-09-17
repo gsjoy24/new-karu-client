@@ -10,23 +10,11 @@ const authApi = baseApi.injectEndpoints({
 				data
 			})
 		}),
-		confirmEmail: build.mutation({
-			query: (token) => ({
-				url: `/auth/confirm-email/?token=${token}`,
-				method: 'POST'
-			})
-		}),
 		login: build.mutation({
 			query: (data) => ({
 				url: '/auth/login',
 				method: 'POST',
 				data
-			})
-		}),
-		logout: build.query({
-			query: () => ({
-				url: '/auth/logout',
-				method: 'POST'
 			})
 		}),
 		forgotPassword: build.mutation({
@@ -64,8 +52,6 @@ const authApi = baseApi.injectEndpoints({
 export const {
 	useRegisterMutation,
 	useLoginMutation,
-	useConfirmEmailMutation,
-	useLogoutQuery,
 	useChangePasswordMutation,
 	useForgotPasswordMutation,
 	useResetPasswordMutation,

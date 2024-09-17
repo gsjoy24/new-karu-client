@@ -2,7 +2,7 @@
 import profile_bg from '@/assets/profile-cover.jpg';
 import user_img from '@/assets/user-img.png';
 import { useGetMeQuery } from '@/redux/api/userApi';
-import { setUser } from '@/redux/features/authSlice';
+import { logOut } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { removeFromLocalStorage } from '@/utils/local-storage';
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
@@ -33,14 +33,16 @@ const profileNavLinks = [
 ];
 
 const ProfileNav = () => {
-	const { data } = useGetMeQuery({});
+	const { data, isLoading } = useGetMeQuery({});
 	const profile = data?.data ?? {};
 
 	const dispatch = useAppDispatch();
 	const handleLogout = () => {
-		dispatch(setUser({ user: null, token: null }));
+		dispatch(logOut());
 		removeFromLocalStorage('accessToken');
 	};
+
+	if (isLoading) return null;
 
 	return (
 		<Box
@@ -75,8 +77,8 @@ const ProfileNav = () => {
 				variant='h1'
 				sx={{
 					fontSize: {
-						xs: '1.5rem',
-						md: '2.3rem'
+						xs: '1.3rem',
+						md: '2rem'
 					},
 					color: '#333',
 					textAlign: 'center'

@@ -2,22 +2,16 @@
 import Loading from '@/app/loading';
 import NewArrivals from '@/components/Home/NewArrivals/NewArrivals';
 import { useGetMeQuery } from '@/redux/api/userApi';
-import { Email, Home, LocationCity, LocationOn, Phone } from '@mui/icons-material';
+import { Email } from '@mui/icons-material';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 
 const Profile = () => {
 	const { data, isLoading } = useGetMeQuery({});
-
-	if (isLoading) return <Loading />;
-
 	const userData = data?.data;
 	const fullName = userData?.name ?? 'User';
 	const email = userData?.email;
-	const mobileNumber = userData?.mobile_number ?? 'N/A';
-	const address = userData?.address ?? 'N/A';
-	const district = userData?.district ?? 'N/A';
-	const city = userData?.city ?? 'N/A';
 
+	if (isLoading) return <Loading />;
 	return (
 		<>
 			<Box sx={{ maxWidth: 800, mx: 'auto', mt: 4, px: 2 }}>
