@@ -3,8 +3,9 @@ import { Box } from '@mui/material';
 import Image from 'next/image';
 import Carousel from 'react-material-ui-carousel';
 const data = [
-	// 'https://res.cloudinary.com/dwgozodq0/image/upload/v1726508667/Khan-Gadget-Fb-cover_1_gajxfu.png',
-	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726508666/Untitled-1_xwsmkx.png'
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726508666/Untitled-1_xwsmkx.png',
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726602226/Khan-Gadget-Fb-cover_2_egqiln.jpg',
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726602227/ca07f7a5-b4cd-430f-9cba-626847d683e2_knphqr.jpg'
 ];
 const HeroSection = () => {
 	return (
@@ -25,9 +26,7 @@ const HeroSection = () => {
 			}}
 			indicatorContainerProps={{
 				style: {
-					position: 'absolute',
-					bottom: '20px',
-					zIndex: '99'
+					display: 'none'
 				}
 			}}
 			navButtonsProps={{
@@ -39,7 +38,7 @@ const HeroSection = () => {
 				}
 			}}
 			duration={700}
-			interval={3000}
+			interval={4000}
 			sx={{
 				mt: 3
 			}}
@@ -57,7 +56,7 @@ const HeroSection = () => {
 						alignItems: 'center'
 					}}
 				>
-					<Image src={link} alt='banner' width={1200} height={700} className='w-auto h-full  rounded-2xl' />
+					<Image src={link} alt='banner' width={1200} height={700} className='w-full h-full  rounded-2xl' />
 				</Box>
 			))}
 		</Carousel>
