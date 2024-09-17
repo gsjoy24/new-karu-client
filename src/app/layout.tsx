@@ -1,6 +1,7 @@
 import Footer from '@/components/Shared/Footer';
 import Header from '@/components/Shared/Header/Header';
 import MobileNav from '@/components/Shared/Header/MobileNav/MobileNav';
+import config from '@/lib/config';
 import Providers from '@/lib/Providers/Providers';
 import { Container } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
@@ -10,9 +11,13 @@ import { karla } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-	title: 'Karukon - The largest platform for luxury home decor and gift items',
+	metadataBase: new URL(config.app_url),
+	title: {
+		default: 'Karukon - The largest platform for luxury home decor and gift items',
+		template: '%s | Karukon'
+	},
 	description:
-		'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+		'Karukon BD (কারুকোণ বিডি) Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
 	keywords: 'Karukon BD, কারুকোণ বিডি, home decor, online shop, cynor',
 	authors: [{ name: 'Karukon' }],
 	twitter: {
@@ -26,7 +31,10 @@ export const metadata: Metadata = {
 		title: 'Karukon - The largest platform for luxury home decor and gift items',
 		description:
 			'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png'
+		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png',
+		locale: 'en_US',
+		url: config.app_url,
+		siteName: 'Karukon'
 	}
 };
 
