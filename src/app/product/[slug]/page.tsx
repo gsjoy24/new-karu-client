@@ -22,11 +22,13 @@ export async function generateMetadata({
 	const title = data?.data?.name;
 	const description = data?.data?.short_description;
 	const image = data?.data?.images[0];
+	const keywords = data?.data?.tags;
 
 	return {
 		title,
 		description,
-		openGraph: { images: [{ url: image }] }
+		openGraph: { images: [{ url: image }] },
+		keywords
 	};
 }
 
