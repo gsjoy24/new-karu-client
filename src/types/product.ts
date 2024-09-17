@@ -4,6 +4,7 @@ export type TProduct = {
 	_id?: string;
 	slug: string;
 	name: string;
+	short_description: string;
 	description: string;
 	old_price: number;
 	last_price: number;

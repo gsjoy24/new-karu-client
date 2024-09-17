@@ -1,39 +1,48 @@
-'use client';
-import Loading from '@/app/loading';
-import KImageGallery from '@/components/Shared/KImageGallery/KImageGallery';
-import Product from '@/components/Shared/Product/Product';
-import { useGetProductBySlugQuery, useGetProductsQuery } from '@/redux/api/productApi';
-import { TProduct } from '@/types/product';
+import config from '@/lib/config';
 import { Box, Breadcrumbs, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { useState } from 'react';
-import CartModal from '../components/CartModal';
+import ImageBox from '../components/ImageBox';
+import RelatedProducts from '../components/RelatedProducts';
 
 const AddToCart = dynamic(() => import('../components/AddToCart'), {
 	ssr: false,
 	loading: () => <Skeleton variant='rectangular' width={210} height={40} />
 });
 
-const ProductDetails = () => {
-	const [open, setOpen] = useState<boolean>(false);
-	const { slug } = useParams();
-	const { data, isFetching } = useGetProductBySlugQuery(slug as string);
-	const { data: relatedProducts } = useGetProductsQuery([
-		{
-			name: 'sub_category',
-			value: data?.data?.sub_category?.slug
-		}
-	]);
+export async function generateMetadata({
+	params: { slug }
+}: {
+	params: {
+		slug: string;
+	};
+}) {
+	const data = await fetch(`${config.server_url}/products/slug/${slug}`).then((res) => res.json());
+	const title = data?.data?.name;
+	const description = data?.data?.short_description;
+	const image = data?.data?.images[0];
+
+	return {
+		title,
+		description,
+		openGraph: { images: [{ url: image }] }
+	};
+}
+
+const ProductDetails = async ({
+	params: { slug }
+}: {
+	params: {
+		slug: string;
+	};
+}) => {
+	const data = await fetch(`${config.server_url}/products/slug/${slug}`).then((res) => res.json());
 
 	const productImages = data?.data?.images.map((image: string) => ({
 		original: image,
 		thumbnail: image
 	}));
-
-	const otherProducts = relatedProducts?.data?.filter((product: TProduct) => product._id !== data?.data?._id);
 
 	const breadcrumbs = [
 		<Link href='/' key='1'>
@@ -47,9 +56,7 @@ const ProductDetails = () => {
 		</Link>
 	];
 
-	return isFetching ? (
-		<Loading />
-	) : (
+	return (
 		<Box
 			sx={{
 				my: 2
@@ -74,7 +81,7 @@ const ProductDetails = () => {
 						<Breadcrumbs separator='›' aria-label='breadcrumb'>
 							{breadcrumbs}
 						</Breadcrumbs>
-						<KImageGallery productImages={productImages} />
+						<ImageBox productImages={productImages} />
 					</Box>
 				</Grid>
 				<Grid
@@ -160,7 +167,7 @@ const ProductDetails = () => {
 								sx={{ backgroundColor: 'red', color: 'white', fontWeight: 'bold', borderRadius: 0 }}
 							/>
 						) : (
-							<AddToCart product={data?.data} stock={data?.data?.stock} setOpen={() => setOpen(true)} />
+							<AddToCart product={data?.data} stock={data?.data?.stock} />
 						)}
 
 						<Box mt={2}>
@@ -240,19 +247,7 @@ const ProductDetails = () => {
 					</Box>
 				</Grid>
 			</Grid>
-			{otherProducts?.length > 0 && (
-				<Box mt={2}>
-					<Typography variant='h4' my={4} align='center'>
-						Related Products
-					</Typography>
-					<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap'>
-						{otherProducts?.map((product: TProduct) => (
-							<Product key={product._id} product={product} />
-						))}
-					</Stack>
-				</Box>
-			)}
-			<CartModal open={open} onClose={() => setOpen(false)} />
+			<RelatedProducts subCategorySlug={data?.data?.sub_category?.slug} currentProductId={data?.data?._id} />
 		</Box>
 	);
 };

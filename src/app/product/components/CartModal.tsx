@@ -105,7 +105,7 @@ const CartModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
 								/>
 								<div>
 									<Typography variant='body1' gutterBottom>
-										{item?.name} Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos tenetur distinctio?
+										{item?.name}
 									</Typography>
 									<Typography variant='body2'>৳ {item?.price}</Typography>
 								</div>
