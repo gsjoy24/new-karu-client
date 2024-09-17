@@ -7,7 +7,6 @@ import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 const SearchProduct = () => {
-	const currentPath = usePathname();
 	const router = useRouter();
 	const handleSubmit = (data: FieldValues) => {
 		router.push(`/products?search=${data.search}`);

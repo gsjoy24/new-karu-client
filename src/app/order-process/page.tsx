@@ -10,20 +10,20 @@ import { Card, CardContent, Container, Step, StepLabel, Stepper, Typography } fr
 import Link from 'next/link';
 
 export const metadata = {
-	title: 'How to Place an Order - Karukon BD',
+	title: 'How to Place an Order',
 	description:
 		'Follow these simple steps to place an order without paying upfront. Once your order is placed, you will receive a confirmation call from us to verify your delivery address.',
-	keywords: 'Karukon BD, কারুকোণ বিডি, order process, how to place an order, online shop, cynor'
+	keywords: ['Karukon BD', 'কারুকোণ বিডি', 'order process', 'how to place an order', 'online shop', 'cynor']
 };
 
 const steps = [
-	{ label: 'Sign Up', icon: <PersonAdd /> },
-	{ label: 'Confirm Email', icon: <EmailOutlined /> },
-	{ label: 'Browse Products', icon: <ShoppingCartOutlined /> },
-	{ label: 'Add to Cart', icon: <ShoppingCartOutlined /> },
-	{ label: 'Place Order', icon: <PaymentOutlined /> },
-	{ label: 'Confirmation Call', icon: <LocalPhoneOutlined /> },
-	{ label: 'Order Delivery', icon: <LocalShippingOutlined /> }
+	{ id: 'qwe', label: 'Sign Up', icon: <PersonAdd /> },
+	{ id: 'ada', label: 'Confirm Email', icon: <EmailOutlined /> },
+	{ id: 'asda', label: 'Browse Products', icon: <ShoppingCartOutlined /> },
+	{ id: 'qda', label: 'Add to Cart', icon: <ShoppingCartOutlined /> },
+	{ id: 'asd', label: 'Place Order', icon: <PaymentOutlined /> },
+	{ id: 'assdf', label: 'Confirmation Call', icon: <LocalPhoneOutlined /> },
+	{ id: 'asdaa', label: 'Order Delivery', icon: <LocalShippingOutlined /> }
 ];
 
 const HowToPlaceOrderPage = () => {
@@ -48,7 +48,7 @@ const HowToPlaceOrderPage = () => {
 			</Typography>
 			<Stepper activeStep={-1} orientation='vertical' style={{ marginTop: '30px' }}>
 				{steps.map((step, index) => (
-					<Step key={index}>
+					<Step key={step.id}>
 						<StepLabel icon={step.icon}>
 							<Typography variant='h6'>{step.label}</Typography>
 						</StepLabel>

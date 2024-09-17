@@ -99,8 +99,8 @@ const ProfileNav = () => {
 					gap: '0.5rem'
 				}}
 			>
-				{profileNavLinks.map((link, index) => (
-					<Link key={index} href={link.href}>
+				{profileNavLinks.map((link) => (
+					<Link key={link.href} href={link.href}>
 						<Stack
 							component={Button}
 							fullWidth

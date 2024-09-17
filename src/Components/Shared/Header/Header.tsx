@@ -4,7 +4,6 @@ import { Divider, Skeleton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import BrowseCategory from './BrowseCategory';
 import SearchProduct from './SearchProduct';
 const HeaderButtons = dynamic(() => import('./HeaderButtons'), {

@@ -8,7 +8,6 @@ import { IoCartOutline } from 'react-icons/io5';
 import ProfileMenu from './ProfileMenu';
 
 const CartButton = () => {
-	const { data } = useGetMeQuery({});
 	const user = useAppSelector((state) => state.auth.user);
 	const cartItems = useAppSelector(selectTotalItems);
 
@@ -21,26 +20,24 @@ const CartButton = () => {
 			{user ? (
 				<ProfileMenu />
 			) : (
-				<>
-					<Typography
-						component={Link}
-						href='/login'
-						sx={{
-							cursor: 'pointer',
-							textTransform: 'capitalize',
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'center',
-							gap: '0.1rem',
-							':hover span': {
-								width: '100%'
-							}
-						}}
-					>
-						Sign In
-						<span className='h-[1px] w-0 duration-100 inline-block bg-slate-400  '></span>
-					</Typography>
-				</>
+				<Typography
+					component={Link}
+					href='/login'
+					sx={{
+						cursor: 'pointer',
+						textTransform: 'capitalize',
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: '0.1rem',
+						':hover span': {
+							width: '100%'
+						}
+					}}
+				>
+					<span>Sign In</span>
+					<span className='h-[1px] w-0 duration-100 inline-block bg-slate-400'></span>
+				</Typography>
 			)}
 		</Stack>
 	);
