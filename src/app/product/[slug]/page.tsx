@@ -39,7 +39,9 @@ const ProductDetails = async ({
 		slug: string;
 	};
 }) => {
-	const data = await fetch(`${config.server_url}/products/slug/${slug}`).then((res) => res.json());
+	const data = await fetch(`${config.server_url}/products/slug/${slug}`, { cache: 'no-store' }).then((res) =>
+		res.json()
+	);
 
 	const productImages = data?.data?.images.map((image: string) => ({
 		original: image,
