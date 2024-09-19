@@ -50,7 +50,7 @@ const ProductPage = () => {
 			value: limit
 		}
 	]);
-	const totalPage = data?.meta?.total / data?.meta?.limit;
+	const totalPage = Math.ceil(data?.meta?.total / data?.meta?.limit);
 
 	const breadcrumbs = [
 		<Link href='/' key='1'>
@@ -166,7 +166,14 @@ const ProductPage = () => {
 							</Stack>
 							{totalPage > 1 && (
 								<Stack my={5} alignItems='center'>
-									<Pagination count={totalPage} shape='rounded' onChange={(e, value) => setPage(value)} />
+									<Pagination
+										count={totalPage}
+										shape='rounded'
+										onChange={(e, value) => {
+											setPage(value);
+											window.scrollTo({ top: 90, behavior: 'smooth' });
+										}}
+									/>
 								</Stack>
 							)}
 						</>

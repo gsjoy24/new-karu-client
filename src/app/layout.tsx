@@ -17,15 +17,8 @@ export const metadata: Metadata = {
 		template: '%s | Karukon'
 	},
 	description:
-		'Karukon BD (কারুকোণ বিডি) Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-	keywords: [
-		'Karukon',
-		'Karukon BD',
-		'Karukon Online Shopping',
-		'Karukon Online Store',
-		'Karukon Home Decor',
-		'Karukon Gift Items'
-	],
+		'Karukon BD Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+	keywords: ['Karukon BD', 'Karukon Online Store', 'Karukon Home Decor', 'Karukon Gift Items'],
 	authors: [{ name: 'Gour Saha Joy', url: 'https://github.com/gsjoy24' }],
 	twitter: {
 		card: 'summary_large_image',
@@ -37,7 +30,7 @@ export const metadata: Metadata = {
 		type: 'website',
 		title: 'Karukon - The largest platform for luxury home decor and gift items',
 		description:
-			'Karukon BD (কারুকোণ বিডি) Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+			'Karukon BD Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
 		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png',
 		locale: 'en_US',
 		url: config.app_url,

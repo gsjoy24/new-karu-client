@@ -136,7 +136,12 @@ const OrdersPage = () => {
 
 					{/* Pagination Component */}
 					<Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-						<Pagination count={data.meta.totalPages} page={page} onChange={handlePageChange} color='primary' />
+						<Pagination
+							count={Math.ceil(data.meta.totalPages)}
+							page={page}
+							onChange={handlePageChange}
+							color='primary'
+						/>
 					</Box>
 				</>
 			) : (
