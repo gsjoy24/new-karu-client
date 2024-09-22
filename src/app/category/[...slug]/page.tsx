@@ -37,7 +37,7 @@ const ProductsByCategory = () => {
 	const { data, isFetching } = useGetProductsQuery([
 		{
 			name: 'page',
-			value: page
+			value: Number(page)
 		},
 		{
 			name: 'category',
@@ -56,10 +56,6 @@ const ProductsByCategory = () => {
 			value: sortParam
 		},
 		{
-			name: 'page',
-			value: page
-		},
-		{
 			name: 'sortOrder',
 			value: sortOrder
 		},
@@ -68,7 +64,10 @@ const ProductsByCategory = () => {
 			value: limit
 		}
 	]);
-	const totalPage = data?.meta?.total / data?.meta?.limit;
+
+	console.log(data);
+
+	const totalPage = Math.ceil(data?.meta?.total / data?.meta?.limit);
 
 	return (
 		<Box

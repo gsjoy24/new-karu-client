@@ -49,7 +49,7 @@ const Footer = () => {
 					<Box>
 						<SocialSection /> <br />
 						<Typography variant='subtitle1'>Contact: +88 01766892662</Typography>
-						<Typography variant='subtitle1'>Email: karukonbd@gmail.com</Typography>
+						<Typography variant='subtitle1'>Email: support@karukonbd.com</Typography>
 					</Box>
 				</Stack>
 				<Stack direction='row' justifyContent='center' mt={5}>

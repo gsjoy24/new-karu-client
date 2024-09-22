@@ -3,9 +3,9 @@ import { Box } from '@mui/material';
 import Image from 'next/image';
 import Carousel from 'react-material-ui-carousel';
 const data = [
-	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726508666/Untitled-1_xwsmkx.png',
-	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726602226/Khan-Gadget-Fb-cover_2_egqiln.jpg',
-	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726602227/ca07f7a5-b4cd-430f-9cba-626847d683e2_knphqr.jpg'
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944682/Untitled-1_1_xoqana.png',
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944680/Untitled-1k_rpo1ih.png',
+	'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944678/6ceb57cd-164c-4cfc-8b57-362015bcf276_nb433s.jpg'
 ];
 const HeroSection = () => {
 	return (

@@ -17,6 +17,7 @@ const productApis = baseApi.injectEndpoints({
 				args?.forEach((param: TQueryParams) => {
 					params.append(param.name, param.value);
 				});
+
 				return {
 					url: `/products`,
 					method: 'GET',
