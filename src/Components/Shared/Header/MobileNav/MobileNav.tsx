@@ -1,12 +1,11 @@
 'use client';
-import logo from '@/assets/logo.png';
 import { Button, Divider, IconButton, Skeleton, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import * as React from 'react';
+import { useState } from 'react';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { CiLocationOn } from 'react-icons/ci';
 import { GiFlexibleLamp } from 'react-icons/gi';
@@ -16,13 +15,14 @@ import { MdOutlineArrowOutward } from 'react-icons/md';
 import SocialSection from '../../SocialSection';
 import SearchProduct from '../SearchProduct';
 import CategoryAccordion from './CategoryAccordion';
+
 const HeaderButtons = dynamic(() => import('../HeaderButtons'), {
 	ssr: false,
 	loading: () => <Skeleton variant='rectangular' width={150} height={40} />
 });
 
 const MobileNav = () => {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 	const mobileNavLinks = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Products', href: '/products' }
@@ -50,7 +50,14 @@ const MobileNav = () => {
 					zIndex: 1
 				}}
 			>
-				<Image src={logo} alt='logo' width={80} height={80} />
+				<Image
+					src={
+						'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
+					}
+					alt='logo'
+					width={80}
+					height={80}
+				/>
 				<IconButton
 					size='small'
 					onClick={toggleDrawer(false)}
@@ -153,7 +160,14 @@ const MobileNav = () => {
 					<CgMenuRightAlt size={32} />
 				</IconButton>
 				<Link href='/'>
-					<Image src={logo} alt='logo' width={60} height={60} />
+					<Image
+						src={
+							'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
+						}
+						alt='logo'
+						width={60}
+						height={60}
+					/>
 				</Link>
 				<HeaderButtons />
 			</Stack>

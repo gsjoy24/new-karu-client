@@ -1,4 +1,3 @@
-import logo from '@/assets/logo.png';
 import { Box, Container, Divider, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,7 +20,14 @@ const Footer = () => {
 			<Container>
 				<Stack direction='row' gap={3} justifyContent='space-between' flexWrap={'wrap'}>
 					<Box sx={{ maxWidth: '20rem' }}>
-						<Image src={logo} alt='Karukon BD' width={100} height={100} />
+						<Image
+							src={
+								'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
+							}
+							alt='Karukon BD'
+							width={100}
+							height={100}
+						/>
 						<br />
 						<Typography variant='h6' gutterBottom>
 							About us

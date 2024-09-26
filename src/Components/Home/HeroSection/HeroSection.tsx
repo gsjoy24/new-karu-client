@@ -56,7 +56,7 @@ const HeroSection = () => {
 						alignItems: 'center'
 					}}
 				>
-					<Image src={link} alt='banner' width={1200} height={700} className='w-full h-full  rounded-2xl' />
+					<Image src={link} alt='banner' width={1800} height={1200} className='w-full h-full  rounded-2xl' />
 				</Box>
 			))}
 		</Carousel>

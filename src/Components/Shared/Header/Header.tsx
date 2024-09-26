@@ -1,5 +1,4 @@
 'use client';
-import logo from '@/assets/logo.png';
 import { Divider, Skeleton, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -28,7 +27,14 @@ const Header = () => {
 				}}
 			>
 				<Link href='/'>
-					<Image src={logo} alt='logo' width={80} height={80} />
+					<Image
+						src={
+							'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
+						}
+						alt='logo'
+						width={80}
+						height={80}
+					/>
 				</Link>
 				<Stack direction='row' gap={2} alignItems='center'>
 					<BrowseCategory />

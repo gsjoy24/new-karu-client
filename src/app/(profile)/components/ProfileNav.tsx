@@ -59,7 +59,9 @@ const ProfileNav = () => {
 		>
 			{/* cover */}
 			<Image
-				src={profile_bg}
+				src={
+					'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_venfnq.jpg'
+				}
 				alt={'profile background'}
 				width={500}
 				height={200}
@@ -67,7 +69,9 @@ const ProfileNav = () => {
 			/>
 			{/* profile */}
 			<Image
-				src={user_img}
+				src={
+					'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072658/WhatsApp_Image_2024-09-23_at_12.20.54_PM_2_jl3wod.jpg'
+				}
 				alt={profile?.full_name ?? 'profile picture'}
 				width={120}
 				height={120}

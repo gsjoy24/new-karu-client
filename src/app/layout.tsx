@@ -24,14 +24,14 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		site: '@karukonbd',
 		creator: '@karukonbd',
-		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png'
+		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944680/Untitled-1k_rpo1ih.png'
 	},
 	openGraph: {
 		type: 'website',
 		title: 'Karukon - The largest platform for luxury home decor and gift items',
 		description:
 			'Karukon BD Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-		images: 'https://i.ibb.co/Ny8hxKS/Karukon-logo.png',
+		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944680/Untitled-1k_rpo1ih.png',
 		locale: 'en_US',
 		url: config.app_url,
 		siteName: 'Karukon'
