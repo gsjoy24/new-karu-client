@@ -147,7 +147,13 @@ const MobileNav = () => {
 				justifyContent='space-between'
 				alignItems='center'
 				gap={2}
-				sx={{ display: { xs: 'flex', md: 'none' } }}
+				sx={{
+					display: { xs: 'flex', md: 'none' },
+					position: 'sticky',
+					top: 0,
+					bgcolor: 'background.paper',
+					zIndex: 9999
+				}}
 				py={1}
 			>
 				<IconButton
@@ -161,9 +167,7 @@ const MobileNav = () => {
 				</IconButton>
 				<Link href='/'>
 					<Image
-						src={
-							'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
-						}
+						src={'https://res.cloudinary.com/dwgozodq0/image/upload/v1727512919/Karukon-logo_1_iwe2s6.png'}
 						alt='logo'
 						width={60}
 						height={60}

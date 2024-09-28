@@ -98,6 +98,11 @@ const CheckOutPage = () => {
 
 		try {
 			if (email && password) {
+				// check if the password is valid
+				if (password.length < 8) {
+					toast.error('Password must be at least 8 characters long.');
+					return;
+				}
 				const response = await register(registerData).unwrap();
 				if (response?.success) {
 					toast.success('Registered successfully! Placing order...');

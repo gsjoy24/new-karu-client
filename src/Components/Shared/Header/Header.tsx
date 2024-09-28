@@ -12,12 +12,12 @@ const HeaderButtons = dynamic(() => import('./HeaderButtons'), {
 
 const Header = () => {
 	return (
-		<>
+		<div className='sticky top-0 z-50 backdrop-blur-md bg-white/80'>
 			<Stack
 				justifyContent='space-between'
 				alignItems='center'
 				direction='row'
-				py={2}
+				py={1.5}
 				gap={2}
 				sx={{
 					display: {
@@ -28,12 +28,10 @@ const Header = () => {
 			>
 				<Link href='/'>
 					<Image
-						src={
-							'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
-						}
+						src={'https://res.cloudinary.com/dwgozodq0/image/upload/v1727512919/Karukon-logo_1_iwe2s6.png'}
 						alt='logo'
-						width={80}
-						height={80}
+						width={70}
+						height={70}
 					/>
 				</Link>
 				<Stack direction='row' gap={2} alignItems='center'>
@@ -43,7 +41,7 @@ const Header = () => {
 				</Stack>
 			</Stack>
 			<Divider />
-		</>
+		</div>
 	);
 };
 

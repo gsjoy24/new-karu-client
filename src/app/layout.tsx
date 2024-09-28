@@ -13,28 +13,28 @@ import './globals.css';
 export const metadata: Metadata = {
 	metadataBase: new URL(config.app_url),
 	title: {
-		default: 'Karukon - The largest platform for luxury home decor and gift items',
-		template: '%s | Karukon'
+		default: 'KarukonBD - The largest platform for luxury home decor and gift items',
+		template: '%s | KarukonBD'
 	},
 	description:
-		'Karukon BD Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-	keywords: ['Karukon BD', 'Karukon Online Store', 'Karukon Home Decor', 'Karukon Gift Items'],
+		'KarukonBD Online shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
+	keywords: ['KarukonBD', 'Karukon Online Store', 'Karukon Home Decor', 'Karukon Gift Items'],
 	authors: [{ name: 'Gour Saha Joy', url: 'https://github.com/gsjoy24' }],
 	twitter: {
 		card: 'summary_large_image',
 		site: '@karukonbd',
 		creator: '@karukonbd',
-		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944680/Untitled-1k_rpo1ih.png'
+		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1727514747/Untitled-1_2_wub75n.png'
 	},
 	openGraph: {
 		type: 'website',
-		title: 'Karukon - The largest platform for luxury home decor and gift items',
+		title: 'KarukonBD - The largest platform for luxury home decor and gift items',
 		description:
 			'Karukon BD Online Shopping is a online retailing store that thrives to provide it’s customer with the best available product at the lowest possible price.',
-		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1726944680/Untitled-1k_rpo1ih.png',
+		images: 'https://res.cloudinary.com/dwgozodq0/image/upload/v1727514747/Untitled-1_2_wub75n.png',
 		locale: 'en_US',
 		url: config.app_url,
-		siteName: 'Karukon'
+		siteName: 'KarukonBD'
 	}
 };
 
@@ -51,6 +51,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
 						</Container>
 						<Footer />
 						<Toaster
+							position='top-center'
 							toastOptions={{
 								style: { background: '#242D39', color: '#fff' }
 							}}

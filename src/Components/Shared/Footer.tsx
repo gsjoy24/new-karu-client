@@ -21,9 +21,7 @@ const Footer = () => {
 				<Stack direction='row' gap={3} justifyContent='space-between' flexWrap={'wrap'}>
 					<Box sx={{ maxWidth: '20rem' }}>
 						<Image
-							src={
-								'https://res.cloudinary.com/dwgozodq0/image/upload/v1727072659/WhatsApp_Image_2024-09-23_at_12.20.54_PM_1_fp1rbf.jpg'
-							}
+							src={'https://res.cloudinary.com/dwgozodq0/image/upload/v1727512919/Karukon-logo_1_iwe2s6.png'}
 							alt='Karukon BD'
 							width={100}
 							height={100}

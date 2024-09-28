@@ -27,8 +27,8 @@ const ReturnPolicyPage = () => {
 					You have 7 calendar days after the item is delivered to notify us of your intent to return the product.
 				</Typography>
 				<Typography variant='body1' sx={{ mb: 2 }}>
-					To initiate a return, please contact our Customer Service at <strong>01700654618</strong>. If your item meets
-					all the return requirements, the return process will be started.
+					To initiate a return, please contact our Customer Service at <strong>+88 01766892662</strong>. If your item
+					meets all the return requirements, the return process will be started.
 				</Typography>
 				<Divider sx={{ my: 2 }} />
 
