@@ -6,9 +6,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FieldValues } from 'react-hook-form';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
-const SearchProduct = () => {
+const SearchProduct = ({ setOpen }: { setOpen?: (open: boolean) => void }) => {
 	const router = useRouter();
 	const handleSubmit = (data: FieldValues) => {
+		if (setOpen) {
+			setOpen(false);
+		}
 		router.push(`/products?search=${data.search}`);
 	};
 

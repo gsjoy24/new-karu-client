@@ -8,7 +8,7 @@ const Product = ({ product }: { product: TProduct }) => {
 		<Box
 			sx={{
 				width: {
-					xs: '9.5rem',
+					xs: '10rem',
 					sm: '14rem',
 					md: '17rem'
 				},
@@ -80,7 +80,7 @@ const Product = ({ product }: { product: TProduct }) => {
 					className='line-clamp-3 lg:line-clamp-2'
 					sx={{
 						fontSize: {
-							xs: '0.9rem',
+							xs: '0.8rem',
 							sm: '1rem'
 						},
 						color: 'text.primary',

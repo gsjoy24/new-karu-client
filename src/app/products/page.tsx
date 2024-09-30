@@ -159,7 +159,17 @@ const ProductPage = () => {
 						<EmptyCard />
 					) : (
 						<>
-							<Stack direction='row' justifyContent='center' alignItems='center' gap={1} flexWrap='wrap' mt={3}>
+							<Stack
+								direction='row'
+								justifyContent='space-between'
+								alignItems='center'
+								gap={{
+									xs: 1,
+									sm: 3
+								}}
+								flexWrap='wrap'
+								mt={3}
+							>
 								{data?.data?.map((product: TProduct) => (
 									<Product product={product} key={product?._id} />
 								))}

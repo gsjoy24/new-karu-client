@@ -72,7 +72,7 @@ const MobileNav = () => {
 			</Box>
 
 			{/* search bar */}
-			<SearchProduct />
+			<SearchProduct setOpen={setOpen} />
 
 			{/* links */}
 			<Stack direction='column' gap={2} p={1} mt={2}>
