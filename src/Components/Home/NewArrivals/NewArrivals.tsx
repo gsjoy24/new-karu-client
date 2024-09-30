@@ -3,7 +3,8 @@ import Loading from '@/app/loading';
 import Product from '@/components/Shared/Product/Product';
 import { useGetNewArrivalsQuery } from '@/redux/api/productApi';
 import { TProduct } from '@/types/product';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
 const NewArrivals = () => {
 	const { data, isFetching } = useGetNewArrivalsQuery({});
@@ -35,6 +36,17 @@ const NewArrivals = () => {
 					<Product product={product} key={product?._id} />
 				))}
 			</Stack>
+			<div className='flex justify-center'>
+				<Button
+					variant='outlined'
+					size='large'
+					sx={{ mt: 2, textAlign: 'center' }}
+					LinkComponent={Link}
+					href='/products'
+				>
+					See More
+				</Button>
+			</div>
 		</Box>
 	);
 };

@@ -35,7 +35,7 @@ const MobileNav = () => {
 	};
 
 	const DrawerList = (
-		<Box sx={{ width: 350 }} px={2}>
+		<Box sx={{ width: 350, zIndex: 9999 }} px={2}>
 			<Box
 				sx={{
 					display: 'flex',
@@ -152,7 +152,7 @@ const MobileNav = () => {
 					position: 'sticky',
 					top: 0,
 					bgcolor: 'background.paper',
-					zIndex: 9999
+					zIndex: 999
 				}}
 				py={1}
 			>

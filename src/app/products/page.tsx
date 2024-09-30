@@ -25,7 +25,7 @@ const ProductPage = () => {
 	const params = useSearchParams();
 	const search = params.get('search');
 	const [sortParam, setSortParam] = useState<string>('createdAt');
-	const [sortOrder, setSortOrder] = useState<string>('asc');
+	const [sortOrder, setSortOrder] = useState<string>('desc');
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(16);
 	const { data, isLoading } = useGetProductsQuery([
